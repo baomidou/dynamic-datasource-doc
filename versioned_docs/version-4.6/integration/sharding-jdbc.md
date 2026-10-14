@@ -154,7 +154,7 @@ public class MyDataSourceConfiguration {
 }
 ```
 >4.0.0的多数据源配置
-```
+```java
     @Bean
     public DynamicDataSourceProvider dynamicDataSourceProvider(DefaultDataSourceCreator dataSourceCreator) {
         return new AbstractDataSourceProvider(dataSourceCreator) {

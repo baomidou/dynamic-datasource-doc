@@ -26,14 +26,14 @@ Quartz常常需要独立运行在主业务数据库外,在springboot场景中可
 
 根据需要可配置独立数据源的参数，或把quartz数据源也作为动态数据源的一个数据源。
 
-一般来说二种方式根据需要选择一种即可，如果没有在动态数据源里需要切到quartz的的场景，建议久独立配吧。
+一般来说两种方式按需二选一即可。如果没有「在业务里切到 quartz 库」的场景，建议就用独立配置。
 
 ```yml
 spring:
   datasource: #独立quartz配置
     username: root
-    password: 123456
-    url: jdbc:mysql://39.108.158.138:3306/quartz
+    password: your-password
+    url: jdbc:mysql://host:3306/quartz
     driver-class-name: com.mysql.cj.jdbc.Driver
     dynamic:
       datasource:
@@ -44,8 +44,8 @@ spring:
           driver-class-name: org.h2.Driver
         quartz:  #把quartz数据源也作为动态数据源的一个数据源
           username: root
-          password: 123456
-          url: jdbc:mysql://39.108.158.138:3306/quartz
+          password: your-password
+          url: jdbc:mysql://host:3306/quartz
           driver-class-name: com.mysql.cj.jdbc.Driver
   quartz:
     job-store-type: jdbc
@@ -56,7 +56,7 @@ spring:
 ## 3. 创建任务。
 
 创建一个每秒打印一次hello world的任务。
-~~~java
+```java
 @Slf4j
 public class HelloworldJob extends QuartzJobBean {
 
@@ -67,9 +67,9 @@ public class HelloworldJob extends QuartzJobBean {
         log.info("Hello world!:" + jobExecutionContext.getJobDetail().getKey() + "-" + (time++));
     }
 }
-~~~
+```
 对应的自动配置。
-~~~
+```java
 @Configuration
 public class QuartzCommonAutoConfiguration {
 
@@ -94,23 +94,23 @@ public class QuartzCommonAutoConfiguration {
                 .build();
     }
 }
-~~~
+```
 ## 4 配置Quartz实际使用的数据源。
 
 具体方式有二种，随意选择一种即可。建议方式一，简单点。
 
 ### 4.1 方式一： 自定义SchedulerFactoryBeanCustomizer。
 
-~~~
+```yaml
 spring:
   datasource: #独立quartz配置
     username: root
-    password: 123456
-    url: jdbc:mysql://39.108.158.138:3306/quartz
+    password: your-password
+    url: jdbc:mysql://host:3306/quartz
     driver-class-name: com.mysql.cj.jdbc.Driver
-~~~
+```
 
-~~~
+```java
 @Configuration
 public class MyQuartzAutoConfigurationMode1 {
 
@@ -140,11 +140,11 @@ public class MyQuartzAutoConfigurationMode1 {
 //    }
 
 }
-~~~
+```
 
 ### 4.2 方式二： 使用@QuartzDataSource来指明quartz数据源。
 
-~~~
+```java
 @Configuration
 public class MyQuartzAutoConfigurationMode2 {
 
@@ -180,7 +180,7 @@ public class MyQuartzAutoConfigurationMode2 {
 //        return ds.getDataSource("quartz");
 //    }
 }
-~~~
+```
 
 ## 示例项目
 

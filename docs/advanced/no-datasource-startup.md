@@ -20,9 +20,9 @@ spring:
 
 因为没有匹配的主数据源，启动的时候你会见到类似如下日志。
 
-~~~
+```text
 dynamic-datasource initial loaded 0 datasource,Please add your primary datasource or check your configuration
-~~~
+```
 
 一般无数据源启动需要结合 进阶使用里的动态添加移除在启动后添加
 

@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
 需要注意的是手动切换的数据源，最好自己在合适的位置 调用DynamicDataSourceContextHolder.clear()清空当前线程的数据源信息。 
 如果你不太清楚什么时候调用，那么可以参考下面写一个拦截器，注册进spring里即可。
-~~~java
+```java
 @Slf4j
 public class DynamicDatasourceClearInterceptor implements HandlerInterceptor {
 
@@ -41,4 +41,4 @@ public class DynamicDatasourceClearInterceptor implements HandlerInterceptor {
     }
 
 }
-~~~
+```

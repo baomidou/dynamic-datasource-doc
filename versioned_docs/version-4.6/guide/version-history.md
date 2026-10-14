@@ -1,23 +1,32 @@
 # 版本记录与选择建议
 
 ## 版本支持
-| dynamic-datasource    | jdk    |springboot    |gravvel|druid|
-| ---| --- | --- |--- |--- |
-|  3.5.2   |  jdk1.7+ |1.5.x和2.x.x和3.x.x |不支持|不支持1.2.17引入的socketTimeout和connectTimeout|
-|  4.1.3 | jdk1.7+ |1.5.x和2.x.x和3.x.x |不支持|都支持|
-|  >=4.2.0   |  jdk1.8+|1.5.x和2.x.x和3.x.x|支持|都支持|
 
-- 新用户建议直接使用4.x.x版本。
-- 如果当前版本用的好好的，后续也没有需要的特性建议不升级。
+| dynamic-datasource | JDK | Spring Boot | GraalVM Native | Druid |
+| :--- | :--- | :--- | :--- | :--- |
+| 3.5.2 | JDK 8+ | 1.5.x / 2.x.x / 3.x.x | 不支持 | 不支持 1.2.17 引入的 `socketTimeout` / `connectTimeout` |
+| 4.1.3 | JDK 8+ | 1.5.x / 2.x.x / 3.x.x | 不支持 | 都支持 |
+| >= 4.2.0 | JDK 8+ | 1.5.x / 2.x.x / 3.x.x | 支持 | 都支持 |
+| **>= 4.5.0** | JDK 8+（Boot 3/4 需 17+） | 1.5.x / 2.x.x / 3.x.x / **4.x.x** | 支持 | 都支持 |
 
-## 4.x主要变化：
-1. 分包：为了更好的适配springboot3同时保留对springboot1.5版本和2.x版本和java7用户的支持。
-dynamic-datasource-spring-boot-starter 和dynamic-datasource-spring-boot3-starter。
-2. 本地事务新增了多数据源传播机制。
-3. 适配atomikos数据源。（作者还在详细测试-暂不出文档）
-4. 适配1.2.17+Druid数据源。
+- 新用户建议直接用 4.x.x。
+- 当前版本用得好、又没有需要的新特性，就不必升级。
 
-所有用法和以前版本没差异，不过分包过程中为了将来脱离spring。 你如果用到了动态添加移除数据源，建议只用DefaultCreator来创建。
+:::info[本页只到 4.3.1]
+下面按版本罗列的条目是从早期 CHANGELOG 迁移过来的，**4.4.0 之后的发布未同步补录**。
+
+完整的变更记录请以 [GitHub Releases](https://github.com/baomidou/dynamic-datasource/releases) 为准。
+:::
+
+## 4.x 主要变化
+
+1. **分包**：为同时适配 Spring Boot 3 与保留对 Spring Boot 1.5 / 2.x 的支持，拆成
+   `dynamic-datasource-spring-boot-starter`、`-boot3-starter`、`-boot4-starter` 三个构件。
+2. 本地事务新增了多数据源**传播机制**（`DsPropagation`）。
+3. 适配 Atomikos 数据源（XA）。
+4. 适配 1.2.17+ 的 Druid。
+
+用法与旧版本没有差异。分包过程中为将来脱离 Spring 做准备，如果你用到了动态添加移除数据源，建议只用 `DefaultCreator` 来创建。
 
 ## 4.3.1
 * fix 修复 启动警告问题 by @JavaLionLi in https://github.com/baomidou/dynamic-datasource/pull/617

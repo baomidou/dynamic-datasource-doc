@@ -1,17 +1,19 @@
 # 进阶使用
 
-**动态添加移除数据源**：指在系统运行过程中动态的添加数据源，删除数据源，多使用于基于数据库的多租户系统。
-*****
-**动态解析数据源**：指数据源切换是不固定的，可以根据域名，根据header参数，根据session参数，根据方法变量等来动态切换。 多使用于多租户系统，支持扩展。
-*****
-**数据库加密**：指数据库的url,username,password需要加密，长用于安全性较高系统，不让普通开发通过配置知道生产库的连接配置。
-*****
-**启动初始化脚本**：指数据源启动的时候可以执行schema和data的脚本来初始化结构和数据，本组件支持每个数据源加载不同的schema和data。
-*****
-**自动读写分离**：适用于mybatis环境，基于mybatis插件实现无注解自动读写分离。
-*****
-**懒启动数据源**：指配置的数据源不立即启动，等需要建立连接的时候再真正初始化连接池。
-*****
-**无数据源启动**：指启动的时候不配置任何数据源，全靠后期系统动态添加。
-*****
-**手动切换数据源**：指某些情况无法根据注解切换，通过工具类手动切换数据源。
+本章覆盖超出「`@DS` 切库」本身的运行时能力。按使用频率排列：
+
+| 主题 | 说明 |
+| :--- | :--- |
+| [动态添加/移除数据源](/docs/advanced/add-remove-datasource) | 运行期增删数据源，多租户系统的基石 |
+| [运维端点与指标](/docs/advanced/observability) | Actuator 端点盘点数据源与分组，连接池 Micrometer 指标 |
+| [优雅关闭](/docs/advanced/graceful-shutdown) | 关闭前等待活跃连接归还，避免发布期请求失败 |
+| [动态解析数据源](/docs/advanced/dynamic-datasource-resolution) | 按 header / session / SpEL 动态决定切到哪个库 |
+| [数据库密码加密](/docs/advanced/encryption) | `ENC(...)` 加密 url / username / password |
+| [启动初始化脚本](/docs/advanced/init-scripts) | 每个库独立执行 schema 与 data 脚本 |
+| [懒启动数据源](/docs/advanced/lazy-datasource) | 到首次使用时才真正创建连接池 |
+| [无数据源启动](/docs/advanced/no-datasource-startup) | 启动时不配置任何数据源，全靠后期动态添加 |
+| [手动切换数据源](/docs/advanced/manual-switching) | 注解无法覆盖的场景，用工具类手动切换 |
+| [手动注入多数据源](/docs/advanced/manual-injection) | 需要自己接管 `DataSource` Bean 时的做法 |
+| [多租户实践](/docs/guide/multi-tenant) | 四种递进的租户隔离形态 |
+
+想彻底不用注解？请看[无注解方案](/docs/no-annotation/)。

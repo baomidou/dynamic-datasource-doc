@@ -4,7 +4,7 @@
 
 但是需要理解本多数据源实现的核心。
 
-~~~
+```java
 public class DynamicRoutingDataSource {
 @Override
 public DataSource determineDataSource() {
@@ -12,7 +12,7 @@ public DataSource determineDataSource() {
     String dsKey = DynamicDataSourceContextHolder.peek();
     return getDataSource(dsKey);
 }
-~~~
+```
 
 所以我们就可以根据需求，选择合适的时机调用DynamicDataSourceContextHolder.push("对应数据源")。
 

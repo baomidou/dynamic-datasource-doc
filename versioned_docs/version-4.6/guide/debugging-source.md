@@ -41,7 +41,7 @@ public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor
         return (!key.isEmpty() && key.startsWith(DYNAMIC_PREFIX)) ? dsProcessor.determineDatasource(invocation, key) : key;
     }
 }
-```
+```java
 
 3. 断点调试DynamicRoutingDataSource。
 

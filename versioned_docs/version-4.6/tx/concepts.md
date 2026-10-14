@@ -33,7 +33,7 @@ try{
 
 spring开启事务很简单，在需要事务的方法和类上添加 `@Transactional`注解。
 
-```
+```java
 @Transactional
 public void test() {
       Aservice.dosometing();

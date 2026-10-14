@@ -5,7 +5,7 @@
 1. 使用这个方式，原注解方式并不会失效。 原DS注解也是AOP。
 2. 注意：不要在同一个切面同时使用注解又使用自定义切面。
 
-~~~
+```java
 @Configuration
 public class MyConfig {
 
@@ -28,7 +28,7 @@ public class MyConfig {
         return new DefaultPointcutAdvisor(pointcut, dsAdvice);
     }
 }
-~~~
+```
 
 以上实现com.baomidou.samples.pattern包service下所有类的add和update,delete开头的方法使用master数据源，select使用slave数据源。
 

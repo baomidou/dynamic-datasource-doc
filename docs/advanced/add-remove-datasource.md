@@ -2,19 +2,18 @@
 
 ## 基础介绍
 
-主要在多租户场景中，常常新的一个租户进来需要动态的添加一个数据源到库中，使得系统不用重启即可切换数据源。
+多租户场景里常见这样的需求：新租户进来时需要**在不重启应用的前提下**增加一个数据源，租户注销时再把它摘掉。
+
+`DynamicRoutingDataSource` 为此提供了 `addDataSource` / `removeDataSource` 两个方法，配合 `DefaultDataSourceCreator` 就能在运行期创建任意连接池。
 
 ## 使用步骤
 
 ```java
 import com.baomidou.dynamic.datasource.DynamicRoutingDataSource;
-import com.baomidou.dynamic.datasource.creator.*;
-import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
-import com.baomidou.samples.ds.dto.DataSourceDTO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.baomidou.dynamic.datasource.creator.DataSourceProperty;
+import com.baomidou.dynamic.datasource.creator.DefaultDataSourceCreator;
+import com.baomidou.dynamic.datasource.creator.jndi.JndiDataSourceCreator;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,119 +22,50 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/datasources")
-@Api(tags = "添加删除数据源")
 public class DataSourceController {
 
-    @Autowired
-    private DataSource dataSource;
-   // private final DataSourceCreator dataSourceCreator; //3.3.1及以下版本使用这个通用，强烈推荐sb2用户至少升级到3.5.2版本
+    private final DataSource dataSource;
+    private final DefaultDataSourceCreator dataSourceCreator;
+    private final JndiDataSourceCreator jndiDataSourceCreator;
 
-    @Autowired
-    private DefaultDataSourceCreator dataSourceCreator;
-//如果是用4.x以上版本，因为要和spring解绑，重构了一些东西，比如缺少了懒启动和启动初始化数据库。不太建议用以下独立的创建器，只建议用上面的DefaultDataSourceCreator 
-    @Autowired
-    private BasicDataSourceCreator basicDataSourceCreator;
-    @Autowired
-    private JndiDataSourceCreator jndiDataSourceCreator;
-    @Autowired
-    private DruidDataSourceCreator druidDataSourceCreator;
-    @Autowired
-    private HikariDataSourceCreator hikariDataSourceCreator;
-    @Autowired
-    private BeeCpDataSourceCreator beeCpDataSourceCreator;
-    @Autowired
-    private Dbcp2DataSourceCreator dbcp2DataSourceCreator;
+    public DataSourceController(DataSource dataSource,
+                                DefaultDataSourceCreator dataSourceCreator,
+                                JndiDataSourceCreator jndiDataSourceCreator) {
+        this.dataSource = dataSource;
+        this.dataSourceCreator = dataSourceCreator;
+        this.jndiDataSourceCreator = jndiDataSourceCreator;
+    }
 
     @GetMapping
-    @ApiOperation("获取当前所有数据源")
     public Set<String> now() {
         DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
         return ds.getDataSources().keySet();
     }
 
-    //通用数据源会根据maven中配置的连接池根据顺序依次选择。
-    //默认的顺序为druid>hikaricp>beecp>dbcp>spring basic
+    /**
+     * 通用添加（推荐）：由 DefaultDataSourceCreator 根据环境自动选择连接池。
+     * 选择顺序：druid > hikaricp > beecp > dbcp2 > basic
+     */
     @PostMapping("/add")
-    @ApiOperation("通用添加数据源（推荐）")
     public Set<String> add(@Validated @RequestBody DataSourceDTO dto) {
-        DataSourceProperty dataSourceProperty = new DataSourceProperty();
-        BeanUtils.copyProperties(dto, dataSourceProperty);
-        DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
-        DataSource dataSource = dataSourceCreator.createDataSource(dataSourceProperty);
-        ds.addDataSource(dto.getPoolName(), dataSource);
-        return ds.getDataSources().keySet();
-    }
+        DataSourceProperty property = new DataSourceProperty();
+        BeanUtils.copyProperties(dto, property);
 
-    @PostMapping("/addBasic(强烈不推荐，除了用了马上移除)")
-    @ApiOperation(value = "添加基础数据源", notes = "调用Springboot内置方法创建数据源，兼容1,2")
-    public Set<String> addBasic(@Validated @RequestBody DataSourceDTO dto) {
-        DataSourceProperty dataSourceProperty = new DataSourceProperty();
-        BeanUtils.copyProperties(dto, dataSourceProperty);
         DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
-        DataSource dataSource = basicDataSourceCreator.createDataSource(dataSourceProperty);
-        ds.addDataSource(dto.getPoolName(), dataSource);
+        DataSource newDataSource = dataSourceCreator.createDataSource(property);
+        ds.addDataSource(dto.getPoolName(), newDataSource);
         return ds.getDataSources().keySet();
     }
 
     @PostMapping("/addJndi")
-    @ApiOperation("添加JNDI数据源")
-    public Set<String> addJndi(String pollName, String jndiName) {
+    public Set<String> addJndi(String poolName, String jndiName) {
         DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
-        DataSource dataSource = jndiDataSourceCreator.createDataSource(jndiName);
-        ds.addDataSource(poolName, dataSource);
-        return ds.getDataSources().keySet();
-    }
-
-    @PostMapping("/addDruid")
-    @ApiOperation("基础Druid数据源")
-    public Set<String> addDruid(@Validated @RequestBody DataSourceDTO dto) {
-        DataSourceProperty dataSourceProperty = new DataSourceProperty();
-        BeanUtils.copyProperties(dto, dataSourceProperty);
-        dataSourceProperty.setLazy(true);
-        DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
-        DataSource dataSource = druidDataSourceCreator.createDataSource(dataSourceProperty);
-        ds.addDataSource(dto.getPoolName(), dataSource);
-        return ds.getDataSources().keySet();
-    }
-
-    @PostMapping("/addHikariCP")
-    @ApiOperation("基础HikariCP数据源")
-    public Set<String> addHikariCP(@Validated @RequestBody DataSourceDTO dto) {
-        DataSourceProperty dataSourceProperty = new DataSourceProperty();
-        BeanUtils.copyProperties(dto, dataSourceProperty);
-        dataSourceProperty.setLazy(true);//3.4.0版本以下如果有此属性，需手动设置，不然会空指针。
-        DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
-        DataSource dataSource = hikariDataSourceCreator.createDataSource(dataSourceProperty);
-        ds.addDataSource(dto.getPoolName(), dataSource);
-        return ds.getDataSources().keySet();
-    }
-
-    @PostMapping("/addBeeCp")
-    @ApiOperation("基础BeeCp数据源")
-    public Set<String> addBeeCp(@Validated @RequestBody DataSourceDTO dto) {
-        DataSourceProperty dataSourceProperty = new DataSourceProperty();
-        BeanUtils.copyProperties(dto, dataSourceProperty);
-        dataSourceProperty.setLazy(true);//3.4.0版本以下如果有此属性，需手动设置，不然会空指针。
-        DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
-        DataSource dataSource = beeCpDataSourceCreator.createDataSource(dataSourceProperty);
-        ds.addDataSource(dto.getPoolName(), dataSource);
-        return ds.getDataSources().keySet();
-    }
-
-    @PostMapping("/addDbcp")
-    @ApiOperation("基础Dbcp数据源")
-    public Set<String> addDbcp(@Validated @RequestBody DataSourceDTO dto) {
-        DataSourceProperty dataSourceProperty = new DataSourceProperty();
-        BeanUtils.copyProperties(dto, dataSourceProperty);
-        dataSourceProperty.setLazy(true);//3.4.0版本以下如果有此属性，需手动设置，不然会空指针。
-        DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
-        DataSource dataSource = dbcp2DataSourceCreator.createDataSource(dataSourceProperty);
-        ds.addDataSource(dto.getPoolName(), dataSource);
+        DataSource newDataSource = jndiDataSourceCreator.createDataSource(jndiName);
+        ds.addDataSource(poolName, newDataSource);
         return ds.getDataSources().keySet();
     }
 
     @DeleteMapping
-    @ApiOperation("删除数据源")
     public String remove(String name) {
         DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
         ds.removeDataSource(name);
@@ -144,15 +74,51 @@ public class DataSourceController {
 }
 ```
 
-## 示例项目
+:::tip[统一用 DefaultDataSourceCreator]
+`DefaultDataSourceCreator` 按环境自动挑选连接池，并且**会自动处理懒加载、`ENC()` 解密与初始化脚本**。
 
-https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/add-remove-datasource-sample
+各个具体的创建器（`DruidDataSourceCreator`、`HikariDataSourceCreator` 等）虽然也可以单独注入使用，但它们绕过了上述统一处理，只建议在明确知道原因时使用。
+:::
+
+## 行为细节
+
+`addDataSource(String name, DataSource dataSource)`：
+
+- 以 `name` 为 key 覆盖写入（同名会替换旧数据源）
+- 按命名规则把新数据源**自动归入对应分组**——加入 `slave_3` 会自动进 `slave` 组，成为负载均衡的一个成员
+- 方法带 `synchronized`，并发安全
+
+`removeDataSource(String name)`：
+
+- 名称不能为空
+- 组内成员被移除后为空时，**该组会被自动清理**
+- 同样带 `synchronized`
+
+## 注意事项
+
+:::danger[不要移除正在被使用的数据源]
+`removeDataSource` 只是把数据源从路由表中摘掉，它**不会**等你在途的请求结束。
+
+如果此刻正好有线程拿到这个数据源准备取连接，就会拿到 `null` 并抛出 `NullPointerException`（严格模式下也拦不住这类竞态）。
+
+生产环境的正确做法是分两步：
+
+1. **先摘流量**：把该库从分组中移出（例如换个名字让 `slave` 组不再包含它），等待在途请求结束
+2. **再调用移除**：确认没有活跃连接后执行 `removeDataSource`
+
+也可以考虑开启 [`grace-destroy`](/docs/advanced/graceful-shutdown)，让连接池在关闭前等待活跃连接归还。
+:::
+
+其他两点：
+
+- 运行期新增的数据源**同样会被 Actuator 端点统计到**，可用它验证是否添加成功，见[运维端点与指标](/docs/advanced/observability)。
+- 数据源清单如果来自外部（配置中心、引导库），更适合实现 `DynamicDataSourceProvider`，见[自定义数据源来源](/docs/custom/datasource-provider)。
 
 ## 源码分析
 
-![](/img/screenshot_1620832554404.png)
+`DataSourceCreator` 是创建器的统一抽象，`DefaultDataSourceCreator` 按注册顺序取第一个 `support()` 返回 `true` 的实现：
 
-~~~
+```java
 public interface DataSourceCreator {
 
     /**
@@ -171,9 +137,12 @@ public interface DataSourceCreator {
      */
     boolean support(DataSourceProperty dataSourceProperty);
 }
-~~~
+```
 
-DataSourceCreator是一个接口，定义了根据参数创建数据源的接口。
-其他creator实现此接口，本项目暂时实现了Druid和Hikaricp的等连接池的实现。
-BasicDataSourceCreator 是调用Spring原生的创建方式，只支持最最原始的基础配置。
-DefaultDataSourceCreator  是一个通用的创建器，其根据环境自动选择连接池，
+- `BasicDataSourceCreator` 使用 Spring 原生的创建方式，只支持最基础配置，且**不做池化**。
+- `JndiDataSourceCreator` 比较特殊：直接按 `jndiName` 从容器查找，不参与 `support()` 自动选择链。
+- 其余实现分别对应 Druid / HikariCP / BeeCP / DBCP2 / C3P0 / Oracle UCP / Atomikos。
+
+## 示例项目
+
+[https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/add-remove-datasource-sample](https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/add-remove-datasource-sample)

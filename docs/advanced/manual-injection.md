@@ -9,7 +9,7 @@ dynamic-datasource 3.4.0及以上版本和老版本注入方式有一定差别�
 
 注意一定要让多数据源使用 **@Primary** ,让其成为主数据源。
 
-```
+```java
 //3.4.0版本以下
 @Primary
 @Bean

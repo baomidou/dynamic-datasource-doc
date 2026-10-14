@@ -38,7 +38,7 @@ public UserService {
 
 在shiro框架中(UserRealm)使用@Autowire 注入的类, 缓存注解和事务注解都失效。  
 
-```
+```java
 @Component
 public class UserRealm extends AuthorizingRealm {
 

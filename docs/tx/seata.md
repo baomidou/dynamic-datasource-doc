@@ -8,11 +8,11 @@
 - seata 最新版本 
 [![](https://img.shields.io/maven-central/v/io.seata/seata-all.svg)](http://mvnrepository.com/artifact/io.seata/seata-all) 。
 
-> PS：一般需要分布式事务的场景大多数都是微服务化，个人并不建议在单体项目引入多数据源+分布式事务，有能力尽早拆开，可为过度方案。
+> PS：需要分布式事务的场景大多是微服务化之后的产物。并不建议在单体项目里引入「多数据源 + 分布式事务」，有能力就尽早拆开，它只适合作为过渡方案。
 
 ## 注意事项
 
-`dynamic-datasource-sring-boot-starter` 组件内部开启seata后会自动使用DataSourceProxy来包装DataSource,所以需要以下方式来保持兼容。
+`dynamic-datasource-spring-boot-starter` 组件内部开启 seata 后，会自动用 `DataSourceProxy` 包装 DataSource，因此需要按下面的方式保持兼容。
 
 1.如果你引入的是seata-all,请不要使用@EnableAutoDataSourceProxy注解。
 
@@ -49,12 +49,12 @@ docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 
 3. 创建相关数据库。
 
-创建 `seata-order`  `seata-product`  `seata-account`  模拟连接不同的数据库。
+创建 `seata_order`、`seata_product`、`seata_account` 三个库，模拟连接不同的数据库。
 
 ```sql
-CREATE DATABASE IF NOT EXIST seata-order;
-CREATE DATABASE IF NOT EXIST seata-product;
-CREATE DATABASE IF NOT EXIST seata-account;
+CREATE DATABASE IF NOT EXISTS seata_order;
+CREATE DATABASE IF NOT EXISTS seata_product;
+CREATE DATABASE IF NOT EXISTS seata_account;
 ```
 
 4. 准备相关数据库脚本。
@@ -71,15 +71,19 @@ CREATE DATABASE IF NOT EXIST seata-account;
 <dependency>
     <groupId>io.seata</groupId>
     <artifactId>seata-spring-boot-starter</artifactId>
-    <version>1.4.2</version>
+    <version>${seata.version}</version>
 </dependency>
 <dependency>
     <groupId>com.baomidou</groupId>
     <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-    <version>3.4.0</version>
+    <version>${dynamic-datasource.version}</version>
 </dependency>
-# 省略，查看示例项目
+<!-- 省略，完整依赖请查看示例项目 -->
 ```
+
+:::warning[Seata 版本差异]
+Seata 2.x 的包结构与配置项有较大调整，官方文档也已迁移到 [seata.apache.org](https://seata.apache.org/)。示例工程始终跟随最新版本，本文的配置片段以 1.x 的写法为主，升级前请对照官方迁移说明。
+:::
 
 2. 编写相关yaml配置。
 
@@ -97,21 +101,24 @@ spring:
         order:
           username: root
           password: 123456
-          url: jdbc:mysql://39.108.158.138:3306/seata_order?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+          url: jdbc:mysql://host:3306/seata_order?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
           driver-class-name: com.mysql.cj.jdbc.Driver
-          schema: classpath:db/schema-order.sql
+          init:
+            schema: classpath:db/schema-order.sql
         account:
           username: root
           password: 123456
-          url: jdbc:mysql://39.108.158.138:3306/seata_account?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+          url: jdbc:mysql://host:3306/seata_account?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
           driver-class-name: com.mysql.cj.jdbc.Driver
-          schema: classpath:db/schema-account.sql
+          init:
+            schema: classpath:db/schema-account.sql
         product:
           username: root
           password: 123456
-          url: jdbc:mysql://39.108.158.138:3306/seata_product?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+          url: jdbc:mysql://host:3306/seata_product?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
           driver-class-name: com.mysql.cj.jdbc.Driver
-          schema: classpath:db/schema-product.sql
+          init:
+            schema: classpath:db/schema-product.sql
         test:
           username: sa
           password: ""
@@ -127,7 +134,7 @@ seata:
     vgroup-mapping:
       my_test_tx_group: default  #key与上面的tx-service-group的值对应
     grouplist:
-      default: 39.108.158.138:8091 #seata-server地址仅file注册中心需要
+      default: host:8091 #seata-server地址仅file注册中心需要
   config:
     type: file
   registry:
@@ -136,7 +143,7 @@ seata:
 
 ### 代码编写
 
-参考工程下面的代码完成controller,service,maaper,entity,dto等。
+参考工程下面的代码完成 controller、service、mapper、entity、dto 等。
 
 订单服务
 

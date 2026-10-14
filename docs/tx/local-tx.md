@@ -1,79 +1,138 @@
-# 本地事务
+# 本地多数据源事务
 
 ## 背景
 
-多数据源事务方案一直是一个难题，通常的解决方案有以下二种。
+多数据源事务一直是个难题，传统方案只有两条路：
 
-1. 利用atomiks手动构建多数据源事务，适合数据源较少，配置的参数也不太多,性能要求不高的项目。难点就是手动配置量大，需要耗费一定时间。
-2. 用seata类似的分布式事务解决方案,难点就是需要搭建维护如seata-server的统一管理中心。
+1. **Atomikos 手工构建 XA 数据源**：适合数据源少、性能要求不高的项目。痛点是配置量大。
+2. **Seata 这类分布式事务方案**：能力完整，痛点是必须部署和维护 seata-server。
 
-每一种方案都有其适用场景，本项目作者常常收到的问题就是。
-1. 为什么我加了事务注解，切换数据源失败？ 
-2. 我了解涉及了分布式事务了，但我不想用seata。我场景简单，有没有不依赖第三方的方案？
+这两条路对「场景简单、又不想引入第三方中间件」的项目都偏重，所以本框架提供了第三条路。
 
 ## 基础介绍
 
-自从3.3.0开始，由seata的核心贡献者https://github.com/a364176773 贡献了基于connection代理的方案。
-建议从3.4.0版本开始使用，其修复了一个功能，老版本不加`@DS`只加`@DSTransactional`会报错。
+从 **3.3.0** 开始，由 Seata 的核心贡献者贡献了一套基于 **Connection 代理** 的本地多数据源事务方案。建议从 **3.4.0** 及以上版本使用——更早的版本存在「只加 `@DSTransactional` 不加 `@DS` 会报错」的问题。
 
-## 注意事项
-
-本地事务实现很简单，就是循环提交，发生错误，循环回滚。 我们默认的前提是数据库本身不会异常，比如宕机。
-如数据在回滚的过程突然宕机，本地事务就会有问题。如果你需要完整分布式方案请使用seata方案。
-
-1. 不支持spring原生事务，不支持spring事务，不支持spring事务，可分别使用，**千万不能混用**。
-2. 再次强调不支持spring事务注解，可理解成独立写了一套事务方案。
-3. 只适合简单本地多数据源场景， 如果涉及异步和微服务等完整事务场景，请使用seata方案。
-4. 暂时不支持更多配置，如只读，如spring的传播特性。 后续会根据反馈考虑支持。4.1.4会开始支持在类上使用.
+它的定位是：**单体应用内、跨多个库、不引入任何外部中间件**。
 
 ## 使用方法
 
-在最外层的方法添加 `@DSTransactional`，底下调用的各个类该切数据源就正常使用`DS`切换数据源即可。  就是这么简单。~
+在最外层方法上标注 `@DSTransactional`，内部各层照常用 `@DS` 切换数据源即可。
 
 ```java
-//如AService调用BService和CService的方法，A,B,C分别对应不同数据源。
-
+// AService 调用 BService 和 CService，A、B、C 分别对应不同的数据源
 public class AService {
-    
-    @DS("a")//如果a是默认数据源则不需要DS注解。
+
+    @DS("a")   // 如果 a 就是默认数据源，这个注解可以省略
     @DSTransactional
-    public void dosomething(){
-        BService.dosomething();
-        CService.dosomething();
+    public void doSomething() {
+        bService.doSomething();
+        cService.doSomething();
     }
 }
 
 public class BService {
-    
+
     @DS("b")
-    public void dosomething(){
-        //dosomething
+    public void doSomething() {
+        // ...
     }
 }
 
 public class CService {
-    
+
     @DS("c")
-    public void dosomething(){
-        //dosomething
+    public void doSomething() {
+        // ...
     }
 }
 ```
-只要`@DSTransactional`注解下任一环节发生异常，则全局多数据源事务回滚。
-如果BC上也有`@DSTransactional`会有影响吗？答：没有影响的。
+
+只要 `@DSTransactional` 覆盖的调用链上任一环节抛出（需要回滚的）异常，**所有已开启的库事务整体回滚**。
+
+内层方法上再标注 `@DSTransactional` 是允许的，它不会开启新事务，而是并入同一个 XID——这一点和 Spring 的 `REQUIRED` 语义一致。
+
+## 完整属性
+
+```java
+@Target({ElementType.TYPE, ElementType.METHOD})
+public @interface DSTransactional {
+
+    /** 需要回滚的异常，默认 {Exception.class} */
+    Class<? extends Throwable>[] rollbackFor() default {Exception.class};
+
+    /** 不需要回滚的异常 */
+    Class<? extends Throwable>[] noRollbackFor() default {};
+
+    /** 事务传播行为，默认 REQUIRED */
+    DsPropagation propagation() default DsPropagation.REQUIRED;
+}
+```
+
+:::warning[回滚规则与 Spring 不同]
+`rollbackFor` 默认是 `{Exception.class}`，所以**默认情况下所有异常（含受检异常）都会触发回滚**。
+
+而 Spring 的 `@Transactional` 默认只回滚 `RuntimeException` 与 `Error`。从 Spring 迁过来的代码不要想当然，需要排除某些异常时请显式配置 `noRollbackFor`。
+:::
+
+`DsPropagation` 提供与 Spring 对齐的 7 种传播行为：
+
+| 传播行为 | 含义 |
+| :--- | :--- |
+| `REQUIRED`（默认） | 有事务就加入，没有就新建 |
+| `REQUIRES_NEW` | 总是新建，若存在当前事务则挂起 |
+| `NOT_SUPPORTED` | 以非事务方式执行，若存在当前事务则挂起 |
+| `SUPPORTS` | 有事务就加入，没有就以非事务方式执行 |
+| `NEVER` | 以非事务方式执行，若存在当前事务则抛异常 |
+| `MANDATORY` | 必须已存在事务，否则抛异常 |
+| `NESTED` | 存在当前事务时在嵌套事务内执行（基于 Savepoint），否则新建 |
+
+## 事务事件监听
+
+长事务结束后才需要执行的动作（发消息、清缓存、推通知），不要写在事务里。用 `@DsTxEventListener` 把它挂到事务的对应阶段：
+
+```java
+@Component
+public class OrderTxListener {
+
+    @DsTxEventListener
+    public void onCommitted(OrderCreatedEvent event) {
+        // 默认 phase = AFTER_COMMIT，只有真正提交后才执行
+        messageProducer.send(event);
+    }
+
+    @DsTxEventListener(phase = TransactionPhase.AFTER_ROLLBACK)
+    public void onRolledBack(OrderCreatedEvent event) {
+        log.warn("下单失败，已回滚: {}", event.getOrderId());
+    }
+}
+```
+
+`@DsTxEventListener` 是 Spring `@EventListener` 的别名，因此同样支持 `classes` 按类型过滤与 `condition` SpEL 条件：
+
+| 属性 | 默认值 | 说明 |
+| :--- | :--- | :--- |
+| `phase` | `AFTER_COMMIT` | 触发阶段，取值同 Spring `TransactionPhase` |
+| `value` / `classes` | `{}` | 监听的事件类型 |
+| `condition` | `""` | SpEL 条件表达式 |
+
+## 注意事项
+
+1. **不要与 Spring 原生事务混用。** 可以分别使用，但**千万不能混用**——混用后事务边界不再对应代码结构，排查成本极高。详见[事务常见问题](/docs/tx/faq)。
+2. **只适合单体多数据源场景。** 涉及异步、线程池、微服务时请改用 [Seata](/docs/tx/seata)。
+3. **不支持只读事务与隔离级别配置。** 只有传播行为可配置。
+4. **提交阶段不是原子的。** 实现上是「循环提交、出错循环回滚」，前提假设是数据库本身不异常。如果某个库在 commit 阶段宕机，先前已提交的库无法回滚——这类场景请使用 Seata 或 XA。
+5. **`TransactionContext` 不要和 Seata 的 `RootContext` 搞混。** 本地事务用 `com.baomidou.dynamic.datasource.tx.TransactionContext.getXID()` 拿 XID；Seata 场景才是 `io.seata.core.context.RootContext.getXID()`。
 
 ## 示例项目
 
-https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/tx-local-sample
+[https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/tx-local-sample](https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/tx-local-sample)
 
-完整示例项目  数据库都已准备好，可以直接运行测试。`http://localhost:8080/doc.html`
+数据库脚本已备好，可直接运行，接口文档在 `http://localhost:8080/doc.html`。
 
-示例项目A,B,C分别对应OrderService,ProductService，AccountService。分别是独立的数据库。
+工程里 A、B、C 分别是 `OrderService`、`ProductService`、`AccountService`，对应三个独立数据库。下单流程会先扣商品库存、再扣用户余额，任一环节抛 `RuntimeException` 都会触发整体回滚。
 
-用户下单分别调用产品库扣库存，账户库扣余额。
-如果库存不足，或用户余额不足都抛出RuntimeException,触发整体回滚。
-
-~~~
+```java
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -82,42 +141,33 @@ public class OrderService {
     private final OrderMapper orderMapper;
     private final AccountService accountService;
     private final ProductService productService;
-    
-    //@DS("order") 这里不需要，因为order是默认库，如果开启事务的不是默认库则必须加
-    @DSTransactional //注意这里开启事务
-    public void placeOrder(PlaceOrderRequest request) {
-        log.info("=============ORDER START=================");
-        Long userId = request.getUserId();
-        Long productId = request.getProductId();
-        Integer amount = request.getAmount();
-        log.info("收到下单请求,用户:{}, 商品:{},数量:{}", userId, productId, amount);
 
+    // 这里不需要 @DS("order")：order 就是默认库；如果开启事务的库不是默认库，则必须加
+    @DSTransactional   // 在最外层开启事务
+    public void placeOrder(PlaceOrderRequest request) {
         log.info("当前 XID: {}", TransactionContext.getXID());
 
         Order order = Order.builder()
-                .userId(userId)
-                .productId(productId)
+                .userId(request.getUserId())
+                .productId(request.getProductId())
                 .status(OrderStatus.INIT)
-                .amount(amount)
+                .amount(request.getAmount())
                 .build();
-
         orderMapper.insert(order);
-        log.info("订单一阶段生成，等待扣库存付款中");
-        // 扣减库存并计算总价
-        Double totalPrice = productService.reduceStock(productId, amount);
-        // 扣减余额
-        accountService.reduceBalance(userId, totalPrice);
+
+        // 扣减库存并计算总价（ProductService 上标了 @DS("product")）
+        Double totalPrice = productService.reduceStock(request.getProductId(), request.getAmount());
+        // 扣减余额（AccountService 上标了 @DS("account")）
+        accountService.reduceBalance(request.getUserId(), totalPrice);
 
         order.setStatus(OrderStatus.SUCCESS);
         order.setTotalPrice(totalPrice);
         orderMapper.updateById(order);
-        log.info("订单已成功下单");
-        log.info("=============ORDER END=================");
     }
 }
-~~~
+```
 
-~~~
+```java
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -127,72 +177,34 @@ public class ProductService {
 
     @DS("product")
     public Double reduceStock(Long productId, Integer amount) {
-        log.info("=============PRODUCT START=================");
-        log.info("当前 XID: {}", TransactionContext.getXID());
-
-        // 检查库存
         Product product = productMapper.selectById(productId);
         Assert.notNull(product, "商品不存在");
+
         Integer stock = product.getStock();
-        log.info("商品编号为 {} 的库存为{},订单商品数量为{}", productId, stock, amount);
-
         if (stock < amount) {
-            log.warn("商品编号为{} 库存不足，当前库存:{}", productId, stock);
-            throw new RuntimeException("库存不足");
+            throw new RuntimeException("库存不足");   // 触发整体回滚
         }
-        log.info("开始扣减商品编号为 {} 库存,单价商品价格为{}", productId, product.getPrice());
-        // 扣减库存
-        int currentStock = stock - amount;
-        product.setStock(currentStock);
+        product.setStock(stock - amount);
         productMapper.updateById(product);
-        double totalPrice = product.getPrice() * amount;
-        log.info("扣减商品编号为 {} 库存成功,扣减后库存为{}, {} 件商品总价为 {} ", productId, currentStock, amount, totalPrice);
-        log.info("=============PRODUCT END=================");
-        return totalPrice;
+        return product.getPrice() * amount;
     }
 }
-~~~
-
-~~~
-@Slf4j
-@Service
-@RequiredArgsConstructor
-public class AccountService {
-
-    private final AccountMapper accountMapper;
-
-    @DS("account")
-    public void reduceBalance(Long userId, Double price) {
-        log.info("=============ACCOUNT START=================");
-        log.info("当前 XID: {}", TransactionContext.getXID());
-
-        Account account = accountMapper.selectById(userId);
-        Assert.notNull(account, "用户不存在");
-        Double balance = account.getBalance();
-        log.info("下单用户{}余额为 {},商品总价为{}", userId, balance, price);
-
-        if (balance < price) {
-            log.warn("用户 {} 余额不足，当前余额:{}", userId, balance);
-            throw new RuntimeException("余额不足");
-        }
-        log.info("开始扣减用户 {} 余额", userId);
-        double currentBalance = account.getBalance() - price;
-        account.setBalance(currentBalance);
-        accountMapper.updateById(account);
-        log.info("扣减用户 {} 余额成功,扣减后用户账户余额为{}", userId, currentBalance);
-        log.info("=============ACCOUNT END=================");
-    }
-}
-~~~
-
-![](/img/screenshot_1624150848767.png)
+```
 
 ## 原理介绍
 
-完整支持代码：https://github.com/baomidou/dynamic-datasource-spring-boot-starter/commit/f0cbad193528296eeb64faa76c79743afbdd811d
+核心思路是**代理 `Connection`**：每个被事务覆盖的数据源在首次使用时，框架从连接池取出真实连接并包一层 `ConnectionProxy`，按 XID 放进 `ConnectionFactory` 统一持有。业务方法正常返回则整体提交，抛异常则整体回滚。
 
-核心原理就是代理connection，并根据不同数据库获取到一个connection放入ConnectionFactory。 如果成功了整体提交，失败了整体回滚。
+涉及的组件：
 
+| 组件 | 职责 |
+| :--- | :--- |
+| `TransactionalTemplate` | 传播行为、挂起/恢复、Savepoint 编排 |
+| `TransactionContext` | XID 与事务同步器（Synchronization）的持有 |
+| `ConnectionFactory` | 按 XID 管理各库的 `ConnectionProxy`，负责最终 commit / rollback |
+| `LocalTxUtil` | 编程式入口：`startTransaction` / `commit` / `rollback` |
 
+## 相关阅读
 
-
+- [事务选型指南](/docs/tx) —— 什么时候该用它，什么时候不该
+- [事务常见问题](/docs/tx/faq) —— 混用陷阱与不回滚的排查

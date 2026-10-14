@@ -3,7 +3,7 @@
 目标：拦截以filter/**开头的所有请求，如果后面的方法以a开头就切换到db1，以b开头就切换到db2，其余使用默认数据源。
 
 实现如下：
-~~~
+```java
 @Slf4j
 @WebFilter(filterName = "dsFilter", urlPatterns = {"/filter/*"})
 public class DynamicDatasourceFilter implements Filter {
@@ -47,8 +47,8 @@ public class DynamicDatasourceFilter implements Filter {
 
     }
 }
-~~~
-~~~
+```
+```java
 @SpringBootApplication
 @ServletComponentScan //filter必须使用这个
 @MapperScan("com.baomidou.samples.ds.mapper")
@@ -58,7 +58,7 @@ public class AllDataSourceApplication {
         SpringApplication.run(AllDataSourceApplication.class, args);
     }
 }
-~~~
+```
 示例项目（原 all-datasource-sample 已随示例仓库重构调整，可参考本文完整代码）： https://github.com/dynamic-datasource/dynamic-datasource-samples
 扩展：从request中还能获取到很多东西，如header和session，是否同理可以根据自己业务需求根据header值和session里对应的用户来动态设置和切换数据源？
 

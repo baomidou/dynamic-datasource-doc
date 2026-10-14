@@ -5,9 +5,9 @@
 - MybatisPlus Github [https://github.com/baomidou/mybatis-plus](https://github.com/baomidou/mybatis-plus)
 - MybatisPlus 文档 [https://mybatis.plus/](https://mybatis.plus/)
 
-> 只要引入了mybatisPlus相关jar包，项目自动集成，兼容mybatisPlus 2.x和3.x的版本。
+> 只要引入了 mybatis-plus 相关 jar 包即自动集成，无需额外配置。请使用 mybatis-plus `3.x`（对应 Spring Boot 3/4 请选择配套的 mybatis-plus 版本）。
 
-#  集成步骤
+## 集成步骤
 
 ## 1. 项目引入 `mybatis-Plus` 依赖。
 [![](https://img.shields.io/maven-central/v/com.baomidou/mybatis-plus.svg)](http://mvnrepository.com/artifact/com.baomidou/mybatis-plus)
@@ -28,7 +28,7 @@
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @DS("oracle")
-    publid void addUser(User user){
+    public void addUser(User user) {
         //do something
         baseMapper.insert(user);
     }
@@ -65,7 +65,8 @@ mp内置的ServiceImpl在新增,更改,删除等一些方法上自带事物导�
 
 如果自己写多数据源，则很难完成与mp的集成。
 
-核心解析源码 [https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-spring/src/main/java/com/baomidou/dynamic/datasource/support/DataSourceClassResolver.java](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-spring/src/main/java/com/baomidou/dynamic/datasource/support/DataSourceClassResolver.java)
+核心解析源码：`DataSourceClassResolver`
+[https://github.com/baomidou/dynamic-datasource/blob/master/dynamic-datasource-spring/src/main/java/com/baomidou/dynamic/datasource/support/DataSourceClassResolver.java](https://github.com/baomidou/dynamic-datasource/blob/master/dynamic-datasource-spring/src/main/java/com/baomidou/dynamic/datasource/support/DataSourceClassResolver.java)
 
 ## 示例项目
 

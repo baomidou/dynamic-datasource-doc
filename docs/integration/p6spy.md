@@ -1,4 +1,8 @@
-# 基础介绍
+# 集成 P6spy
+
+## 基础介绍
+
+P6spy 是一个 JDBC 驱动包装层，用于打印**带真实参数值**的 SQL，弥补日志里只能看到 `?` 占位符的问题。
 
 - P6spy Github [https://github.com/p6spy/p6spy](https://github.com/p6spy/p6spy)
 - P6spy 文档 [https://p6spy.readthedocs.io/en/latest/](https://p6spy.readthedocs.io/en/latest/)
@@ -10,9 +14,9 @@ select * from user where age>?
 select * from user where age>6
 ```
 
-#  集成步骤
+## 集成步骤
 
-## 1. 项目引入`p6spy`依赖。
+### 1. 项目引入 `p6spy` 依赖
 [![](https://img.shields.io/maven-central/v/p6spy/p6spy.svg)](http://mvnrepository.com/artifact/p6spy/p6spy)
 
 ```xml
@@ -23,7 +27,7 @@ select * from user where age>6
 </dependency>
 ```
 
-## 2. 启用p6spy相关配置。
+### 2. 启用 p6spy 相关配置
 
 ```yaml
 spring:
@@ -44,9 +48,9 @@ spring:
           driver-class-name: org.h2.Driver
 ```
 
-## 3. 引入相关配置文件。
+### 3. 引入相关配置文件
 
-在classPath下创建spy.properties
+在 classpath 下创建 `spy.properties`：
 
 ```properties
 # 一个最简单配置,定义slf4j日志输出。 更多参数请自行了解。
