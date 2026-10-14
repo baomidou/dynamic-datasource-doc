@@ -184,4 +184,4 @@ public class MyDataSourceConfiguration {
 
 ## 示例项目
 
-https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/third-part-samples/shardingsphere-sample
+https://github.com/dynamic-datasource/dynamic-datasource-samples

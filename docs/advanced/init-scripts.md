@@ -37,4 +37,4 @@ spring:
               separator: ";" # sql默认分号分隔符，一般无需更改
 ```
 
-示例项目 [https://github.com/dynamic-datasource/dynamic-datasource-samples/blob/master/datasource-samples/druid-sample/src/main/resources/application.yml](https://github.com/dynamic-datasource/dynamic-datasource-samples/blob/master/datasource-samples/druid-sample/src/main/resources/application.yml)
+示例项目 [https://github.com/dynamic-datasource/dynamic-datasource-samples/blob/master/spring-boot-4/druid-sample/src/main/resources/application.yml](https://github.com/dynamic-datasource/dynamic-datasource-samples/blob/master/spring-boot-4/druid-sample/src/main/resources/application.yml)

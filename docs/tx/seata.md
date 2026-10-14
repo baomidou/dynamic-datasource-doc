@@ -25,7 +25,7 @@ seata:
 
 ## 示例项目
 
-https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/tx-samples/tx-seata-sample
+https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/tx-seata-sample
 
 此工程为 多数据源+druid+seata+mybatisPlus的版本。
 

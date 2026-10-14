@@ -59,6 +59,6 @@ public class AllDataSourceApplication {
     }
 }
 ~~~
-对应源码： https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/all-datasource-sample
+示例项目（原 all-datasource-sample 已随示例仓库重构调整，可参考本文完整代码）： https://github.com/dynamic-datasource/dynamic-datasource-samples
 扩展：从request中还能获取到很多东西，如header和session，是否同理可以根据自己业务需求根据header值和session里对应的用户来动态设置和切换数据源？
 

@@ -64,7 +64,7 @@ public class CService {
 
 ## 示例项目
 
-https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/tx-samples/tx-local-sample
+https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/tx-local-sample
 
 完整示例项目  数据库都已准备好，可以直接运行测试。`http://localhost:8080/doc.html`
 

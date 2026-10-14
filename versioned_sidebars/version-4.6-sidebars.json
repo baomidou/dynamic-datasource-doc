@@ -1,0 +1,103 @@
+{
+  "docs": [
+    {
+      "type": "category",
+      "label": "入门",
+      "collapsed": false,
+      "items": [
+        "guide/basics",
+        "guide/how-it-works"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "连接池集成",
+      "collapsed": false,
+      "items": [
+        "pool/common",
+        "pool/druid",
+        "pool/hikaricp",
+        "pool/beecp",
+        "pool/dbcp2",
+        "pool/jndi"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "第三方集成",
+      "collapsed": false,
+      "items": [
+        "integration/index",
+        "integration/mybatis-plus",
+        "integration/p6spy",
+        "integration/quartz",
+        "integration/sharding-jdbc"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "进阶使用",
+      "collapsed": false,
+      "items": [
+        "advanced/index",
+        "advanced/add-remove-datasource",
+        "advanced/dynamic-datasource-resolution",
+        "advanced/encryption",
+        "advanced/init-scripts",
+        "advanced/lazy-datasource",
+        "advanced/no-datasource-startup",
+        "advanced/manual-switching",
+        "advanced/manual-injection"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "自定义",
+      "collapsed": false,
+      "items": [
+        "custom/index",
+        "custom/annotation",
+        "custom/datasource-provider",
+        "custom/load-balance-strategy"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "无注解方案",
+      "collapsed": false,
+      "items": [
+        "no-annotation/readme",
+        "no-annotation/filter",
+        "no-annotation/interceptor",
+        "no-annotation/aop",
+        "no-annotation/mybatis-read-write"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "事务专栏",
+      "collapsed": false,
+      "items": [
+        "tx/index",
+        "tx/concepts",
+        "tx/basics",
+        "tx/local-tx",
+        "tx/seata",
+        "tx/faq"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "更多",
+      "collapsed": false,
+      "items": [
+        "guide/debugging-source",
+        "guide/switching-failure",
+        "guide/unavailable-versions",
+        "guide/version-history",
+        "guide/knowledge-base",
+        "guide/multi-tenant"
+      ]
+    }
+  ]
+}

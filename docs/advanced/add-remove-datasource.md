@@ -146,7 +146,7 @@ public class DataSourceController {
 
 ## 示例项目
 
-https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/features-samples/add-remove-datasource-sample
+https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/add-remove-datasource-sample
 
 ## 源码分析
 

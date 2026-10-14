@@ -69,4 +69,4 @@ mp内置的ServiceImpl在新增,更改,删除等一些方法上自带事物导�
 
 ## 示例项目
 
-https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/orm-samples/mybatisplus3-sample
+https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/mybatisplus3-sample

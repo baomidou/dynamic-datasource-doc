@@ -96,7 +96,7 @@ spring:
 
 ## 示例项目
 
-https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/datasource-samples/druid-sample
+https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/druid-sample
 
 ## 核心源码
 

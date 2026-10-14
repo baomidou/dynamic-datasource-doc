@@ -34,4 +34,4 @@ public class MyConfig {
 
 更复杂的切点表达式语法需自行学习。
 
-示例项目 https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/name-pattern-sample
+示例项目 https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/name-pattern-sample

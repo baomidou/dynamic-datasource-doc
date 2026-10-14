@@ -199,7 +199,7 @@ dynamic-datasource-spring-boot-starter 和dynamic-datasource-spring-boot3-starte
 - 修复创建ItemDatasource参数错误。
 - 修复自定义注解在方法上失效。
 - 添加默认的Master和Slave注解。
-- 示例项目整体迁出为独立项目https://gitee.com/baomidou/dynamic-datasource-samples 。
+- 示例项目整体迁出为独立项目https://github.com/dynamic-datasource/dynamic-datasource-samples 。
 
 ## v3.2.0
 

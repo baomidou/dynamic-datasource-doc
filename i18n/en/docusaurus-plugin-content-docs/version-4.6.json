@@ -1,0 +1,38 @@
+{
+  "version.label": {
+    "message": "4.6",
+    "description": "The label for version 4.6"
+  },
+  "sidebar.docs.category.入门": {
+    "message": "Getting Started",
+    "description": "The label for category '入门' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.连接池集成": {
+    "message": "Connection Pools",
+    "description": "The label for category '连接池集成' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.第三方集成": {
+    "message": "Integrations",
+    "description": "The label for category '第三方集成' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.进阶使用": {
+    "message": "Advanced Usage",
+    "description": "The label for category '进阶使用' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.自定义": {
+    "message": "Customization",
+    "description": "The label for category '自定义' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.无注解方案": {
+    "message": "No-Annotation Approach",
+    "description": "The label for category '无注解方案' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.事务专栏": {
+    "message": "Transactions",
+    "description": "The label for category '事务专栏' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.更多": {
+    "message": "More",
+    "description": "The label for category '更多' in sidebar 'docs'"
+  }
+}
