@@ -17,10 +17,9 @@ const config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-  url: 'https://baomidou.github.io',
-  // Local dev defaults to '/'.
-  // The deploy workflow injects DOC_BASE=/dynamic-datasource-doc/ for the
-  // GitHub Pages project subpath (and future custom domains).
+  url: 'https://doc.xiuceyun.cn',
+  // The site is served from the custom-domain root; DOC_BASE can override
+  // it (e.g. DOC_BASE=/dynamic-datasource-doc/ for a project-subpath preview).
   baseUrl: process.env.DOC_BASE ?? '/',
 
   organizationName: 'baomidou',
@@ -59,13 +58,12 @@ const config = {
   themes: [
     [
       '@easyops-cn/docusaurus-search-local',
-      /** @type {import('@easyops-cn/docusaurus-search-local').PluginOptions} */
-      ({
+      {
         hashed: true,
         language: ['zh', 'en'],
         indexBlog: false,
         docsRouteBasePath: '/docs',
-      }),
+      },
     ],
   ],
 

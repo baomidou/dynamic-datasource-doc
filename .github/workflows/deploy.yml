@@ -32,8 +32,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build with Docusaurus
-        env:
-          DOC_BASE: /dynamic-datasource-doc/
         run: pnpm build
       - name: Setup Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
