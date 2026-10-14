@@ -2,16 +2,15 @@
 
 ## 基础介绍
 
-- MybatisPlus Github <https://github.com/baomidou/mybatis-plus>
-- MybatisPlus 文档 <https://mybatis.plus/>
+- MybatisPlus Github [https://github.com/baomidou/mybatis-plus](https://github.com/baomidou/mybatis-plus)
+- MybatisPlus 文档 [https://mybatis.plus/](https://mybatis.plus/)
 
 > 只要引入了mybatisPlus相关jar包，项目自动集成，兼容mybatisPlus 2.x和3.x的版本。
 
 #  集成步骤
 
 ## 1. 项目引入 `mybatis-Plus` 依赖。
-<a href="http://mvnrepository.com/artifact/com.baomidou/mybatis-plus" target="_blank">
-<img src="https://img.shields.io/maven-central/v/com.baomidou/mybatis-plus.svg" ></a>
+[![](https://img.shields.io/maven-central/v/com.baomidou/mybatis-plus.svg)](http://mvnrepository.com/artifact/com.baomidou/mybatis-plus)
 
 ```xml
 <dependency>
@@ -66,7 +65,7 @@ mp内置的ServiceImpl在新增,更改,删除等一些方法上自带事物导�
 
 如果自己写多数据源，则很难完成与mp的集成。
 
-核心解析源码 <https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-spring/src/main/java/com/baomidou/dynamic/datasource/support/DataSourceClassResolver.java>
+核心解析源码 [https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-spring/src/main/java/com/baomidou/dynamic/datasource/support/DataSourceClassResolver.java](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-spring/src/main/java/com/baomidou/dynamic/datasource/support/DataSourceClassResolver.java)
 
 ## 示例项目
 

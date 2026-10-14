@@ -2,8 +2,8 @@
 
 ## 基础介绍
 
-- Quartz Github <https://github.com/quartz-scheduler/quartz>
-- Quartz 文档 <http://www.quartz-scheduler.org/>
+- Quartz Github [https://github.com/quartz-scheduler/quartz](https://github.com/quartz-scheduler/quartz)
+- Quartz 文档 [http://www.quartz-scheduler.org/](http://www.quartz-scheduler.org/)
 
 ---
 Quartz是一个定时任务框架，常常用于解决分布式系统下的定时任务协调问题。
@@ -13,8 +13,7 @@ Quartz常常需要独立运行在主业务数据库外,在springboot场景中可
 ## 使用方法
 
 ## 1. 项目引用 `quartz-starter` 。
-<a href="http://mvnrepository.com/artifact/org.quartz-scheduler/quartz" target="_blank">
-<img src="https://img.shields.io/maven-central/v/org.quartz-scheduler/quartz.svg" ></a>
+[![](https://img.shields.io/maven-central/v/org.quartz-scheduler/quartz.svg)](http://mvnrepository.com/artifact/org.quartz-scheduler/quartz)
 
 ```xml
 <dependency>

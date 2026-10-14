@@ -2,14 +2,13 @@
 
 ## 基础介绍
 
-- Dbcp2 Github <https://github.com/apache/commons-dbcp>
-- Dbcp2 文档 <https://commons.apache.org/proper/commons-dbcp/>
+- Dbcp2 Github [https://github.com/apache/commons-dbcp](https://github.com/apache/commons-dbcp)
+- Dbcp2 文档 [https://commons.apache.org/proper/commons-dbcp/](https://commons.apache.org/proper/commons-dbcp/)
 
 ## 集成步骤
 
 ## 1. 项目引入 `Dbcp2 ` 依赖。
-<a href="http://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2" target="_blank">
-<img src="https://img.shields.io/maven-central/v/org.apache.commons/commons-dbcp2.svg" ></a>
+[![](https://img.shields.io/maven-central/v/org.apache.commons/commons-dbcp2.svg)](http://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2)
 
 ```xml
 <dependency>
@@ -44,6 +43,6 @@ spring:
 
 ## 核心源码
 
-`dbcp2数据源创建器`  <https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/dbcp/Dbcp2DataSourceCreator.java>
+`dbcp2数据源创建器`  [https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/dbcp/Dbcp2DataSourceCreator.java](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/dbcp/Dbcp2DataSourceCreator.java)
 
-`dbcp2参数配置类`  <https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/dbcp/Dbcp2Config.java>
+`dbcp2参数配置类`  [https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/dbcp/Dbcp2Config.java](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/dbcp/Dbcp2Config.java)

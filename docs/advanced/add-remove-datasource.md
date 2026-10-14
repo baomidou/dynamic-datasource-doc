@@ -150,7 +150,7 @@ https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/fea
 
 ## 源码分析
 
-![](/images/screenshot_1620832554404.png)
+![](/img/screenshot_1620832554404.png)
 
 ~~~
 public interface DataSourceCreator {

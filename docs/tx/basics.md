@@ -30,6 +30,6 @@
 
 另外建议不理解或不清楚分布式事务的同学，自行先通过搜索引擎 ***分布式事务*** 和 ***CAP定理*** 学习相关概念。
 
-程序员小灰的分布式事务 <https://blog.csdn.net/bjweimengshu/article/details/79607522>
+程序员小灰的分布式事务 [https://blog.csdn.net/bjweimengshu/article/details/79607522](https://blog.csdn.net/bjweimengshu/article/details/79607522)
 
-程序员小灰的CAP定理 <https://blog.csdn.net/bjweimengshu/article/details/79338859>
+程序员小灰的CAP定理 [https://blog.csdn.net/bjweimengshu/article/details/79338859](https://blog.csdn.net/bjweimengshu/article/details/79338859)

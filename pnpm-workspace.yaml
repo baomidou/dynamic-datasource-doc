@@ -1,0 +1,5 @@
+# pnpm 11 settings — allow the SWC native build used by Docusaurus Faster,
+# and skip core-js's version banner script.
+allowBuilds:
+  '@swc/core': true
+  core-js: false

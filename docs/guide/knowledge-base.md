@@ -29,4 +29,4 @@ public void dosomething{
 }
 ```
 ## DynamicRoutingDataSource 其他常用方法
-![](/images/screenshot_1649815541046.png)
+![](/img/screenshot_1649815541046.png)

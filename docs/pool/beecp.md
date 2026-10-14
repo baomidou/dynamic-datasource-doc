@@ -2,14 +2,13 @@
 
 ## 基础介绍
 
-- BeeCp Github <https://github.com/Chris2018998/BeeCP>
-- BeeCp 文档 <https://github.com/Chris2018998/BeeCP/blob/master/README_ZH.md>
+- BeeCp Github [https://github.com/Chris2018998/BeeCP](https://github.com/Chris2018998/BeeCP)
+- BeeCp 文档 [https://github.com/Chris2018998/BeeCP/blob/master/README_ZH.md](https://github.com/Chris2018998/BeeCP/blob/master/README_ZH.md)
 
 ## 集成步骤
 
 ## 1. 项目引入 `BeeCp` 依赖。
-<a href="http://mvnrepository.com/artifact/com.github.chris2018998/beecp" target="_blank">
-<img src="https://img.shields.io/maven-central/v/com.github.chris2018998/beecp.svg" ></a>
+[![](https://img.shields.io/maven-central/v/com.github.chris2018998/beecp.svg)](http://mvnrepository.com/artifact/com.github.chris2018998/beecp)
 
 ```xml
 <dependency>
@@ -68,6 +67,6 @@ spring:
 
 ## 核心源码
 
-`BeeCp数据源创建器`  <https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/beecp/BeeCpDataSourceCreator.java>
+`BeeCp数据源创建器`  [https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/beecp/BeeCpDataSourceCreator.java](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/beecp/BeeCpDataSourceCreator.java)
 
-`BeeCp参数配置类`  <https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/beecp/BeeCpConfig.java>
+`BeeCp参数配置类`  [https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/beecp/BeeCpConfig.java](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/beecp/BeeCpConfig.java)

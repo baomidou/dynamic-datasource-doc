@@ -2,14 +2,13 @@
 
 ## 基础介绍
 
-- HikariCP Github <https://github.com/brettwooldridge/HikariCP>
-- HikariCP 文档 <https://github.com/brettwooldridge/HikariCP/wiki>
+- HikariCP Github [https://github.com/brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
+- HikariCP 文档 [https://github.com/brettwooldridge/HikariCP/wiki](https://github.com/brettwooldridge/HikariCP/wiki)
 
 ## 集成步骤
 
 ## 1. 项目引入 `HikariCP` 依赖。
-<a href="http://mvnrepository.com/artifact/com.zaxxer/HikariCP" target="_blank">
-<img src="https://img.shields.io/maven-central/v/com.zaxxer/HikariCP.svg" ></a>
+[![](https://img.shields.io/maven-central/v/com.zaxxer/HikariCP.svg)](http://mvnrepository.com/artifact/com.zaxxer/HikariCP)
 
 ```xml
 <dependency>
@@ -79,6 +78,6 @@ https://github.com/brettwooldridge/HikariCP/issues/1034
 
 ## 核心源码
 
-`HikariCP数据源创建器`  <https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/hikaricp/HikariDataSourceCreator.java>
+`HikariCP数据源创建器`  [https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/hikaricp/HikariDataSourceCreator.java](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/hikaricp/HikariDataSourceCreator.java)
 
-`HikariCP参数配置类`  <https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/hikaricp/HikariCpConfig.java>
+`HikariCP参数配置类`  [https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/hikaricp/HikariCpConfig.java](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/hikaricp/HikariCpConfig.java)

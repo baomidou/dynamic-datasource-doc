@@ -41,7 +41,7 @@ public class Demo {
 }
 ```
 
-![](/images/screenshot_1621483566421.png)
+![](/img/screenshot_1621483566421.png)
 
 ## 2. 配置加密yml。
 
@@ -95,8 +95,8 @@ public interface DataSourceInitEvent {
 
 1. Druid作者wenshao自己的回答。
 https://github.com/alibaba/druid/issues/960
-![](/images/screenshot_1621841781110.png)
+![](/img/screenshot_1621841781110.png)
 
 2. 知乎一些文章片段。
 
-![](/images/screenshot_1621841824649.png)
+![](/img/screenshot_1621841824649.png)

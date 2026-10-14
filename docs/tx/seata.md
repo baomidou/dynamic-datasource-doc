@@ -2,12 +2,11 @@
 
 ## 基础介绍
 
-- seata Github地址 <https://github.com/seata/seata>
-- seata 文档 <https://seata.io/zh-cn/docs/overview/what-is-seata.html>
-- seata 示例 <https://github.com/seata/seata-samples>
+- seata Github地址 [https://github.com/seata/seata](https://github.com/seata/seata)
+- seata 文档 [https://seata.io/zh-cn/docs/overview/what-is-seata.html](https://seata.io/zh-cn/docs/overview/what-is-seata.html)
+- seata 示例 [https://github.com/seata/seata-samples](https://github.com/seata/seata-samples)
 - seata 最新版本 
-<a href="http://mvnrepository.com/artifact/io.seata/seata-all" target="_blank">
-<img src="https://img.shields.io/maven-central/v/io.seata/seata-all.svg" ></a> 。
+[![](https://img.shields.io/maven-central/v/io.seata/seata-all.svg)](http://mvnrepository.com/artifact/io.seata/seata-all) 。
 
 > PS：一般需要分布式事务的场景大多数都是微服务化，个人并不建议在单体项目引入多数据源+分布式事务，有能力尽早拆开，可为过度方案。
 

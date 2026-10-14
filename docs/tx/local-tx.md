@@ -185,7 +185,7 @@ public class AccountService {
 }
 ~~~
 
-![](/images/screenshot_1624150848767.png)
+![](/img/screenshot_1624150848767.png)
 
 ## 原理介绍
 

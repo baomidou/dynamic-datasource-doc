@@ -1,7 +1,7 @@
 # 基础介绍
 
-- P6spy Github <https://github.com/p6spy/p6spy>
-- P6spy 文档 <https://p6spy.readthedocs.io/en/latest/>
+- P6spy Github [https://github.com/p6spy/p6spy](https://github.com/p6spy/p6spy)
+- P6spy 文档 [https://p6spy.readthedocs.io/en/latest/](https://p6spy.readthedocs.io/en/latest/)
 
 ```shell
 # before
@@ -13,8 +13,7 @@ select * from user where age>6
 #  集成步骤
 
 ## 1. 项目引入`p6spy`依赖。
-<a href="http://mvnrepository.com/artifact/p6spy/p6spy" target="_blank">
-<img src="https://img.shields.io/maven-central/v/p6spy/p6spy.svg" ></a>
+[![](https://img.shields.io/maven-central/v/p6spy/p6spy.svg)](http://mvnrepository.com/artifact/p6spy/p6spy)
 
 ```xml
 <dependency>
@@ -54,4 +53,4 @@ spring:
 appender=com.p6spy.engine.spy.appender.Slf4JLogger
 ```
 
-简单示例 <https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/datasource-samples/druid-sample>
+简单示例 [https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/datasource-samples/druid-sample](https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/datasource-samples/druid-sample)

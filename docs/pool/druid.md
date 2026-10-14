@@ -2,8 +2,8 @@
 
 ## 基础介绍
 
-- Druid Github <https://github.com/alibaba/druid>
-- Druid 文档 <https://github.com/alibaba/druid/wiki>
+- Druid Github [https://github.com/alibaba/druid](https://github.com/alibaba/druid)
+- Druid 文档 [https://github.com/alibaba/druid/wiki](https://github.com/alibaba/druid/wiki)
 
 本组件能```简单高效``` 完成对Druid的集成并完成其参数的多元化配置。
 
@@ -13,7 +13,7 @@
 #  集成步骤
 
 ## 1. 项目引入 `druid-spring-boot-starter` 依赖。
-<a href="http://mvnrepository.com/artifact/com.alibaba/druid" target="_blank"><img src="https://img.shields.io/maven-central/v/com.alibaba/druid.svg" ></a>
+[![](https://img.shields.io/maven-central/v/com.alibaba/druid.svg)](http://mvnrepository.com/artifact/com.alibaba/druid)
 
 ```xml
 <dependency>
@@ -100,9 +100,9 @@ https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/dat
 
 ## 核心源码
 
-`Druid数据源创建器`  <https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/druid/DruidDataSourceCreator.java>
+`Druid数据源创建器`  [https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/druid/DruidDataSourceCreator.java](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/druid/DruidDataSourceCreator.java)
 
-`Druid参数源码`  <https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/druid/DruidConfig.java>
+`Druid参数源码`  [https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/druid/DruidConfig.java](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/blob/master/dynamic-datasource-creator/src/main/java/com/baomidou/dynamic/datasource/creator/druid/DruidConfig.java)
 
 如有参数缺失可参考源码提交PR。
 

@@ -2,9 +2,9 @@
 
 ## 基础介绍
 
-- shardingsphere Github <https://github.com/apache/shardingsphere>
-- shardingsphere 文档 <https://shardingsphere.apache.org/>
-- shardingsphere 示例 <https://github.com/apache/shardingsphere/tree/master/examples>
+- shardingsphere Github [https://github.com/apache/shardingsphere](https://github.com/apache/shardingsphere)
+- shardingsphere 文档 [https://shardingsphere.apache.org/](https://shardingsphere.apache.org/)
+- shardingsphere 示例 [https://github.com/apache/shardingsphere/tree/master/examples](https://github.com/apache/shardingsphere/tree/master/examples)
 
 ---
 
@@ -17,8 +17,7 @@ shardingsphere有多个不同版本，**不同版本的集成方法具体查看�
 ## 使用方法
 
 ## 1. 项目引入 `shardingsphere` 依赖。
-<a href="http://mvnrepository.com/artifact/org.apache.shardingsphere/sharding-jdbc-spring-boot-starter" target="_blank">
-<img src="https://img.shields.io/maven-central/v/org.apache.shardingsphere/sharding-jdbc-spring-boot-starter.svg" ></a>
+[![](https://img.shields.io/maven-central/v/org.apache.shardingsphere/sharding-jdbc-spring-boot-starter.svg)](http://mvnrepository.com/artifact/org.apache.shardingsphere/sharding-jdbc-spring-boot-starter)
 
 ```xml
 <dependency>
