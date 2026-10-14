@@ -80,6 +80,10 @@ const config = {
             label: '文档',
           },
           {
+            type: 'docsVersionDropdown',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/baomidou/dynamic-datasource/wiki',
             label: 'FAQ 排查',
             position: 'right',
@@ -87,6 +91,10 @@ const config = {
           {
             href: 'https://github.com/baomidou/dynamic-datasource',
             label: 'GitHub',
+            position: 'right',
+          },
+          {
+            type: 'localeDropdown',
             position: 'right',
           },
         ],
