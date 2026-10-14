@@ -6,8 +6,35 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// ---------------------------------------------------------------------------
+// 站点统计
+//
+// 百度统计（推荐，域名已备案后国内最稳）：
+//   1. https://tongji.baidu.com 注册站点，拿到 hm.js 后面的 ID
+//   2. 把 ID 填到下面的 BAIDU_TONGJI_ID 即可生效
+//
+// Microsoft Clarity（免费无限量，附带热图 / 会话录屏，可选）：
+//   1. https://clarity.microsoft.com 新建项目，拿到项目 ID
+//   2. 填到下面的 CLARITY_ID
+//
+// 留空则不会注入任何统计脚本。
+// ---------------------------------------------------------------------------
+const BAIDU_TONGJI_ID = 'f721154f6983ef53284f27c3bf7a40d4';
+const CLARITY_ID = 'yxnf8b5c40';
+
+const analyticsScripts = [
+  ...(BAIDU_TONGJI_ID
+    ? [{src: `https://hm.baidu.com/hm.js?${BAIDU_TONGJI_ID}`, async: true}]
+    : []),
+  ...(CLARITY_ID
+    ? [{src: `https://www.clarity.ms/tag/${CLARITY_ID}`, async: true}]
+    : []),
+];
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  scripts: analyticsScripts,
+
   title: 'dynamic-datasource',
   tagline: 'Spring Boot 多数据源框架 — 一行 @DS 注解切换数据源 · 本地多库事务 · 动态增删数据源 · 读写分离',
   favicon: 'img/favicon.ico',
