@@ -4,6 +4,7 @@ import Layout from '@theme/Layout';
 import CodeBlock from '@theme/CodeBlock';
 import Translate from '@docusaurus/Translate';
 
+import DataSourceFlow from '../components/DataSourceFlow';
 import {SponsorStrip} from '../components/SponsorSlot';
 import SponsorRails from '../components/SponsorSlot/SponsorRails';
 
@@ -245,6 +246,7 @@ export default function Home() {
       description="dynamic-datasource：@DS 注解切换数据源、本地多库事务、动态增删数据源、读写分离与连接池集成的完整文档。">
       <SponsorRails />
       <Hero />
+      <DataSourceFlow />
       <main>
         <Features />
         <QuickStart />

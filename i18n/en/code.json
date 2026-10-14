@@ -442,6 +442,63 @@
   "homepage.cta.issue": {
     "message": "Open an Issue"
   },
+  "homepage.flow.title": {
+    "message": "How does a single request reach the right database?"
+  },
+  "homepage.flow.desc": {
+    "message": "Once a connection comes in, @DS resolves the target database or group, the router hands the statement to the matching datasource and returns the result the same way — none of this leaks into your business code."
+  },
+  "homepage.flow.badge": {
+    "message": "Live routing preview"
+  },
+  "homepage.flow.figureLabel": {
+    "message": "dynamic-datasource request routing diagram"
+  },
+  "homepage.flow.pauseHint": {
+    "message": "Hover to pause the rotation"
+  },
+  "homepage.flow.hit": {
+    "message": "Hit"
+  },
+  "homepage.flow.client.title": {
+    "message": "Spring Boot app"
+  },
+  "homepage.flow.client.sub": {
+    "message": "Service method"
+  },
+  "homepage.flow.hub.title": {
+    "message": "Dynamic routing"
+  },
+  "homepage.flow.role.master": {
+    "message": "MySQL · Primary"
+  },
+  "homepage.flow.role.slave": {
+    "message": "MySQL · Replica"
+  },
+  "homepage.flow.role.oracle": {
+    "message": "Oracle · Heterogeneous"
+  },
+  "homepage.flow.note.master": {
+    "message": "Write requests go straight to the primary"
+  },
+  "homepage.flow.note.slave": {
+    "message": "Load-balanced inside the slave group"
+  },
+  "homepage.flow.note.oracle": {
+    "message": "Heterogeneous datasource, routed by annotation"
+  },
+  "homepage.flow.legend.request": {
+    "message": "Request"
+  },
+  "homepage.flow.legend.response": {
+    "message": "Response"
+  },
+  "homepage.flow.legend.idle": {
+    "message": "Idle datasource"
+  },
+  "homepage.flow.scrollHint": {
+    "message": "← Swipe sideways to see the full topology →"
+  },
   "sponsor.title": {
     "message": "Sponsorship · Ad slots available"
   },
