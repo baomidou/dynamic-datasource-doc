@@ -38,7 +38,7 @@ Move `test2()` into another service and call it separately.
 
 In a Shiro application, beans injected with `@Autowire` into classes such as `UserRealm` lose both caching and transaction annotations.
 
-```
+```java
 @Component
 public class UserRealm extends AuthorizingRealm {
 

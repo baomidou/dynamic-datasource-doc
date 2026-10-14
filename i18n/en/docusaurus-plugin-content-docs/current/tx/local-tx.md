@@ -17,18 +17,66 @@ Every solution has its scenarios. The questions the author keeps receiving are:
 Since 3.3.0, a connection-proxy-based solution was contributed by a Seata core contributor (https://github.com/a364176773).
 It is recommended to start from 3.4.0, which fixed an issue where older versions errored when `@DSTransactional` was used without `@DS`.
 
+## Attributes
+
+```java
+@Target({ElementType.TYPE, ElementType.METHOD})
+public @interface DSTransactional {
+
+    /** Exceptions that trigger a rollback. Defaults to {Exception.class}. */
+    Class<? extends Throwable>[] rollbackFor() default {Exception.class};
+
+    /** Exceptions that must NOT trigger a rollback. */
+    Class<? extends Throwable>[] noRollbackFor() default {};
+
+    /** Propagation behaviour, REQUIRED by default. */
+    DsPropagation propagation() default DsPropagation.REQUIRED;
+}
+```
+
+:::warning[Rollback rules differ from Spring]
+`rollbackFor` defaults to `{Exception.class}`, so **all exceptions — checked ones included — trigger a rollback**.
+
+Spring's `@Transactional` only rolls back on `RuntimeException` and `Error` by default. Do not assume the two behave the same; use `noRollbackFor` to opt out explicitly.
+:::
+
+`DsPropagation` mirrors Spring's seven levels: `REQUIRED` (default), `REQUIRES_NEW`, `NOT_SUPPORTED`, `SUPPORTS`, `NEVER`, `MANDATORY` and `NESTED` (savepoint-based when a transaction is already active).
+
+## Transaction event listeners
+
+Work that must only happen after the transaction settles (sending a message, evicting a cache) does not belong inside the transaction. Attach it with `@DsTxEventListener`:
+
+```java
+@Component
+public class OrderTxListener {
+
+    @DsTxEventListener   // phase defaults to AFTER_COMMIT
+    public void onCommitted(OrderCreatedEvent event) {
+        messageProducer.send(event);
+    }
+
+    @DsTxEventListener(phase = TransactionPhase.AFTER_ROLLBACK)
+    public void onRolledBack(OrderCreatedEvent event) {
+        log.warn("Order failed and rolled back: {}", event.getOrderId());
+    }
+}
+```
+
+It is an alias of Spring's `@EventListener`, so `classes` and `condition` (SpEL) are supported as well.
+
 ## Notes
 
-The local transaction implementation is simple: commit in a loop, and roll back in a loop on failure. The default assumption is that the databases themselves do not fail (e.g. crash). If the machine crashes mid-rollback, a local transaction can leave inconsistencies. Use Seata when you need a complete distributed solution.
+The implementation commits in a loop and rolls back in a loop. It assumes the databases themselves do not fail. If a database crashes during the commit phase, datasources that already committed cannot be rolled back — this is **not** a strict two-phase commit. Use Seata when you need a complete distributed transaction.
 
 1. Spring's native transaction is **not** supported — they can be used separately, but **never mixed**.
-2. Again: Spring's transaction annotations are not supported. Think of this as an independent transaction implementation.
-3. Only suitable for simple local multi-datasource scenarios. For async and microservice cases, use Seata.
-4. Extra configuration (read-only, Spring propagation modes, ...) is not supported yet and may follow based on feedback. Since 4.1.4 the annotation is also supported on classes.
+2. Only suitable for local multi-datasource scenarios inside a single application. For async and microservice cases, use Seata.
+3. Read-only transactions and isolation levels are **not** configurable; only propagation is.
+4. The annotation has also been supported on classes since 4.1.4.
+5. Do not confuse `com.baomidou.dynamic.datasource.tx.TransactionContext.getXID()` (local transactions) with Seata's `io.seata.core.context.RootContext.getXID()`.
 
 ## Usage
 
-Annotate the outermost method with `@DSTransactional`; everything it calls keeps switching datasources with `@DS` as usual. That is all. ~
+Annotate the outermost method with `@DSTransactional`; everything it calls keeps switching datasources with `@DS` as usual.
 
 ```java
 //AService calls BService and CService; A, B and C are different datasources.
@@ -74,7 +122,7 @@ A, B and C correspond to OrderService, ProductService and AccountService, each b
 Placing an order deducts stock from the product database and balance from the account database.
 Insufficient stock or balance throws a RuntimeException and triggers a global rollback.
 
-~~~
+```java
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -116,9 +164,9 @@ public class OrderService {
         log.info("=============ORDER END=================");
     }
 }
-~~~
+```
 
-~~~
+```java
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -152,9 +200,9 @@ public class ProductService {
         return totalPrice;
     }
 }
-~~~
+```
 
-~~~
+```java
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -184,12 +232,19 @@ public class AccountService {
         log.info("=============ACCOUNT END=================");
     }
 }
-~~~
+```
 
 ![](/img/screenshot_1624150848767.png)
 
 ## How it works
 
-Full implementation commit: https://github.com/baomidou/dynamic-datasource-spring-boot-starter/commit/f0cbad193528296eeb64faa76c79743afbdd811d
+The core idea is proxying connections: one connection per participating database is wrapped in a `ConnectionProxy`, registered into a `ConnectionFactory` under a shared XID, and committed or rolled back together at the outermost boundary.
 
-The core idea is proxying connections: one connection per database is registered into a `ConnectionFactory`. If everything succeeds they commit together; on failure they roll back together.
+| Component | Responsibility |
+| :--- | :--- |
+| `TransactionalTemplate` | Propagation behaviour, suspend/resume, savepoint orchestration |
+| `TransactionContext` | Holds the XID and transaction synchronizations |
+| `ConnectionFactory` | Owns the per-database `ConnectionProxy` instances and performs the final commit / rollback |
+| `LocalTxUtil` | Programmatic entry points: `startTransaction` / `commit` / `rollback` |
+
+Source: [TransactionalTemplate](https://github.com/baomidou/dynamic-datasource/blob/master/dynamic-datasource-spring/src/main/java/com/baomidou/dynamic/datasource/tx/TransactionalTemplate.java)
