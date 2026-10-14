@@ -98,6 +98,32 @@ const config = {
           sidebarPath: './sidebars.js',
           editUrl:
             'https://github.com/baomidou/dynamic-datasource-doc/edit/main/',
+
+          // 多版本文档：
+          //   current  -> docs/                     dev 分支内容，路由 /docs/next/
+          //   4.6      -> versioned_docs/version-4.6  最新稳定版，路由 /docs/（默认）
+          //   4.5      -> versioned_docs/version-4.5  上一稳定版，路由 /docs/4.5/
+          //
+          // 版本名就是 versioned_docs 目录名的后缀，比补丁号（4.5.0 / 4.6.0）短，
+          // 这样同一个 tag 线上发布多个补丁时不需要新建快照目录。
+          // 新增快照见 README「维护约定」。
+          versions: {
+            current: {
+              label: 'Next',
+              badge: false, // 不在侧边栏头部重复显示版本名
+              banner: 'none', // Next 不显示「非最新版」横幅
+            },
+            '4.6': {
+              label: '4.6.0',
+              badge: true,
+              banner: 'none', // 默认版本文档，无需横幅
+            },
+            '4.5': {
+              label: '4.5.0',
+              badge: true,
+              banner: 'unmaintained', // 提示这是旧版本，引导升级
+            },
+          },
         },
         blog: false,
         theme: {
@@ -176,6 +202,18 @@ const config = {
             ],
           },
           {
+            title: '版本',
+            items: [
+              {label: '版本记录', to: '/docs/guide/version-history'},
+              {label: '4.6.0 文档（最新）', to: '/docs/guide/basics'},
+              {label: '4.5.0 文档', to: '/docs/4.5/guide/basics'},
+              {
+                label: '更新日志（GitHub Releases）',
+                href: 'https://github.com/baomidou/dynamic-datasource/releases',
+              },
+            ],
+          },
+          {
             title: '社区',
             items: [
               {
@@ -185,6 +223,10 @@ const config = {
               {
                 label: 'GitHub Issues',
                 href: 'https://github.com/baomidou/dynamic-datasource/issues',
+              },
+              {
+                label: 'Discussions',
+                href: 'https://github.com/baomidou/dynamic-datasource/discussions',
               },
             ],
           },

@@ -1,0 +1,137 @@
+{
+  "docs": [
+    {
+      "type": "category",
+      "label": "入门",
+      "collapsed": false,
+      "items": [
+        "guide/basics",
+        "guide/ds-semantics",
+        "guide/how-it-works",
+        "guide/configuration",
+        "guide/out-of-scope"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "连接池集成",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "doc",
+          "id": "pool/index",
+          "label": "连接池总览"
+        },
+        "pool/common",
+        "pool/druid",
+        "pool/hikaricp",
+        "pool/beecp",
+        "pool/dbcp2",
+        "pool/jndi"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "第三方集成",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "doc",
+          "id": "integration/index",
+          "label": "集成总览"
+        },
+        "integration/mybatis-plus",
+        "integration/p6spy",
+        "integration/quartz",
+        "integration/sharding-jdbc"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "事务专栏",
+      "collapsed": false,
+      "items": [
+        "tx/index",
+        "tx/concepts",
+        "tx/basics",
+        "tx/faq",
+        "tx/local-tx",
+        "tx/seata"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "进阶使用",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "doc",
+          "id": "advanced/index",
+          "label": "进阶总览"
+        },
+        "advanced/add-remove-datasource",
+        "advanced/observability",
+        "advanced/graceful-shutdown",
+        "advanced/dynamic-datasource-resolution",
+        "advanced/encryption",
+        "advanced/init-scripts",
+        "advanced/lazy-datasource",
+        "advanced/no-datasource-startup",
+        "advanced/manual-switching",
+        "advanced/manual-injection",
+        "guide/multi-tenant"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "自定义",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "doc",
+          "id": "custom/index",
+          "label": "自定义总览"
+        },
+        "custom/annotation",
+        "custom/datasource-provider",
+        "custom/load-balance-strategy"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "无注解方案",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "doc",
+          "id": "no-annotation/readme",
+          "label": "无注解总览"
+        },
+        "no-annotation/filter",
+        "no-annotation/interceptor",
+        "no-annotation/aop",
+        "no-annotation/mybatis-read-write"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "运维与排障",
+      "collapsed": false,
+      "items": [
+        "guide/switching-failure",
+        "guide/debugging-source",
+        "guide/knowledge-base"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "版本与迁移",
+      "collapsed": false,
+      "items": [
+        "guide/version-history",
+        "guide/unavailable-versions",
+        "guide/native-image"
+      ]
+    }
+  ]
+}
