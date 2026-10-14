@@ -1,6 +1,6 @@
 # dynamic-datasource 文档站
 
-<https://baomidou.github.io/dynamic-datasource-doc/>
+<https://doc.xiuceyun.cn/>
 
 dynamic-datasource 的完整文档（原秀策云付费文档，现已免费开放），基于 [Docusaurus 3](https://docusaurus.io) 构建，使用 pnpm 管理依赖，部署在 GitHub Pages。
 
@@ -33,7 +33,7 @@ DOC_BASE=/dynamic-datasource-doc/ pnpm build && pnpm serve
 
 ## 部署
 
-push 到 `main` 后，GitHub Actions（[`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml)）自动以 pnpm 构建并发布到 GitHub Pages；workflow 中通过 `DOC_BASE` 注入子路径。所有 actions 均 pin 到 SHA。
+push 到 `main` 后，GitHub Actions（[`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml)）自动以 pnpm 构建并发布到 GitHub Pages（自定义域名 `doc.xiuceyun.cn`）。所有 actions 均 pin 到 SHA。
 
 ## 内容来源与迁移脚本
 
