@@ -23,12 +23,15 @@ import posixpath
 import re
 from pathlib import Path
 
-# 这些目录下的 .md 都对应 /docs/<相对路径> 路由
+# 这些目录下的 .md 都对应 /docs/<相对路径> 路由。
+# 新增版本文档时记得把对应的 versioned_docs / i18n 目录补进来。
 DOC_ROOTS = (
     "docs",
     "versioned_docs/version-4.6",
+    "versioned_docs/version-4.5",
     "i18n/en/docusaurus-plugin-content-docs/current",
     "i18n/en/docusaurus-plugin-content-docs/version-4.6",
+    "i18n/en/docusaurus-plugin-content-docs/version-4.5",
 )
 
 LINK_RE = re.compile(r"\]\((?P<target>\.{1,2}/[^)\s]*?\.md)(?P<anchor>#[^)]*)?\)")
