@@ -2,6 +2,10 @@
 
 /**
  * Sidebar mirroring the dynamic-datasource docs structure.
+ *
+ * 结构约定：
+ * - 每个分类的第一项是 `index.md` / `readme.md`，作为该章的入口页
+ * - 新增页面后请同步更新 `versioned_sidebars/version-4.6-sidebars.json`
  * @type {import('@docusaurus/plugin-content-docs').SidebarsConfig}
  */
 const sidebars = {
@@ -10,13 +14,20 @@ const sidebars = {
       type: 'category',
       label: '入门',
       collapsed: false,
-      items: ['guide/basics', 'guide/how-it-works'],
+      items: [
+        'guide/basics',
+        'guide/ds-semantics',
+        'guide/how-it-works',
+        'guide/configuration',
+        'guide/out-of-scope',
+      ],
     },
     {
       type: 'category',
       label: '连接池集成',
       collapsed: false,
       items: [
+        {type: 'doc', id: 'pool/index', label: '连接池总览'},
         'pool/common',
         'pool/druid',
         'pool/hikaricp',
@@ -30,50 +41,11 @@ const sidebars = {
       label: '第三方集成',
       collapsed: false,
       items: [
-        'integration/index',
+        {type: 'doc', id: 'integration/index', label: '集成总览'},
         'integration/mybatis-plus',
         'integration/p6spy',
         'integration/quartz',
         'integration/sharding-jdbc',
-      ],
-    },
-    {
-      type: 'category',
-      label: '进阶使用',
-      collapsed: false,
-      items: [
-        'advanced/index',
-        'advanced/add-remove-datasource',
-        'advanced/dynamic-datasource-resolution',
-        'advanced/encryption',
-        'advanced/init-scripts',
-        'advanced/lazy-datasource',
-        'advanced/no-datasource-startup',
-        'advanced/manual-switching',
-        'advanced/manual-injection',
-      ],
-    },
-    {
-      type: 'category',
-      label: '自定义',
-      collapsed: false,
-      items: [
-        'custom/index',
-        'custom/annotation',
-        'custom/datasource-provider',
-        'custom/load-balance-strategy',
-      ],
-    },
-    {
-      type: 'category',
-      label: '无注解方案',
-      collapsed: false,
-      items: [
-        'no-annotation/readme',
-        'no-annotation/filter',
-        'no-annotation/interceptor',
-        'no-annotation/aop',
-        'no-annotation/mybatis-read-write',
       ],
     },
     {
@@ -84,22 +56,71 @@ const sidebars = {
         'tx/index',
         'tx/concepts',
         'tx/basics',
+        'tx/faq',
         'tx/local-tx',
         'tx/seata',
-        'tx/faq',
       ],
     },
     {
       type: 'category',
-      label: '更多',
+      label: '进阶使用',
       collapsed: false,
       items: [
-        'guide/debugging-source',
-        'guide/switching-failure',
-        'guide/unavailable-versions',
-        'guide/version-history',
-        'guide/knowledge-base',
+        {type: 'doc', id: 'advanced/index', label: '进阶总览'},
+        'advanced/add-remove-datasource',
+        'advanced/observability',
+        'advanced/graceful-shutdown',
+        'advanced/dynamic-datasource-resolution',
+        'advanced/encryption',
+        'advanced/init-scripts',
+        'advanced/lazy-datasource',
+        'advanced/no-datasource-startup',
+        'advanced/manual-switching',
+        'advanced/manual-injection',
         'guide/multi-tenant',
+      ],
+    },
+    {
+      type: 'category',
+      label: '自定义',
+      collapsed: false,
+      items: [
+        {type: 'doc', id: 'custom/index', label: '自定义总览'},
+        'custom/annotation',
+        'custom/datasource-provider',
+        'custom/load-balance-strategy',
+      ],
+    },
+    {
+      type: 'category',
+      label: '无注解方案',
+      collapsed: false,
+      items: [
+        {type: 'doc', id: 'no-annotation/readme', label: '无注解总览'},
+        'no-annotation/filter',
+        'no-annotation/interceptor',
+        'no-annotation/aop',
+        'no-annotation/mybatis-read-write',
+      ],
+    },
+    {
+      type: 'category',
+      label: '运维与排障',
+      collapsed: false,
+      items: [
+        'guide/switching-failure',
+        'guide/debugging-source',
+        'guide/knowledge-base',
+      ],
+    },
+    {
+      type: 'category',
+      label: '版本与迁移',
+      collapsed: false,
+      items: [
+        'guide/version-history',
+        'guide/unavailable-versions',
+        'guide/native-image',
       ],
     },
   ],
