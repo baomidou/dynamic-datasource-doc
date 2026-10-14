@@ -441,5 +441,20 @@
   },
   "homepage.cta.issue": {
     "message": "Open an Issue"
+  },
+  "sponsor.title": {
+    "message": "Sponsorship · Ad slots available"
+  },
+  "sponsor.subtitle": {
+    "message": "This documentation reaches Spring Boot / multi-datasource developers. Showcase your product, open-source project, or job posting here."
+  },
+  "sponsor.cta": {
+    "message": "Become a sponsor"
+  },
+  "sponsor.slot.rent": {
+    "message": "Ad slot available"
+  },
+  "sponsor.slot.rentDesc": {
+    "message": "Reserved for you — get in touch"
   }
 }

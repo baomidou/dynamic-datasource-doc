@@ -4,6 +4,8 @@ import Layout from '@theme/Layout';
 import CodeBlock from '@theme/CodeBlock';
 import Translate from '@docusaurus/Translate';
 
+import SponsorSlot from '../components/SponsorSlot';
+
 import styles from './index.module.css';
 
 const FEATURES = [
@@ -205,6 +207,16 @@ function SkillSection() {
   );
 }
 
+function Sponsors() {
+  return (
+    <section className={clsx(styles.section, styles.sponsors)}>
+      <div className="container">
+        <SponsorSlot />
+      </div>
+    </section>
+  );
+}
+
 function BottomCta() {
   return (
     <section className={clsx(styles.section, styles.cta)}>
@@ -244,6 +256,7 @@ export default function Home() {
         <Features />
         <QuickStart />
         <SkillSection />
+        <Sponsors />
         <BottomCta />
       </main>
     </Layout>
