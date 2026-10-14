@@ -18,22 +18,47 @@ import {themes as prismThemes} from 'prism-react-renderer';
 //   2. 填到下面的 CLARITY_ID
 //
 // 留空则不会注入任何统计脚本。
+//
+// 统计脚本只在 ANALYTICS_HOSTS 列出的域名下加载。本地 `docusaurus start` /
+// `docusaurus serve` 预览（localhost / 127.0.0.1 / IDE 内置预览）不会再请求这些
+// 第三方脚本：既避免 Clarity 在非部署域名下抛错刷控制台，也避免本地调试污染线上
+// 统计后台。需要临时放开时设置环境变量 DOC_ANALYTICS_HOSTS（逗号分隔）。
 // ---------------------------------------------------------------------------
 const BAIDU_TONGJI_ID = 'f721154f6983ef53284f27c3bf7a40d4';
 const CLARITY_ID = 'yxnf8b5c40';
 
-const analyticsScripts = [
-  ...(BAIDU_TONGJI_ID
-    ? [{src: `https://hm.baidu.com/hm.js?${BAIDU_TONGJI_ID}`, async: true}]
-    : []),
-  ...(CLARITY_ID
-    ? [{src: `https://www.clarity.ms/tag/${CLARITY_ID}`, async: true}]
-    : []),
-];
+const ANALYTICS_HOSTS = (process.env.DOC_ANALYTICS_HOSTS ?? 'doc.xiuceyun.cn')
+  .split(',')
+  .map((host) => host.trim().toLowerCase())
+  .filter(Boolean);
+
+const ANALYTICS_SOURCES = [
+  BAIDU_TONGJI_ID && `https://hm.baidu.com/hm.js?${BAIDU_TONGJI_ID}`,
+  CLARITY_ID && `https://www.clarity.ms/tag/${CLARITY_ID}`,
+].filter(Boolean);
+
+/**
+ * Docusaurus 的 `scripts` 配置无法做条件判断，因此改为注入一段引导脚本：
+ * 只有当前 hostname 命中白名单时，才动态插入统计脚本。
+ */
+const analyticsBootstrap =
+  ANALYTICS_SOURCES.length > 0
+    ? {
+        tagName: 'script',
+        attributes: {},
+        innerHTML: `(function(){var h=${JSON.stringify(
+          ANALYTICS_HOSTS,
+        )};if(h.indexOf(location.hostname.toLowerCase())===-1){return;}[${ANALYTICS_SOURCES.map(
+          (src) => JSON.stringify(src),
+        ).join(
+          ',',
+        )}].forEach(function(s){var e=document.createElement('script');e.src=s;e.async=true;document.head.appendChild(e);});})();`,
+      }
+    : null;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  scripts: analyticsScripts,
+  headTags: analyticsBootstrap ? [analyticsBootstrap] : [],
 
   title: 'dynamic-datasource',
   tagline: 'Spring Boot 多数据源框架 — 一行 @DS 注解切换数据源 · 本地多库事务 · 动态增删数据源 · 读写分离',
