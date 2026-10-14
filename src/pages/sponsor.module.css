@@ -1,0 +1,187 @@
+.hero {
+  padding: 4rem 1.5rem 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: radial-gradient(
+      56rem 22rem at 50% -6rem,
+      rgba(13, 148, 136, 0.16),
+      transparent 62%
+    ),
+    linear-gradient(180deg, #f4fdfb 0%, var(--ifm-background-color) 92%);
+}
+
+[data-theme='dark'] .hero {
+  background: radial-gradient(
+      56rem 22rem at 50% -6rem,
+      rgba(45, 212, 191, 0.16),
+      transparent 62%
+    ),
+    linear-gradient(180deg, #06211f 0%, var(--ifm-background-color) 92%);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.heroInner {
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+.kicker {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.25rem 0.85rem;
+  border: 1px solid rgba(13, 148, 136, 0.35);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0f766e;
+  background: rgba(13, 148, 136, 0.08);
+}
+
+[data-theme='dark'] .kicker {
+  color: #5eead4;
+  border-color: rgba(94, 234, 212, 0.35);
+  background: rgba(45, 212, 191, 0.08);
+}
+
+.title {
+  margin-bottom: 0.9rem;
+  font-size: clamp(1.85rem, 4vw, 2.5rem);
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  margin: 0;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.9;
+}
+
+.section {
+  padding: 3.25rem 0;
+}
+
+.sectionTitle {
+  margin-bottom: 1.4rem;
+  font-size: 1.35rem;
+}
+
+.slotGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.slotCard {
+  padding: 1.3rem 1.3rem 1.4rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  background: var(--ifm-background-surface-color);
+  transition: transform 0.18s ease, border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.slotCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 12px 28px rgba(13, 148, 136, 0.12);
+}
+
+.slotTag {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #0f766e;
+  background: rgba(13, 148, 136, 0.12);
+}
+
+[data-theme='dark'] .slotTag {
+  color: #5eead4;
+  background: rgba(45, 212, 191, 0.14);
+}
+
+.slotName {
+  margin-bottom: 0.45rem;
+  font-size: 1rem;
+}
+
+.slotDesc {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.contactSection {
+  padding-top: 0;
+}
+
+.contactCard {
+  padding: 2rem 2.2rem;
+  border: 1px solid rgba(13, 148, 136, 0.3);
+  border-radius: 16px;
+  text-align: center;
+  background: radial-gradient(
+      36rem 12rem at 50% 0%,
+      rgba(13, 148, 136, 0.12),
+      transparent 65%
+    ),
+    var(--ifm-background-surface-color);
+}
+
+[data-theme='dark'] .contactCard {
+  border-color: rgba(45, 212, 191, 0.28);
+}
+
+.contactDesc {
+  margin: 0 auto 1.2rem;
+  max-width: 42rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.85;
+}
+
+.mail {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #fff;
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  user-select: all;
+}
+
+.mail:hover {
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(13, 148, 136, 0.38);
+}
+
+.note {
+  margin: 1.1rem 0 0;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 3rem 1.2rem 2.5rem;
+  }
+
+  .contactCard {
+    padding: 1.6rem 1.2rem;
+  }
+
+  .mail {
+    display: block;
+    text-align: center;
+    word-break: break-all;
+  }
+}

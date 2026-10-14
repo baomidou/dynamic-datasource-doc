@@ -451,10 +451,91 @@
   "sponsor.cta": {
     "message": "Become a sponsor"
   },
+  "sponsor.contact": {
+    "message": "Email"
+  },
   "sponsor.slot.rent": {
     "message": "Ad slot available"
   },
+  "sponsor.rail.desc": {
+    "message": "For Spring Boot / multi-datasource developers"
+  },
   "sponsor.slot.rentDesc": {
     "message": "Reserved for you — get in touch"
+  },
+  "sponsor.strip.label": {
+    "message": "Sponsors"
+  },
+  "sponsor.strip.contact": {
+    "message": "Sponsorship welcome"
+  },
+  "sponsor.toc.desc": {
+    "message": "For Spring Boot developers — sponsorship welcome"
+  },
+  "announce.sponsor": {
+    "message": "📣 Ad slots are available in these docs — sponsorship welcome"
+  },
+  "announce.sponsor.link": {
+    "message": "Learn more"
+  },
+  "sponsor.page.kicker": {
+    "message": "Sponsors"
+  },
+  "sponsor.page.title": {
+    "message": "Sponsorship · Ad slots available"
+  },
+  "sponsor.page.lead": {
+    "message": "This is the official dynamic-datasource documentation, read mostly by Java / Spring Boot backend developers. Showcase your product, open-source project or job posting here."
+  },
+  "sponsor.page.slotsTitle": {
+    "message": "Available placements"
+  },
+  "sponsor.page.tag.site": {
+    "message": "Site-wide"
+  },
+  "sponsor.page.tag.home": {
+    "message": "Homepage"
+  },
+  "sponsor.page.tag.docs": {
+    "message": "Docs"
+  },
+  "sponsor.page.slot.announce.name": {
+    "message": "Top announcement bar"
+  },
+  "sponsor.page.slot.announce.desc": {
+    "message": "Pinned at the top of every page — ideal for one-line branding or campaign promotion."
+  },
+  "sponsor.page.slot.hero.name": {
+    "message": "Above-the-fold strip"
+  },
+  "sponsor.page.slot.hero.desc": {
+    "message": "Sits in the top half of the homepage, visible without scrolling."
+  },
+  "sponsor.page.slot.rail.name": {
+    "message": "Side rails (sticky)"
+  },
+  "sponsor.page.slot.rail.desc": {
+    "message": "Sticky on both sides of the content on wide screens, visible throughout the scroll."
+  },
+  "sponsor.page.slot.toc.name": {
+    "message": "Under the right-hand TOC"
+  },
+  "sponsor.page.slot.toc.desc": {
+    "message": "Seen while developers read the docs — long dwell time."
+  },
+  "sponsor.page.slot.footer.name": {
+    "message": "Bottom banner"
+  },
+  "sponsor.page.slot.footer.desc": {
+    "message": "A high-intent spot right after the content — good for product cards or job posts."
+  },
+  "sponsor.page.contactTitle": {
+    "message": "Get in touch"
+  },
+  "sponsor.page.contactDesc": {
+    "message": "Position, format and duration are all negotiable, and the slots can host product cards, job postings or open-source projects. Just send an email."
+  },
+  "sponsor.page.note": {
+    "message": "Please briefly describe your product, the placement you want and your budget. You'll get a reply soon."
   }
 }

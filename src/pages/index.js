@@ -4,7 +4,8 @@ import Layout from '@theme/Layout';
 import CodeBlock from '@theme/CodeBlock';
 import Translate from '@docusaurus/Translate';
 
-import SponsorSlot from '../components/SponsorSlot';
+import {SponsorStrip} from '../components/SponsorSlot';
+import SponsorRails from '../components/SponsorSlot/SponsorRails';
 
 import styles from './index.module.css';
 
@@ -102,6 +103,7 @@ function Hero() {
           </Link>
         </div>
       </div>
+      <SponsorStrip />
     </header>
   );
 }
@@ -207,16 +209,6 @@ function SkillSection() {
   );
 }
 
-function Sponsors() {
-  return (
-    <section className={clsx(styles.section, styles.sponsors)}>
-      <div className="container">
-        <SponsorSlot />
-      </div>
-    </section>
-  );
-}
-
 function BottomCta() {
   return (
     <section className={clsx(styles.section, styles.cta)}>
@@ -251,12 +243,12 @@ export default function Home() {
     <Layout
       title="dynamic-datasource — Spring Boot 多数据源框架文档"
       description="dynamic-datasource：@DS 注解切换数据源、本地多库事务、动态增删数据源、读写分离与连接池集成的完整文档。">
+      <SponsorRails />
       <Hero />
       <main>
         <Features />
         <QuickStart />
         <SkillSection />
-        <Sponsors />
         <BottomCta />
       </main>
     </Layout>

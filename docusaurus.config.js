@@ -70,6 +70,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // 全站顶部招租公告条；文案由 src/theme/AnnouncementBar/Content 接管（支持中英切换）
+      announcementBar: {
+        id: 'sponsor-slots',
+        content: '本站文档提供广告位，欢迎赞助合作',
+        backgroundColor: '#0d9488',
+        textColor: '#ffffff',
+        isCloseable: true,
+      },
       navbar: {
         title: 'dynamic-datasource',
         items: [
@@ -82,6 +90,11 @@ const config = {
           {
             type: 'docsVersionDropdown',
             position: 'left',
+          },
+          {
+            to: '/sponsor',
+            label: '赞助合作',
+            position: 'right',
           },
           {
             href: 'https://github.com/baomidou/dynamic-datasource/wiki',

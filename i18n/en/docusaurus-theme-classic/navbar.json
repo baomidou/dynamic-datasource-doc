@@ -7,6 +7,10 @@
     "message": "Docs",
     "description": "Navbar item with label 文档"
   },
+  "item.label.赞助合作": {
+    "message": "Sponsor",
+    "description": "Navbar item with label 赞助合作"
+  },
   "item.label.FAQ 排查": {
     "message": "FAQ",
     "description": "Navbar item with label FAQ 排查"

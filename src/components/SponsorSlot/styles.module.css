@@ -71,9 +71,16 @@
   background: var(--ifm-color-emphasis-100);
 }
 
-.cta {
+.actions {
   flex: none;
   align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+.cta {
   padding: 0.55rem 1.15rem;
   border-radius: 8px;
   font-size: 0.9rem;
@@ -89,6 +96,18 @@
   text-decoration: none;
   transform: translateY(-1px);
   box-shadow: 0 10px 26px rgba(13, 148, 136, 0.38);
+}
+
+.contact {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-600);
+  white-space: nowrap;
+}
+
+.contactMail {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  user-select: all;
 }
 
 .grid {
@@ -167,6 +186,7 @@
   font-size: 0.8rem;
   line-height: 1.5;
   color: var(--ifm-color-emphasis-600);
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 640px) {
@@ -174,8 +194,219 @@
     padding: 1.2rem 1.1rem;
   }
 
-  .cta {
+  .actions {
     align-self: stretch;
+    align-items: stretch;
+  }
+
+  .contact,
+  .cta {
     text-align: center;
   }
+}
+
+/* ---------- 首页左右固定招租位 ---------- */
+
+.rail {
+  display: none;
+}
+
+/* 只在正文两侧留白足够的宽屏显示（>=1600px 时容器为 1320px） */
+@media (min-width: 1600px) {
+  .rail {
+    display: block;
+    position: fixed;
+    top: 50%;
+    z-index: 1;
+    width: 140px;
+    transform: translateY(-50%);
+  }
+
+  .railLeft {
+    left: max(1rem, calc((100vw - 1320px) / 2 - 156px));
+  }
+
+  .railRight {
+    right: max(1rem, calc((100vw - 1320px) / 2 - 156px));
+  }
+}
+
+.railCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 0.8rem;
+  border: 1px dashed var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  text-align: center;
+  color: inherit;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.1);
+  transition: transform 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.railCard:hover {
+  color: inherit;
+  text-decoration: none;
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(13, 148, 136, 0.18);
+}
+
+.railBadge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.railSlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  color: var(--ifm-color-emphasis-500);
+  background: var(--ifm-color-emphasis-100);
+}
+
+.railTitle {
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.railDesc {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.railMail {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  word-break: break-all;
+  user-select: all;
+}
+
+/* ---------- 首页首屏赞助位置条 ---------- */
+
+.strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  max-width: var(--ifm-container-width-xl);
+  margin: 3.25rem auto 0;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.stripLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.stripSlots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.stripSlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7.5rem;
+  height: 2.4rem;
+  padding: 0 0.8rem;
+  border: 1px dashed var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-600);
+  transition: border-color 0.15s ease, color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.stripSlot:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-background-surface-color);
+}
+
+.stripLogo {
+  max-height: 1.5rem;
+  width: auto;
+}
+
+.stripContact {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.stripMail {
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  user-select: all;
+}
+
+/* ---------- 文档页右侧 TOC 下方的紧凑招租卡 ---------- */
+
+.tocSlot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 1.25rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px dashed var(--ifm-color-emphasis-300);
+  border-radius: 10px;
+  background: var(--ifm-background-surface-color);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tocSlot:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 10px 24px rgba(13, 148, 136, 0.12);
+}
+
+.tocBadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.tocTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.tocDesc {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.tocMail {
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  word-break: break-all;
+  user-select: all;
 }

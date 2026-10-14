@@ -3,7 +3,7 @@
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 6.5rem 1.5rem 5.5rem;
+  padding: 5rem 1.5rem 3rem;
   text-align: center;
   background:
     radial-gradient(56rem 22rem at 50% -6rem, rgba(13, 148, 136, 0.16), transparent 62%),
@@ -123,7 +123,7 @@
 /* ---------- Shared section ---------- */
 
 .section {
-  padding: 4.5rem 0;
+  padding: 3.25rem 0;
 }
 
 .sectionTitle {
@@ -218,7 +218,7 @@
 /* ---------- Skill ---------- */
 
 .skill {
-  padding: 4.5rem 0;
+  padding: 3.25rem 0;
 }
 
 .skillCard {
@@ -286,12 +286,6 @@
   line-height: 1;
 }
 
-/* ---------- Sponsors ---------- */
-
-.sponsors {
-  padding-top: 0;
-}
-
 /* ---------- Bottom CTA ---------- */
 
 .cta {
@@ -307,7 +301,7 @@
 
 @media (max-width: 640px) {
   .hero {
-    padding: 4.5rem 1.2rem 3.5rem;
+    padding: 3.5rem 1.2rem 2.5rem;
   }
 
   .heroDivider {

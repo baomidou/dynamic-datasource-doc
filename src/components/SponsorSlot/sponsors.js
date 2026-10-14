@@ -14,6 +14,16 @@ export const CONTACT = {
   wechat: '',
 };
 
+// 「成为赞助商」/ 招租卡片统一的跳转地址：优先邮箱，否则回退到 Issue 入口
+export function contactHref() {
+  if (CONTACT.email) {
+    return `mailto:${CONTACT.email}?subject=${encodeURIComponent(
+      'dynamic-datasource 文档赞助合作咨询',
+    )}`;
+  }
+  return CONTACT.issueUrl;
+}
+
 export const SPONSORS = [
   // {
   //   name: 'YourProduct',
