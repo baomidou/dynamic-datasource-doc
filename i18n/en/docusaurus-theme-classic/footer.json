@@ -7,6 +7,26 @@
     "message": "Community",
     "description": "The title of the footer links column with title=社区 in the footer"
   },
+  "link.title.版本": {
+    "message": "Versions",
+    "description": "The title of the footer links column with title=版本 in the footer"
+  },
+  "link.item.label.版本记录": {
+    "message": "Version History",
+    "description": "The label of footer link with label=版本记录 linking to /docs/guide/version-history"
+  },
+  "link.item.label.4.6.0 文档（最新）": {
+    "message": "4.6.0 Docs (Latest)",
+    "description": "The label of footer link with label=4.6.0 文档（最新） linking to /docs/guide/basics"
+  },
+  "link.item.label.4.5.0 文档": {
+    "message": "4.5.0 Docs",
+    "description": "The label of footer link with label=4.5.0 文档 linking to /docs/4.5/guide/basics"
+  },
+  "link.item.label.更新日志（GitHub Releases）": {
+    "message": "Changelog (GitHub Releases)",
+    "description": "The label of footer link with label=更新日志（GitHub Releases） linking to https://github.com/baomidou/dynamic-datasource/releases"
+  },
   "link.title.更多": {
     "message": "More",
     "description": "The title of the footer links column with title=更多 in the footer"
