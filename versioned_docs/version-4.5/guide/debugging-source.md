@@ -1,6 +1,11 @@
+---
+title: "调试源码"
+description: "检查日志输出是否正确。"
+---
+
 # 调试源码
 
-1. 开启动态数据源的debug日志。
+1. 开启动态数据源的 debug 日志。
 
 ```shell
 logging:
@@ -9,7 +14,7 @@ logging:
 ```
 检查日志输出是否正确。
 
-2. 断点调试DynamicDataSourceAnnotationInterceptor。
+2. 断点调试 DynamicDataSourceAnnotationInterceptor。
 
 ```java {17}
 public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor {
@@ -27,9 +32,9 @@ public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         try {
-            //这里把获取到的数据源标识如master存入本地线程
+            //这里把获取到的数据源标识如 master 存入本地线程
             String dsKey = determineDatasourceKey(invocation);
-        ●  DynamicDataSourceContextHolder.push(dsKey);
+            DynamicDataSourceContextHolder.push(dsKey);
             return invocation.proceed();
         } finally {
             DynamicDataSourceContextHolder.poll();
@@ -41,9 +46,9 @@ public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor
         return (!key.isEmpty() && key.startsWith(DYNAMIC_PREFIX)) ? dsProcessor.determineDatasource(invocation, key) : key;
     }
 }
-```java
+```
 
-3. 断点调试DynamicRoutingDataSource。
+3. 断点调试 DynamicRoutingDataSource。
 
 ```java {10}
 public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
@@ -54,8 +59,8 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
     @Override
     public DataSource determineDataSource() {
-        //从本地线程获取key解析最终真实的数据源
-     ●  String dsKey = DynamicDataSourceContextHolder.peek();
+        //从本地线程获取 key 解析最终真实的数据源
+        String dsKey = DynamicDataSourceContextHolder.peek();
         return getDataSource(dsKey);
     }
 

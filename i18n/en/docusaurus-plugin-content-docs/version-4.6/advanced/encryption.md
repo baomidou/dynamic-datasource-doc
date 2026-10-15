@@ -1,3 +1,8 @@
+---
+title: "Database Password Encryption"
+description: "With Druid you can encrypt with its own ConfigTools. But what if your project uses HikariCP, BeeCP, or no pool at all, and you still want the database credentials encrypted?"
+---
+
 # Database Password Encryption
 
 ## Overview

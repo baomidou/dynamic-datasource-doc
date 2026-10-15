@@ -1,3 +1,8 @@
+---
+title: "Connection Pool Essentials"
+description: "Druid > HikariCP > BeeCP > DBCP2 > Spring Basic."
+---
+
 # Connection Pool Essentials
 
 1. Every datasource has a `type` that selects its connection pool.

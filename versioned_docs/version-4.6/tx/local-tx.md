@@ -1,3 +1,8 @@
+---
+title: "本地多数据源事务"
+description: "本篇描述的传播行为、回滚规则与语义边界，由三线共享的契约测试锁定：dynamic-datasource-test-common 的 AbstractPropagationContractTest（12 个场景，Boot 2/3/4 跑同一套断言）。"
+---
+
 # 本地多数据源事务
 
 :::info[语义由契约测试锁定]

@@ -1,3 +1,8 @@
+---
+title: "Custom Load Balancing Strategy"
+description: "As shown below, the slave group holds three datasources. When a user switches to slave, a load balancing algorithm is applied."
+---
+
 # Custom Load Balancing Strategy
 
 ## Overview

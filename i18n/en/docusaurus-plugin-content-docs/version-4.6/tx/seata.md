@@ -1,3 +1,8 @@
+---
+title: "Seata Transactions"
+description: "Once Seata is enabled inside dynamic-datasource-spring-boot-starter, the component wraps the DataSource with a DataSourceProxy automatically, so keep compatibility as follows."
+---
+
 # Seata Transactions
 
 ## Overview

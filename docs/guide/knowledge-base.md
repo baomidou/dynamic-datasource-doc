@@ -1,3 +1,8 @@
+---
+title: "知识库"
+description: "知识库"
+---
+
 # 知识库
 
 ## 如何注入多数据源？
@@ -7,8 +12,8 @@ public class A{
     @Autowired
     private DataSource dataSource;
 
-    public void dosomething{
-         //使用的时候需要强转
+    public void dosomething() {
+        //使用的时候需要强转
         DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
     }
 }
@@ -23,10 +28,11 @@ DynamicDataSourceContextHolder.peek()
 ## 如何获取当前线程数据源？
 
 ```java
-public void dosomething{
+public void dosomething() {
     DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
-    DataSource datasource=ds.determineDataSource();
+    DataSource datasource = ds.determineDataSource();
 }
 ```
+
 ## DynamicRoutingDataSource 其他常用方法
 ![](/img/screenshot_1649815541046.png)

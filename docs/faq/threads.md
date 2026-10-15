@@ -1,3 +1,8 @@
+---
+title: "@DS 与线程：异步、线程池、并发串库"
+description: "切换上下文 DynamicDataSourceContextHolder 基于 ThreadLocal（线程私有）："
+---
+
 # @DS 与线程：异步、线程池、并发串库
 
 > 关联 Issue：[#74](https://github.com/baomidou/dynamic-datasource/issues/74)、[#147](https://github.com/baomidou/dynamic-datasource/issues/147)、[#399](https://github.com/baomidou/dynamic-datasource/issues/399)、[#502](https://github.com/baomidou/dynamic-datasource/issues/502)、[#536](https://github.com/baomidou/dynamic-datasource/issues/536)、[#550](https://github.com/baomidou/dynamic-datasource/issues/550)、[#664](https://github.com/baomidou/dynamic-datasource/issues/664)、[#673](https://github.com/baomidou/dynamic-datasource/issues/673)、[#554](https://github.com/baomidou/dynamic-datasource/issues/554)、[#708](https://github.com/baomidou/dynamic-datasource/issues/708)

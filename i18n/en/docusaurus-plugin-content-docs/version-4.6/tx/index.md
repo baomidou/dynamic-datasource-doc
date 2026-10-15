@@ -1,3 +1,8 @@
+---
+title: "Transaction Guide"
+description: "Anyone working with multiple datasources eventually runs into transactions. This chapter does not simply list \"the available options\" — it helps you pick the right one in 30 seconds."
+---
+
 # Transaction Guide
 
 Anyone working with multiple datasources eventually runs into transactions. This chapter does not simply list "the available options" — it helps you **pick the right one in 30 seconds**.

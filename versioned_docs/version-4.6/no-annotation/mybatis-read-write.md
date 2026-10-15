@@ -1,11 +1,16 @@
+---
+title: "自动读写分离"
+description: "场景："
+---
+
 # 自动读写分离
 
 场景：
 
-1. 在纯的读写分离环境，写操作全部是master，读操作全部是slave。
+1. 在纯的读写分离环境，写操作全部是 master，读操作全部是 slave。
 2. 不想通过注解配置完成以上功能。
 
-答：在mybatis环境下可以基于mybatis插件结合本数据源完成以上功能。
+答：在 mybatis 环境下可以基于 mybatis 插件结合本数据源完成以上功能。
 
 手动注入插件。
 
@@ -16,7 +21,7 @@ public MasterSlaveAutoRoutingPlugin masterSlaveAutoRoutingPlugin(){
 }
 ```
 
-默认主库名称master,从库名称slave。
+默认主库名称 master,从库名称 slave。
 
 暂不支持更多，源码简单可参考重写。
 
@@ -79,5 +84,4 @@ public class MasterSlaveAutoRoutingPlugin implements Interceptor {
 - [自定义负载均衡策略](/docs/custom/load-balance-strategy) —— 组名规则与故障转移 FAQ
 - [集成 ShardingJDBC](/docs/integration/sharding-jdbc)
 - [@DS 与线程](/docs/faq/threads) —— 拦截器里统一切换时的还原要求
-
 

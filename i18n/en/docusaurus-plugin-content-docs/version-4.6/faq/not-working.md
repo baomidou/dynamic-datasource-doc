@@ -1,3 +1,8 @@
+---
+title: "@DS Not Working Checklist"
+description: "After marking a method with @DS(\"xxx\") the SQL still hits the default database (primary), or the log says \"it switched but the connection did not change\" — this is the single most reported class of problem in this repository (150+ issues in total). Go through the list below in order; it is sorted by hit rate, highest first."
+---
+
 # @DS Not Working Checklist
 
 > Related issues: [#770](https://github.com/baomidou/dynamic-datasource/issues/770), [#649](https://github.com/baomidou/dynamic-datasource/issues/649), [#674](https://github.com/baomidou/dynamic-datasource/issues/674), [#266](https://github.com/baomidou/dynamic-datasource/issues/266), [#122](https://github.com/baomidou/dynamic-datasource/issues/122), [#166](https://github.com/baomidou/dynamic-datasource/issues/166), [#740](https://github.com/baomidou/dynamic-datasource/issues/740), [#663](https://github.com/baomidou/dynamic-datasource/issues/663)

@@ -1,3 +1,8 @@
+---
+title: "Integrating Druid"
+description: "This framework integrates Druid simply and efficiently and supports a wide range of parameter configurations."
+---
+
 # Integrating Druid
 
 ## Overview

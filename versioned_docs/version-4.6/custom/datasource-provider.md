@@ -1,8 +1,13 @@
+---
+title: "自定义数据源来源"
+description: "数据源来源的默认实现是 YmlDynamicDataSourceProvider，其从 yaml 或 properties 中读取信息并解析出所有数据源信息。"
+---
+
 # 自定义数据源来源
 
 ## 基础介绍
 
-数据源来源的默认实现是`YmlDynamicDataSourceProvider`，其从yaml或properties中读取信息并解析出所有数据源信息。
+数据源来源的默认实现是`YmlDynamicDataSourceProvider`，其从 yaml 或 properties 中读取信息并解析出所有数据源信息。
 
 ```java
 public interface DynamicDataSourceProvider {
@@ -18,7 +23,7 @@ public interface DynamicDataSourceProvider {
 
 ## 自定义示例
 
-可以参考  `AbstractJdbcDataSourceProvider`  （仅供参考）来实现从JDBC数据库中获取数据库连接信息。
+可以参考  `AbstractJdbcDataSourceProvider`  （仅供参考）来实现从 JDBC 数据库中获取数据库连接信息。
 
 ```java
 @Bean
@@ -46,4 +51,4 @@ public DynamicDataSourceProvider jdbcDynamicDataSourceProvider() {
 }
 ```
 
-PS: 从3.4.0开始，可以注入多个DynamicDataSourceProvider的Bean以实现同时从多个不同来源加载数据源，注意同名会被覆盖。
+PS: 从 3.4.0 开始，可以注入多个 DynamicDataSourceProvider 的 Bean 以实现同时从多个不同来源加载数据源，注意同名会被覆盖。

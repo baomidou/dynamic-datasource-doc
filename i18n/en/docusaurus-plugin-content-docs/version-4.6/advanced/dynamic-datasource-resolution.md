@@ -1,3 +1,8 @@
+---
+title: "Dynamic Datasource Resolution"
+description: "By default a chain of three processors handles dynamic parameter resolution: header -> session -> spel."
+---
+
 # Dynamic Datasource Resolution
 
 ## Overview

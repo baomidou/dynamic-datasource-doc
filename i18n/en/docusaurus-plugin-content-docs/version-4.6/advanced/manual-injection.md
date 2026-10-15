@@ -1,9 +1,13 @@
+---
+title: "Manual Multi-Datasource Injection"
+description: "When do you need to inject the multiple datasources by hand?"
+---
+
 # Manual Multi-Datasource Injection
 
 When do you need to inject the multiple datasources by hand?
 
 Mostly because your system has to coexist with other datasources. Quartz and ShardingJDBC, for instance, both need a datasource of their own.
-*****
 
 Injection differs between dynamic-datasource 3.4.0+ and older versions; inject according to your version.
 

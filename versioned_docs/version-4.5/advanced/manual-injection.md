@@ -1,13 +1,17 @@
+---
+title: "手动注入多数据源"
+description: "什么时候需要手动注入多数据源？"
+---
+
 # 手动注入多数据源
 
 什么时候需要手动注入多数据源？
 
-绝大部分是因为您的系统需要和其他数据源共同存在使用。如Quartz和ShardingJdbc等都需要使用独立的数据源。
-*****
+绝大部分是因为您的系统需要和其他数据源共同存在使用。如 Quartz 和 ShardingJDBC 等都需要使用独立的数据源。
 
-dynamic-datasource 3.4.0及以上版本和老版本注入方式有一定差别，根据自己版本注入。
+dynamic-datasource 3.4.0 及以上版本和老版本注入方式有一定差别，根据自己版本注入。
 
-注意一定要让多数据源使用 **@Primary** ,让其成为主数据源。
+注意一定要让多数据源使用 **@Primary**，让其成为主数据源。
 
 ```java
 //3.4.0版本以下
@@ -51,4 +55,4 @@ public DataSource dataSource(List<DynamicDataSourceProvider> providers) {
 }
 
 ```
-主要变更是因为3.4.0支持了多个provider同时生效，采取了内部注入。 源码改动参考  https://github.com/baomidou/dynamic-datasource-spring-boot-starter/commit/6e8d2954499f83269302d23b58f8832c31e07ef7
+主要变更是因为 3.4.0 支持了多个 provider 同时生效，采取了内部注入。源码改动参考 https://github.com/baomidou/dynamic-datasource-spring-boot-starter/commit/6e8d2954499f83269302d23b58f8832c31e07ef7

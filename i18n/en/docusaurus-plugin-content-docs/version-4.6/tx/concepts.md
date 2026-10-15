@@ -1,3 +1,8 @@
+---
+title: "Transaction Concepts"
+description: "A transaction is the smallest unit of work in database operations: a series of operations executed as a single logical unit of work. These operations are submitted to the system as one whole — either all of them run, or none of them do. A transaction is an indivisible set of operations (a logical unit of work)."
+---
+
 # Transaction Concepts
 
 ### What is a transaction?

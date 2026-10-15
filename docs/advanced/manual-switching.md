@@ -1,3 +1,8 @@
+---
+title: "手动切换数据源"
+description: "在某些情况您可能需要手动切换数据源。"
+---
+
 # 手动切换数据源
 
 在某些情况您可能需要手动切换数据源。
@@ -44,8 +49,8 @@ try {
 任何异常路径下漏掉 `poll()`，都会把 key 残留在（会被复用的）线程上，造成后续请求**串库**。这是硬性要求，不是建议。
 :::
 
-需要注意的是手动切换的数据源，最好自己在合适的位置 调用DynamicDataSourceContextHolder.clear()清空当前线程的数据源信息。 
-如果你不太清楚什么时候调用，那么可以参考下面写一个拦截器，注册进spring里即可。
+需要注意的是手动切换的数据源，最好自己在合适的位置 调用 DynamicDataSourceContextHolder.clear()清空当前线程的数据源信息。 
+如果你不太清楚什么时候调用，那么可以参考下面写一个拦截器，注册进 spring 里即可。
 ```java
 @Slf4j
 public class DynamicDatasourceClearInterceptor implements HandlerInterceptor {

@@ -1,3 +1,8 @@
+---
+title: "Startup Error Quick Reference"
+description: "Startup failures account for roughly 6% of historical issues. They are indexed below by error message."
+---
+
 # Startup Error Quick Reference
 
 > Related issues: [#49](https://github.com/baomidou/dynamic-datasource/issues/49), [#88](https://github.com/baomidou/dynamic-datasource/issues/88), [#141](https://github.com/baomidou/dynamic-datasource/issues/141), [#146](https://github.com/baomidou/dynamic-datasource/issues/146), [#148](https://github.com/baomidou/dynamic-datasource/issues/148), [#186](https://github.com/baomidou/dynamic-datasource/issues/186), [#332](https://github.com/baomidou/dynamic-datasource/issues/332), [#518](https://github.com/baomidou/dynamic-datasource/issues/518), [#632](https://github.com/baomidou/dynamic-datasource/issues/632), [#741](https://github.com/baomidou/dynamic-datasource/issues/741)

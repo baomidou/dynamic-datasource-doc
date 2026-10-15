@@ -1,3 +1,8 @@
+---
+title: "FAQ Quick Reference"
+description: "This chapter collects problems that keep reappearing in the issue tracker, organized as \"symptom → locate → fix\". Every page lists the related historical issue numbers at the top so you can go back to the original discussion."
+---
+
 # FAQ Quick Reference
 
 This chapter collects **problems that keep reappearing in the issue tracker**, organized as "symptom → locate → fix". Every page lists the related historical issue numbers at the top so you can go back to the original discussion.

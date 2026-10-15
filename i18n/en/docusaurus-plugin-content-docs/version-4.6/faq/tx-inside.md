@@ -1,3 +1,8 @@
+---
+title: "No Switching Inside a Transaction (Spring Batch / Quartz Included)"
+description: "Read how switching works under a transaction first; this page focuses on the class of problems where \"an outer transaction is already open and @DS does nothing\", and gives four workable solutions."
+---
+
 # No Switching Inside a Transaction (Spring Batch / Quartz Included)
 
 > Related issue: [#773](https://github.com/baomidou/dynamic-datasource/issues/773) (Spring Batch)

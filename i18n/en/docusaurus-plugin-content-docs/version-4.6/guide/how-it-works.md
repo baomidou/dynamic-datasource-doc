@@ -1,3 +1,8 @@
+---
+title: "Where to Put the @DS Annotation"
+description: "@DS is the core annotation for switching datasources, and the question people new to multiple datasources ask most often is \"which layer should I put it on\". There is no hard requirement, but there is some battle-tested experience."
+---
+
 # Where to Put the @DS Annotation
 
 `@DS` is the core annotation for switching datasources, and the question people new to multiple datasources ask most often is "which layer should I put it on". There is no hard requirement, but there is some battle-tested experience.

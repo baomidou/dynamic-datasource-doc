@@ -1,8 +1,13 @@
+---
+title: "连接池必读"
+description: "Druid>HikariCp>BeeCp>DBCP2>Spring Basic。"
+---
+
 # 连接池必读
 
-1. 每个数据源都有一个type来指定连接池。
+1. 每个数据源都有一个 type 来指定连接池。
 2. 每个数据源甚至可以使用不同的连接池，如无特殊需要并不建议。
-2. type **不是必填字段** ，在没有设置type的时候系统会自动按以下顺序查找并使用连接池。
+2. type **不是必填字段** ，在没有设置 type 的时候系统会自动按以下顺序查找并使用连接池。
 Druid>HikariCp>BeeCp>DBCP2>Spring Basic。
 
 ```yaml

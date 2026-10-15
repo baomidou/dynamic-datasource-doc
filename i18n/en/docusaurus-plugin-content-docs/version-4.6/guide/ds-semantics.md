@@ -1,3 +1,8 @@
+---
+title: "@DS Semantics and Precedence"
+description: "This page explains in depth \"how @DS is resolved into a concrete datasource\". Most \"switching does not work\" problems have their root cause in these rules."
+---
+
 # @DS Semantics and Precedence
 
 This page explains in depth "how `@DS` is resolved into a concrete datasource". Most "switching does not work" problems have their root cause in these rules.

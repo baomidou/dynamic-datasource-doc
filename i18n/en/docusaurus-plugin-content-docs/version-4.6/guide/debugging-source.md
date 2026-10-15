@@ -1,3 +1,8 @@
+---
+title: "Debugging the Source"
+description: "Check whether the log output is what you expect."
+---
+
 # Debugging the Source
 
 1. Turn on debug logging for the dynamic datasource.
@@ -29,7 +34,7 @@ public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor
         try {
             // the resolved datasource identifier, e.g. master, is stored in the local thread here
             String dsKey = determineDatasourceKey(invocation);
-        ●  DynamicDataSourceContextHolder.push(dsKey);
+            DynamicDataSourceContextHolder.push(dsKey);
             return invocation.proceed();
         } finally {
             DynamicDataSourceContextHolder.poll();
@@ -55,7 +60,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
     @Override
     public DataSource determineDataSource() {
         // read the key from the local thread and resolve the real datasource
-     ●  String dsKey = DynamicDataSourceContextHolder.peek();
+        String dsKey = DynamicDataSourceContextHolder.peek();
         return getDataSource(dsKey);
     }
 

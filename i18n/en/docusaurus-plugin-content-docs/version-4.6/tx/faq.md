@@ -1,3 +1,8 @@
+---
+title: "Transaction FAQ"
+description: "Reading why you cannot switch datasources inside a transaction first is recommended; this page focuses on the easiest pitfalls to hit."
+---
+
 # Transaction FAQ
 
 Reading [why you cannot switch datasources inside a transaction](./basics) first is recommended; this page focuses on the easiest pitfalls to hit.

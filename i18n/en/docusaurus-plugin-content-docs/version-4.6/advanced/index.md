@@ -1,3 +1,8 @@
+---
+title: "Advanced Usage"
+description: "This chapter covers the runtime capabilities that go beyond \"switching databases with @DS\". Ordered by how often they are used:"
+---
+
 # Advanced Usage
 
 This chapter covers the runtime capabilities that go beyond "switching databases with `@DS`". Ordered by how often they are used:

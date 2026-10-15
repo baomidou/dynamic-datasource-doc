@@ -1,3 +1,8 @@
+---
+title: "Lazy Datasource Startup"
+description: "Lazy startup: the connection pool is not initialized right after it is created; it is initialized when a connection is actually needed."
+---
+
 # Lazy Datasource Startup
 
 ## Overview

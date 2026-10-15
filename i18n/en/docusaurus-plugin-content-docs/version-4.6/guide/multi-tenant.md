@@ -1,3 +1,8 @@
+---
+title: "Multi-Tenancy Best Practices"
+description: "There are many multi-tenancy approaches"
+---
+
 # Multi-Tenancy Best Practices
 
 ## Overview

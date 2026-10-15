@@ -1,3 +1,8 @@
+---
+title: "Integrating HikariCP"
+description: "SpringBoot2.x.x pulls in HikariCP by default — no need to add it again unless you need a specific version."
+---
+
 # Integrating HikariCP
 
 ## Overview

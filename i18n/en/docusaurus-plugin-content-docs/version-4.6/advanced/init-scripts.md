@@ -1,3 +1,8 @@
+---
+title: "Running Init Scripts at Startup"
+description: "Before 3.5.0"
+---
+
 # Running Init Scripts at Startup
 
 Before 3.5.0

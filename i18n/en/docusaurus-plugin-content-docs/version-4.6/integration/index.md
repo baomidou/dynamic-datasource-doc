@@ -1,3 +1,8 @@
+---
+title: "Third-Party Integrations"
+description: "This chapter covers how to combine multiple datasources with commonly used middleware."
+---
+
 # Third-Party Integrations
 
 This chapter covers how to combine multiple datasources with commonly used middleware.

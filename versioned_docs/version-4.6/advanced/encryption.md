@@ -1,3 +1,8 @@
+---
+title: "数据库密码加密"
+description: "用 Druid 时可以直接用它自带的 ConfigTools 加密。但如果项目用的是 HikariCP、BeeCP 或者干脆不用连接池，又想加密数据库信息呢？"
+---
+
 # 数据库密码加密
 
 ## 基础介绍

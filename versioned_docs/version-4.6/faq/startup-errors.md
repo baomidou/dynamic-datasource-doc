@@ -1,3 +1,8 @@
+---
+title: "启动报错速查"
+description: "启动失败类问题约占历史 issue 的 6%。下面按报错文案索引。"
+---
+
 # 启动报错速查
 
 > 关联 Issue：[#49](https://github.com/baomidou/dynamic-datasource/issues/49)、[#88](https://github.com/baomidou/dynamic-datasource/issues/88)、[#141](https://github.com/baomidou/dynamic-datasource/issues/141)、[#146](https://github.com/baomidou/dynamic-datasource/issues/146)、[#148](https://github.com/baomidou/dynamic-datasource/issues/148)、[#186](https://github.com/baomidou/dynamic-datasource/issues/186)、[#332](https://github.com/baomidou/dynamic-datasource/issues/332)、[#518](https://github.com/baomidou/dynamic-datasource/issues/518)、[#632](https://github.com/baomidou/dynamic-datasource/issues/632)、[#741](https://github.com/baomidou/dynamic-datasource/issues/741)

@@ -1,3 +1,8 @@
+---
+title: "Graceful Shutdown"
+description: "During a rolling release or a scale-down, the shutdown signal reaching the container triggers DataSource.close() immediately. If SQL is still in flight, the connections are closed forcibly and clients receive an SQLException — which shows up as occasional request failures during a release."
+---
+
 # Graceful Shutdown
 
 ## The problem

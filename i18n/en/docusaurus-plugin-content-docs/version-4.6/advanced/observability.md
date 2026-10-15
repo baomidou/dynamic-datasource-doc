@@ -1,3 +1,8 @@
+---
+title: "Operations Endpoint and Metrics"
+description: "When troubleshooting multiple datasources in production, the first question is usually \"which datasources exist right now, and how are they grouped\". This framework provides a read-only Actuator endpoint that answers exactly that."
+---
+
 # Operations Endpoint and Metrics
 
 When troubleshooting multiple datasources in production, the first question is usually "which datasources exist right now, and how are they grouped". This framework provides a read-only Actuator endpoint that answers exactly that.

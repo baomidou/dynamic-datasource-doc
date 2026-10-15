@@ -1,3 +1,8 @@
+---
+title: "集成 ShardingJDBC"
+description: "---"
+---
+
 # 集成 ShardingJDBC
 
 ## 基础介绍
@@ -8,15 +13,15 @@
 
 ---
 
-多数据源与shardingsphere集成的场景：部分表比较大需要分表由shardingsphere完成，同时又有多库的需求。
+多数据源与 shardingsphere 集成的场景：部分表比较大需要分表由 shardingsphere 完成，同时又有多库的需求。
 
 可参考文章 https://zhuanlan.zhihu.com/p/166105923
 
-shardingsphere有多个不同版本，**不同版本的集成方法具体查看最底下的示例项目**。
+shardingsphere 有多个不同版本，**不同版本的集成方法具体查看最底下的示例项目**。
 
 ## 使用方法
 
-## 1. 项目引入 `shardingsphere` 依赖。
+### 1. 项目引入 `shardingsphere` 依赖。
 [![](https://img.shields.io/maven-central/v/org.apache.shardingsphere/sharding-jdbc-spring-boot-starter.svg)](http://mvnrepository.com/artifact/org.apache.shardingsphere/sharding-jdbc-spring-boot-starter)
 
 ```xml
@@ -32,9 +37,9 @@ shardingsphere有多个不同版本，**不同版本的集成方法具体查看�
 </dependency>
 ```
 
-## 2. 分别配置shardingjdbc和多数据源。
+### 2. 分别配置 ShardingJDBC 和多数据源。
 
-shardingsphere有多个不同版本，**不同版本的集成方法具体查看最底下的示例项目**。
+shardingsphere 有多个不同版本，**不同版本的集成方法具体查看最底下的示例项目**。
 
 ```yml
 spring:
@@ -94,9 +99,9 @@ spring:
           schema: db/schema.sql
 ```
 
-## 3. 通过自定义DynamicDataSourceProvider完成与shardingsphere的集成。
+### 3. 通过自定义 DynamicDataSourceProvider 完成与 ShardingSphere 的集成。
 
-shardingsphere有多个不同版本，**不同版本的集成方法具体查看最底下的示例项目**。
+shardingsphere 有多个不同版本，**不同版本的集成方法具体查看最底下的示例项目**。
 
 ```java
 @Configuration
@@ -153,7 +158,7 @@ public class MyDataSourceConfiguration {
     }
 }
 ```
->4.0.0的多数据源配置
+>4.0.0 的多数据源配置
 ```java
     @Bean
     public DynamicDataSourceProvider dynamicDataSourceProvider(DefaultDataSourceCreator dataSourceCreator) {

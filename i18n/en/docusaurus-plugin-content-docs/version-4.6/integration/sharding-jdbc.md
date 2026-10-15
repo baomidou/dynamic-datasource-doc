@@ -1,3 +1,8 @@
+---
+title: "Integrating ShardingJDBC"
+description: "---"
+---
+
 # Integrating ShardingJDBC
 
 ## Overview
@@ -16,7 +21,7 @@ ShardingSphere has several major versions; **check the sample project at the bot
 
 ## How to use
 
-## 1. Add the `shardingsphere` dependency.
+### 1. Add the `shardingsphere` dependency.
 
 [![](https://img.shields.io/maven-central/v/org.apache.shardingsphere/sharding-jdbc-spring-boot-starter.svg)](http://mvnrepository.com/artifact/org.apache.shardingsphere/sharding-jdbc-spring-boot-starter)
 
@@ -33,7 +38,7 @@ ShardingSphere has several major versions; **check the sample project at the bot
 </dependency>
 ```
 
-## 2. Configure ShardingJDBC and the dynamic datasource separately.
+### 2. Configure ShardingJDBC and the dynamic datasource separately.
 
 ShardingSphere has several major versions; **check the sample project at the bottom of this page for the integration method that matches your version**.
 
@@ -95,7 +100,7 @@ spring:
           schema: db/schema.sql
 ```
 
-## 3. Integrate with ShardingSphere through a custom `DynamicDataSourceProvider`.
+### 3. Integrate with ShardingSphere through a custom `DynamicDataSourceProvider`.
 
 ShardingSphere has several major versions; **check the sample project at the bottom of this page for the integration method that matches your version**.
 

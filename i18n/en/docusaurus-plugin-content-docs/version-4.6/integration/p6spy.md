@@ -1,3 +1,8 @@
+---
+title: "Integrating P6spy"
+description: "P6spy is a JDBC driver wrapper that prints SQL with the real parameter values, fixing the problem of logs showing nothing but ? placeholders."
+---
+
 # Integrating P6spy
 
 ## Overview

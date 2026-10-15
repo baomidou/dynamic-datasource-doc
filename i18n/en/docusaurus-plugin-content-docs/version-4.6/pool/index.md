@@ -1,3 +1,8 @@
+---
+title: "Connection Pool Integration"
+description: "Wiring a connection pool into a traditional multi-datasource setup means hand-writing a pile of duplicated DataSource beans. This framework turns that into configuration: declare it once globally, and let each datasource inherit or override as needed."
+---
+
 # Connection Pool Integration
 
 Wiring a connection pool into a traditional multi-datasource setup means hand-writing a pile of duplicated `DataSource` beans. This framework turns that into configuration: **declare it once globally, and let each datasource inherit or override as needed**.

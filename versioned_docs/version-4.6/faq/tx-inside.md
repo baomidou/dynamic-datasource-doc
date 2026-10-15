@@ -1,3 +1,8 @@
+---
+title: "事务内不切换数据源（含 Spring Batch / Quartz）"
+description: "事务原理请先读事务下切换原理；本篇聚焦「外层事务已经开好了，@DS 却不起作用」这一类场景，给出可落地的四种解法。"
+---
+
 # 事务内不切换数据源（含 Spring Batch / Quartz）
 
 > 关联 Issue：[#773](https://github.com/baomidou/dynamic-datasource/issues/773)（Spring Batch）

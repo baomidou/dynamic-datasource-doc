@@ -1,3 +1,8 @@
+---
+title: "SpEL Dynamic Datasource Names"
+description: "This page explains how dynamic datasource names such as @DS(\"#...\") work and how to debug them when resolution fails. The overall design of the processor chain is described in @DS semantics and precedence."
+---
+
 # SpEL Dynamic Datasource Names
 
 > Related issues: [#199](https://github.com/baomidou/dynamic-datasource/issues/199), [#205](https://github.com/baomidou/dynamic-datasource/issues/205), [#413](https://github.com/baomidou/dynamic-datasource/issues/413), [#492](https://github.com/baomidou/dynamic-datasource/issues/492), [#698](https://github.com/baomidou/dynamic-datasource/issues/698), [#744](https://github.com/baomidou/dynamic-datasource/issues/744), [#216](https://github.com/baomidou/dynamic-datasource/issues/216), [#727](https://github.com/baomidou/dynamic-datasource/issues/727)

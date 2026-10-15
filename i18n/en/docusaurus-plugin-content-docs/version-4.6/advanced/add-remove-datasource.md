@@ -1,3 +1,8 @@
+---
+title: "Adding/Removing Datasources at Runtime"
+description: "Multi-tenant systems often need this: when a new tenant arrives, without restarting the application, add a datasource; when the tenant leaves, take it away again."
+---
+
 # Adding/Removing Datasources at Runtime
 
 ## Overview

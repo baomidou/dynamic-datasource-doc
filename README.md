@@ -121,13 +121,13 @@ rsync -a --delete i18n/en/docusaurus-plugin-content-docs/current/ \
 | :--- | :--- |
 | `docs/` + `sidebars.js` | Next（开发中） |
 | `versioned_docs/version-4.6/` + `versioned_sidebars/version-4.6-sidebars.json` | 最新稳定版，**与 `docs/` 一致** |
-| `i18n/en/…/current/` + `…/version-4.6/` | 英文（仅 3 页） |
+| `i18n/en/…/version-4.6/` | 英文（默认版本 57 页已全文翻译） |
 
 ```bash
 rsync -a --delete docs/ versioned_docs/version-4.6/
-rsync -a --delete i18n/en/docusaurus-plugin-content-docs/current/ \
-                  i18n/en/docusaurus-plugin-content-docs/version-4.6/
 ```
+
+英文版各目录**页数不同**（见下文 §7），不要用 `--delete` 在它们之间互相 `rsync`，否则会误删默认版本的完整翻译。
 
 :::warning
 `docs/`（Next）与 `version-4.6` 是**字节级镜像**关系，只改一边会让两个版本内容漂移。
@@ -155,9 +155,17 @@ python3 scripts/fix-code-fences.py
 
 ### 7. 国际化的现状
 
-`i18n/en/` 目前只翻译了 3 个页面（`guide/basics`、`guide/switching-failure`、`tx/local-tx`），其余页面在英文站会回退显示中文原文——能正常访问，不会 404，但也没有英文内容。
+`i18n/en/` 的翻译状态分三档：
 
-**当前策略**：不追求全覆盖，优先保证这 3 个入口页与中文版同步。修改这 3 个中文页时请一并更新对应的英文文件，避免同一个入口出现中英不一致。
+| 目录 | 英文页数 | 说明 |
+| :--- | :--- | :--- |
+| `…/version-4.6/` | 57 页（全文） | 默认版本，已完整翻译 |
+| `…/current/` | 3 页 | Next，仅 `guide/basics`、`guide/switching-failure`、`tx/local-tx` |
+| `…/version-4.5/` | 3 页 | 旧版本，同上 3 页 |
+
+未翻译的页面在英文站会回退显示中文原文——能正常访问，不会 404，但也没有英文内容。
+
+**当前策略**：默认版本（4.6）追求全文翻译；Next 与旧版本只保证这 3 个入口页与中文版同步。修改这 3 个中文页时请一并更新对应的英文文件（`current`、`version-4.6`、`version-4.5` 三个目录各一份），避免同一个入口出现中英不一致。
 
 ## 部署
 

@@ -1,3 +1,8 @@
+---
+title: "@DS Placement and MyBatis-Plus Call Styles"
+description: "Recommended: on methods of the Service implementation class. The maintainer gave three reasons in #259:"
+---
+
 # @DS Placement and MyBatis-Plus Call Styles
 
 > Related issues: [#259](https://github.com/baomidou/dynamic-datasource/issues/259), [#104](https://github.com/baomidou/dynamic-datasource/issues/104), [#344](https://github.com/baomidou/dynamic-datasource/issues/344), [#355](https://github.com/baomidou/dynamic-datasource/issues/355), [#25](https://github.com/baomidou/dynamic-datasource/issues/25), [#59](https://github.com/baomidou/dynamic-datasource/issues/59), [#207](https://github.com/baomidou/dynamic-datasource/issues/207), [#337](https://github.com/baomidou/dynamic-datasource/issues/337), [#709](https://github.com/baomidou/dynamic-datasource/issues/709), [#73](https://github.com/baomidou/dynamic-datasource/issues/73), [#633](https://github.com/baomidou/dynamic-datasource/issues/633), [#589](https://github.com/baomidou/dynamic-datasource/issues/589)

@@ -1,3 +1,8 @@
+---
+title: "Full Configuration Reference"
+description: "This page lists every framework-level property under spring.datasource.dynamic.*. Parameters that belong to the connection pool itself (druid.* / hikari.*, …) are in the connection pool integration chapter, which also maps them to their native names."
+---
+
 # Full Configuration Reference
 
 This page lists **every framework-level property** under `spring.datasource.dynamic.*`. Parameters that belong to the connection pool itself (`druid.*` / `hikari.*`, …) are in the [connection pool integration](../pool/common) chapter, which also maps them to their native names.

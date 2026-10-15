@@ -1,3 +1,8 @@
+---
+title: "@DS and Threads: Async, Thread Pools, Cross-Database Contamination"
+description: "The switching context, DynamicDataSourceContextHolder, is based on a ThreadLocal (private to the thread):"
+---
+
 # @DS and Threads: Async, Thread Pools, Cross-Database Contamination
 
 > Related issues: [#74](https://github.com/baomidou/dynamic-datasource/issues/74), [#147](https://github.com/baomidou/dynamic-datasource/issues/147), [#399](https://github.com/baomidou/dynamic-datasource/issues/399), [#502](https://github.com/baomidou/dynamic-datasource/issues/502), [#536](https://github.com/baomidou/dynamic-datasource/issues/536), [#550](https://github.com/baomidou/dynamic-datasource/issues/550), [#664](https://github.com/baomidou/dynamic-datasource/issues/664), [#673](https://github.com/baomidou/dynamic-datasource/issues/673), [#554](https://github.com/baomidou/dynamic-datasource/issues/554), [#708](https://github.com/baomidou/dynamic-datasource/issues/708)

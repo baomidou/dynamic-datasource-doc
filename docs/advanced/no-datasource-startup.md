@@ -1,3 +1,8 @@
+---
+title: "无数据源启动"
+description: "场景：部分系统可能启动的时候完全不需要数据源，全靠启动后动态添加。"
+---
+
 # 无数据源启动
 
 ## 基础介绍
@@ -6,9 +11,9 @@
 
 ## 配置方式
 
-即基本不需要配置，可能根据需要配置一些类似Druid和HikariCp全局参数。
+即基本不需要配置，可能根据需要配置一些类似 Druid 和 HikariCp 全局参数。
 
-如需配置Druid和HikariCp全局参数可参考对应章节文档。
+如需配置 Druid 和 HikariCp 全局参数可参考对应章节文档。
 
 ```yaml
 spring:
@@ -25,4 +30,3 @@ dynamic-datasource initial loaded 0 datasource,Please add your primary datasourc
 ```
 
 一般无数据源启动需要结合 进阶使用里的动态添加移除在启动后添加
-

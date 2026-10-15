@@ -1,3 +1,8 @@
+---
+title: "基础必读"
+description: "dynamic-datasource 是一个基于 Spring Boot 的快速集成多数据源的启动器。它只做一件事——决定一次调用打到哪个 DataSource 上——并且不限制你随后做什么：任意 CRUD、任意 ORM、任意事务策略。"
+---
+
 # 基础必读
 
 **dynamic-datasource** 是一个基于 Spring Boot 的快速集成多数据源的启动器。它只做一件事——**决定一次调用打到哪个 `DataSource` 上**——并且不限制你随后做什么：任意 CRUD、任意 ORM、任意事务策略。

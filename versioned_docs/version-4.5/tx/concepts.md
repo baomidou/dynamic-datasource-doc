@@ -1,3 +1,8 @@
+---
+title: "事务概念"
+description: "事务：是数据库操作的最小工作单元，是作为单个逻辑工作单元执行的一系列操作；这些操作作为一个整体一起向系统提交，要么都执行、要么都不执行；事务是一组不可再分割的操作集合（工作逻辑单元）。"
+---
+
 # 事务概念
 
 ### 什么是事务？
@@ -14,7 +19,7 @@
 > 4. 持续性
 > 也称永久性，指一个事务一旦提交，它对数据库中的数据的改变就应该是永久性的。接下来的其它操作或故障不应该对其执行结果有任何影响。 
 
-### 原生JDBC处理事务。
+### 原生 JDBC 处理事务。
 
 ```java
 try{
@@ -29,9 +34,9 @@ try{
 ```
 以上是事务的核心，所有操作要一起成功，只要出错就回滚。
 
-### Spring处理事务。
+### Spring 处理事务。
 
-spring开启事务很简单，在需要事务的方法和类上添加 `@Transactional`注解。
+spring 开启事务很简单，在需要事务的方法和类上添加 `@Transactional`注解。
 
 ```java
 @Transactional
@@ -40,5 +45,5 @@ public void test() {
       Bservice.dosometing();
 }
 ```
-使用了 `@Transactional`，**spring会保证整个事务下都复用同一个connection。**
-在默认配置下，只要事务中发生RuntimeException，就会回滚。
+使用了 `@Transactional`，**spring 会保证整个事务下都复用同一个 connection。**
+在默认配置下，只要事务中发生 RuntimeException，就会回滚。

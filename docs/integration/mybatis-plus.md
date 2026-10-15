@@ -1,3 +1,8 @@
+---
+title: "集成 MyBatis-Plus"
+description: "mp 内置的 ServiceImpl 在新增,更改,删除等一些方法上自带事物导致不能切换数据源。"
+---
+
 # 集成 MyBatis-Plus
 
 ## 基础介绍
@@ -50,22 +55,22 @@ public MybatisPlusInterceptor mybatisPlusInterceptor() {
 
 ## 4.注意事项。
 
-mp内置的ServiceImpl在新增,更改,删除等一些方法上自带事物导致不能切换数据源。
+mp 内置的 ServiceImpl 在新增,更改,删除等一些方法上自带事物导致不能切换数据源。
 
 **解决办法:**
 
-1. 复制ServiceImpl出来为自己的MyServiceImpl，并去掉所有事务注解。
-2. 创建一个新方法，并在此方法上加DS注解. 如上面的`addUser`方法。
+1. 复制 ServiceImpl 出来为自己的 MyServiceImpl，并去掉所有事务注解。
+2. 创建一个新方法，并在此方法上加 DS 注解. 如上面的`addUser`方法。
 
 更完整的调用姿势清单（`lambdaQuery()` 链式调用、`IService` 默认方法、`saveBatch`、ActiveRecord、`databaseId` 等）见 [@DS 注解位置与 MyBatis-Plus 调用姿势](/docs/faq/annotation-placement)。
 
 ## FAQ
 
-**为什么要单独拿出来说和mybatisPlus的集成**？
+**为什么要单独拿出来说和 mybatisPlus 的集成**？
 
-因为mybatisPlus重写了一些核心类，必须通过解析获得真实的代理对象。
+因为 mybatisPlus 重写了一些核心类，必须通过解析获得真实的代理对象。
 
-如果自己写多数据源，则很难完成与mp的集成。
+如果自己写多数据源，则很难完成与 mp 的集成。
 
 核心解析源码：`DataSourceClassResolver`
 [https://github.com/baomidou/dynamic-datasource/blob/master/dynamic-datasource-spring/src/main/java/com/baomidou/dynamic/datasource/support/DataSourceClassResolver.java](https://github.com/baomidou/dynamic-datasource/blob/master/dynamic-datasource-spring/src/main/java/com/baomidou/dynamic/datasource/support/DataSourceClassResolver.java)

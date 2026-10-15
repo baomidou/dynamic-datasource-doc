@@ -1,8 +1,13 @@
-# Seata事务
+---
+title: "Seata 事务"
+description: "dynamic-datasource-spring-boot-starter 组件内部开启 seata 后，会自动用 DataSourceProxy 包装 DataSource，因此需要按下面的方式保持兼容。"
+---
+
+# Seata 事务
 
 ## 基础介绍
 
-- seata Github地址 [https://github.com/seata/seata](https://github.com/seata/seata)
+- seata Github 地址 [https://github.com/seata/seata](https://github.com/seata/seata)
 - seata 文档 [https://seata.io/zh-cn/docs/overview/what-is-seata.html](https://seata.io/zh-cn/docs/overview/what-is-seata.html)
 - seata 示例 [https://github.com/seata/seata-samples](https://github.com/seata/seata-samples)
 - seata 最新版本 
@@ -14,9 +19,9 @@
 
 `dynamic-datasource-spring-boot-starter` 组件内部开启 seata 后，会自动用 `DataSourceProxy` 包装 DataSource，因此需要按下面的方式保持兼容。
 
-1.如果你引入的是seata-all,请不要使用@EnableAutoDataSourceProxy注解。
+1.如果你引入的是 seata-all,请不要使用 @EnableAutoDataSourceProxy 注解。
 
-2.如果你引入的是seata-spring-boot-starter 请关闭自动代理。
+2.如果你引入的是 seata-spring-boot-starter 请关闭自动代理。
 
 ```yaml
 seata:
@@ -27,21 +32,21 @@ seata:
 
 https://github.com/dynamic-datasource/dynamic-datasource-samples/tree/master/spring-boot-4/tx-seata-sample
 
-此工程为 多数据源+druid+seata+mybatisPlus的版本。
+此工程为 多数据源+druid+seata+mybatisPlus 的版本。
 
 模拟用户下单，扣商品库存，扣用户余额，初步可分为订单服务+商品服务+用户服务。
 
 ### 环境准备
 
-为了快速演示相关环境都采用docker部署，生产上线请参考seata官方文档使用。
+为了快速演示相关环境都采用 docker 部署，生产上线请参考 seata 官方文档使用。
 
-1. 准备seata-server。
+1. 准备 seata-server。
 
 ```shell
 docker run --name seata-server -p 8091:8091 -d seataio/seata-server
 ```
 
-2. 准备mysql数据库，账户root密码123456。
+2. 准备 mysql 数据库，账户 root 密码 123456。
 
 ```shell
 docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
@@ -59,9 +64,9 @@ CREATE DATABASE IF NOT EXISTS seata_account;
 
 4. 准备相关数据库脚本。
 
-每个数据库下脚本相关的表，seata需要undo_log来监测和回滚。
+每个数据库下脚本相关的表，seata 需要 undo_log 来监测和回滚。
 
-相关的脚本不用自行准备，本工程已在resources/db下面准备好，另外配合多数据源的自动执行脚本功能，应用启动后会自动执行。
+相关的脚本不用自行准备，本工程已在 resources/db 下面准备好，另外配合多数据源的自动执行脚本功能，应用启动后会自动执行。
 
 ### 工程准备
 
@@ -85,7 +90,7 @@ CREATE DATABASE IF NOT EXISTS seata_account;
 Seata 2.x 的包结构与配置项有较大调整，官方文档也已迁移到 [seata.apache.org](https://seata.apache.org/)。示例工程始终跟随最新版本，本文的配置片段以 1.x 的写法为主，升级前请对照官方迁移说明。
 :::
 
-2. 编写相关yaml配置。
+2. 编写相关 yaml 配置。
 
 ```yaml
 spring:
@@ -269,7 +274,7 @@ public class AccountServiceImpl implements AccountService {
 
 ### 测试
 
-在schema自动执行的脚本里，默认设置了商品价格为10，商品总数量为20，用户余额为50。
+在 schema 自动执行的脚本里，默认设置了商品价格为 10，商品总数量为 20，用户余额为 50。
 
 启动项目后通过命令行执行。
 

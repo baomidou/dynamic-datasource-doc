@@ -1,3 +1,8 @@
+---
+title: "Integrating Quartz"
+description: "---"
+---
+
 # Integrating Quartz
 
 ## Overview
@@ -12,7 +17,7 @@ Quartz usually needs to run outside the main business database. In a Spring Boot
 
 ## How to use
 
-## 1. Add the `quartz-starter` dependency.
+### 1. Add the `quartz-starter` dependency.
 
 [![](https://img.shields.io/maven-central/v/org.quartz-scheduler/quartz.svg)](http://mvnrepository.com/artifact/org.quartz-scheduler/quartz)
 
@@ -23,7 +28,7 @@ Quartz usually needs to run outside the main business database. In a Spring Boot
 </dependency>
 ```
 
-## 2. Configure the datasource.
+### 2. Configure the datasource.
 
 Depending on your needs, either configure a standalone datasource for Quartz, or register the Quartz datasource as one of the dynamic datasources.
 
@@ -54,7 +59,7 @@ spring:
       initialize-schema: always
 ```
 
-## 3. Create a job.
+### 3. Create a job.
 
 A job that prints `hello world` once per second.
 
@@ -97,11 +102,11 @@ public class QuartzCommonAutoConfiguration {
     }
 }
 ```
-## 4. Configure the datasource Quartz actually uses.
+### 4. Configure the datasource Quartz actually uses.
 
 There are two ways; pick either one. Method 1 is recommended — it is simpler.
 
-### 4.1 Method 1: a custom `SchedulerFactoryBeanCustomizer`.
+#### 4.1 Method 1: a custom `SchedulerFactoryBeanCustomizer`.
 
 ```yaml
 spring:
@@ -144,7 +149,7 @@ public class MyQuartzAutoConfigurationMode1 {
 }
 ```
 
-### 4.2 Method 2: point Quartz at its datasource with `@QuartzDataSource`.
+#### 4.2 Method 2: point Quartz at its datasource with `@QuartzDataSource`.
 
 ```java
 @Configuration

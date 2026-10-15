@@ -1,3 +1,8 @@
+---
+title: "Switching Datasource with an AOP Aspect"
+description: "Custom aspects are supported since 3.4.0."
+---
+
 # Switching Datasource with an AOP Aspect
 
 Custom aspects are supported since 3.4.0.

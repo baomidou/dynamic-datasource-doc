@@ -19,7 +19,9 @@ import re
 from pathlib import Path
 
 DOC_ROOTS = ("docs", "versioned_docs", "i18n")
-FENCE_RE = re.compile(r"^(?P<indent>[ \t]*)(?P<fence>~~~+|```+)(?P<lang>[^\s`~]*)\s*$")
+FENCE_RE = re.compile(
+    r"^(?P<indent>[ \t]*)(?P<fence>~~~+|```+)(?P<lang>[^\s`~]*)(?P<meta>\s*\{[^}]*\})?\s*$"
+)
 
 JAVA_HINTS = (
     "public ",
@@ -123,7 +125,8 @@ def process(path: Path, dry_run: bool) -> list[tuple[int, str, str]]:
             cursor += 1
 
         resolved = lang or guess_language(block)
-        new_opener = f'{match.group("indent")}```{resolved}\n'
+        meta = match.group("meta") or ""
+        new_opener = f'{match.group("indent")}```{resolved}{meta}\n'
 
         if lines[index] != new_opener:
             changes.append((index + 1, lines[index].strip(), resolved))

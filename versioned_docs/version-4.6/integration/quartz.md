@@ -1,3 +1,8 @@
+---
+title: "集成 Quartz"
+description: "---"
+---
+
 # 集成 Quartz
 
 ## 基础介绍
@@ -6,13 +11,13 @@
 - Quartz 文档 [http://www.quartz-scheduler.org/](http://www.quartz-scheduler.org/)
 
 ---
-Quartz是一个定时任务框架，常常用于解决分布式系统下的定时任务协调问题。
+Quartz 是一个定时任务框架，常常用于解决分布式系统下的定时任务协调问题。
 
-Quartz常常需要独立运行在主业务数据库外,在springboot场景中可以以下面方式运行。
+Quartz 常常需要独立运行在主业务数据库外,在 springboot 场景中可以以下面方式运行。
 
 ## 使用方法
 
-## 1. 项目引用 `quartz-starter` 。
+### 1. 项目引用 `quartz-starter`。
 [![](https://img.shields.io/maven-central/v/org.quartz-scheduler/quartz.svg)](http://mvnrepository.com/artifact/org.quartz-scheduler/quartz)
 
 ```xml
@@ -22,9 +27,9 @@ Quartz常常需要独立运行在主业务数据库外,在springboot场景中可
 </dependency>
 ```
 
-## 2. 配置数据源参数。
+### 2. 配置数据源参数。
 
-根据需要可配置独立数据源的参数，或把quartz数据源也作为动态数据源的一个数据源。
+根据需要可配置独立数据源的参数，或把 quartz 数据源也作为动态数据源的一个数据源。
 
 一般来说两种方式按需二选一即可。如果没有「在业务里切到 quartz 库」的场景，建议就用独立配置。
 
@@ -53,9 +58,9 @@ spring:
       initialize-schema: always
 ```
 
-## 3. 创建任务。
+### 3. 创建任务。
 
-创建一个每秒打印一次hello world的任务。
+创建一个每秒打印一次 hello world 的任务。
 ```java
 @Slf4j
 public class HelloworldJob extends QuartzJobBean {
@@ -95,11 +100,11 @@ public class QuartzCommonAutoConfiguration {
     }
 }
 ```
-## 4 配置Quartz实际使用的数据源。
+### 4. 配置 Quartz 实际使用的数据源。
 
 具体方式有二种，随意选择一种即可。建议方式一，简单点。
 
-### 4.1 方式一： 自定义SchedulerFactoryBeanCustomizer。
+#### 4.1 方式一：自定义 SchedulerFactoryBeanCustomizer。
 
 ```yaml
 spring:
@@ -142,7 +147,7 @@ public class MyQuartzAutoConfigurationMode1 {
 }
 ```
 
-### 4.2 方式二： 使用@QuartzDataSource来指明quartz数据源。
+#### 4.2 方式二：使用 @QuartzDataSource 指明 Quartz 数据源。
 
 ```java
 @Configuration

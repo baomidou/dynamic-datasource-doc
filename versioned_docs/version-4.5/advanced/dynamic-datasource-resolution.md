@@ -1,3 +1,8 @@
+---
+title: "动态解析数据源"
+description: "默认有三个职责链来处理动态参数解析器 header->session->spel"
+---
+
 # 动态解析数据源
 
 ## 基础介绍
@@ -29,11 +34,11 @@ public List selecSpelByTenant(User user) {
 
 ## 如何扩展?
 
-1. 我想从cookie中获取参数解析?
+1. 我想从 cookie 中获取参数解析?
 
 2. 我想从其他环境属性中来计算?
 
-参考header解析器,继承DsProcessor,如果matches返回true则匹配成功,调用doDetermineDatasource返回匹配到的数据源,否则跳到写一个解析器.
+参考 header 解析器,继承 DsProcessor,如果 matches 返回 true 则匹配成功,调用 doDetermineDatasource 返回匹配到的数据源,否则跳到写一个解析器.
 
 ---
 
@@ -78,7 +83,7 @@ public class MyDynamicDataSourceConfig{
 
 如果
 
-## 在Mapper接口下面的方法使用
+## 在 Mapper 接口下面的方法使用
 
 ```java
 public interface UserMapper{
@@ -89,14 +94,14 @@ public interface UserMapper{
 ```
 
 对于在接口下面的使用, 由于编译器的默认配置没有将接口参数的元数据写入字节码文件中.  
-所以spring el会无法识别参数名称, 只能用默认的参数命名方式
+所以 spring el 会无法识别参数名称, 只能用默认的参数命名方式
 
-1. 第一个参数: p0,a0,(加入-parameter后,可以使用参数具体的名字,例如这里的#user)
+1. 第一个参数: p0,a0,(加入-parameter 后,可以使用参数具体的名字,例如这里的#user)
 2. 第二个参数: p1,a1
 3. 第三个参数: P2,a2
 
-可以通过修改maven配置和java编译配置将接口参数信息写入字节码文件  
-maven配置:
+可以通过修改 maven 配置和 java 编译配置将接口参数信息写入字节码文件  
+maven 配置:
 ```xml
     <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -111,7 +116,6 @@ maven配置:
     </plugin>
 ```
 
-idea java编译配置: ` -parameters`  
-> java 支持-parameters的最低版本为 1.8
-
+idea java 编译配置: ` -parameters`  
+> java 支持-parameters 的最低版本为 1.8
 

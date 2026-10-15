@@ -1,3 +1,8 @@
+---
+title: "Getting Started"
+description: "dynamic-datasource is a Spring Boot starter for integrating multiple datasources quickly. It does exactly one thing — deciding which DataSource a call runs against — and places no restriction on what you do afterwards: any CRUD, any ORM, any transaction strategy."
+---
+
 # Getting Started
 
 **dynamic-datasource** is a Spring Boot starter for integrating multiple datasources quickly. It does exactly one thing — **deciding which `DataSource` a call runs against** — and places no restriction on what you do afterwards: any CRUD, any ORM, any transaction strategy.

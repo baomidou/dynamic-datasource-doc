@@ -1,3 +1,8 @@
+---
+title: "启动初始化执行脚本"
+description: "3.5.0 之前版本"
+---
+
 # 启动初始化执行脚本
 
 3.5.0 之前版本
@@ -21,7 +26,7 @@ spring:
           data: classpath*:db/user/data/**/*.sql
 ```
 
-3.5.0（含） 之后版本 (层级多了一层init，保持和新版springboot一致)
+3.5.0（含） 之后版本 (层级多了一层 init，保持和新版 springboot 一致)
 ```yml
 spring:
   datasource:

@@ -1,3 +1,8 @@
+---
+title: "集成 HikariCP"
+description: "特别注意，hikaricp 原生设置某些字段名和本组件不一致，本组件是根据参数反射设置，而原生 hikaricp 字段名称和 set 名称不一致。 所以大家理解，以本组件字段名称为准。"
+---
+
 # 集成 HikariCP
 
 ## 基础介绍
@@ -28,7 +33,7 @@
 2. 如果配置了全局参数，则每一个数据源都会继承对应参数。 
 3. 每一个数据源可以单独设置参数覆盖全局参数。
 
-特别注意，hikaricp原生设置某些字段名和本组件不一致，本组件是根据参数反射设置，而原生hikaricp字段名称和set名称不一致。  所以大家理解，以本组件字段名称为准。
+特别注意，hikaricp 原生设置某些字段名和本组件不一致，本组件是根据参数反射设置，而原生 hikaricp 字段名称和 set 名称不一致。  所以大家理解，以本组件字段名称为准。
 
 ```yaml
 spring:
@@ -74,7 +79,7 @@ spring:
 Failed to validate connection com.mysql.jdbc.JDBC4Connection@xxxxx (No operations allowed after connection closed.)
 https://github.com/brettwooldridge/HikariCP/issues/1034
 
-核心意思就是HikariCP要设置 connection-test-query 并且max-lifetime要小于mysql的默认时间。
+核心意思就是 HikariCP 要设置 connection-test-query 并且 max-lifetime 要小于 mysql 的默认时间。
 
 ## 核心源码
 

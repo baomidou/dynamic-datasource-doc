@@ -1,3 +1,8 @@
+---
+title: "SpEL 动态数据源名"
+description: "本篇讲 @DS(\"#...\") 这类动态数据源名怎么用、以及解析失败时怎么排查。处理器责任链的整体设计见 @DS 语义与优先级。"
+---
+
 # SpEL 动态数据源名
 
 > 关联 Issue：[#199](https://github.com/baomidou/dynamic-datasource/issues/199)、[#205](https://github.com/baomidou/dynamic-datasource/issues/205)、[#413](https://github.com/baomidou/dynamic-datasource/issues/413)、[#492](https://github.com/baomidou/dynamic-datasource/issues/492)、[#698](https://github.com/baomidou/dynamic-datasource/issues/698)、[#744](https://github.com/baomidou/dynamic-datasource/issues/744)、[#216](https://github.com/baomidou/dynamic-datasource/issues/216)、[#727](https://github.com/baomidou/dynamic-datasource/issues/727)

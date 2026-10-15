@@ -1,3 +1,8 @@
+---
+title: "Out of Scope"
+description: "This page spells out what dynamic-datasource deliberately does not do. Its scope is very narrow — \"decide which DataSource a call uses\" — and writing the boundaries down saves more useless debugging than ten extra pages of tutorials."
+---
+
 # Out of Scope
 
 This page spells out **what dynamic-datasource deliberately does not do**. Its scope is very narrow — "decide which `DataSource` a call uses" — and writing the boundaries down saves more useless debugging than ten extra pages of tutorials.

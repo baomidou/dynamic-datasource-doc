@@ -1,3 +1,8 @@
+---
+title: "FAQ: Datasource Switching Fails"
+description: "Cause: after a Spring transaction starts, it keeps a ConnectionHolder so that the whole transaction uses the same database connection."
+---
+
 # FAQ: Datasource Switching Fails
 
 ## 1. A Spring transaction is already open.

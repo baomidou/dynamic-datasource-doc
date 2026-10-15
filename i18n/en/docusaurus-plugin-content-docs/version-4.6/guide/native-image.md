@@ -1,3 +1,8 @@
+---
+title: "GraalVM Native Image"
+description: "Since Spring Boot 3, compiling an application into a GraalVM Native Image is a common way to cut startup time and memory footprint. In a multi-datasource scenario the obstacle is heavy reflection: pool creation, property binding and @DS annotation resolution all rely on runtime reflection that AOT compilation cannot infer."
+---
+
 # GraalVM Native Image
 
 ## Overview

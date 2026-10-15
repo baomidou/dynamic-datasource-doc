@@ -1,3 +1,8 @@
+---
+title: "GraalVM 原生镜像"
+description: "Spring Boot 3 之后，把应用编译成 GraalVM Native Image 是降低启动时间与内存占用的常见手段。多数据源场景下，障碍在于大量反射：连接池创建、属性绑定、@DS 注解解析都依赖运行时反射，AOT 编译时无法推断。"
+---
+
 # GraalVM 原生镜像
 
 ## 概述

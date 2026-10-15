@@ -1,3 +1,8 @@
+---
+title: "Version History and How to Choose"
+description: "Use the latest 4.6.0 for new projects. Projects already on 4.5.0 should upgrade to 4.6.0 as soon as possible (see \"Before you upgrade\" below for the reasons)."
+---
+
 # Version History and How to Choose
 
 ## Picking a version in one sentence

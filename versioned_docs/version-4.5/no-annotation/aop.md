@@ -1,8 +1,13 @@
+---
+title: "AOP 切面切换数据源"
+description: "从 3.4.0 开始支持自定义切面。"
+---
+
 # AOP 切面切换数据源
 
-从3.4.0开始支持自定义切面。
+从 3.4.0 开始支持自定义切面。
 
-1. 使用这个方式，原注解方式并不会失效。 原DS注解也是AOP。
+1. 使用这个方式，原注解方式并不会失效。 原 DS 注解也是 AOP。
 2. 注意：不要在同一个切面同时使用注解又使用自定义切面。
 
 ```java
@@ -30,7 +35,7 @@ public class MyConfig {
 }
 ```
 
-以上实现com.baomidou.samples.pattern包service下所有类的add和update,delete开头的方法使用master数据源，select使用slave数据源。
+以上实现 com.baomidou.samples.pattern 包 service 下所有类的 add 和 update,delete 开头的方法使用 master 数据源，select 使用 slave 数据源。
 
 更复杂的切点表达式语法需自行学习。
 

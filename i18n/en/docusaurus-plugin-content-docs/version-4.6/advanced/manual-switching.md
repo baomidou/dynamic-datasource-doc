@@ -1,3 +1,8 @@
+---
+title: "Manual Datasource Switching"
+description: "In some situations you may need to switch the datasource by hand."
+---
+
 # Manual Datasource Switching
 
 In some situations you may need to switch the datasource by hand.

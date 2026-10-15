@@ -1,3 +1,8 @@
+---
+title: "Knowledge Base"
+description: "Knowledge Base"
+---
+
 # Knowledge Base
 
 ## How do I inject the multiple datasources?
@@ -7,8 +12,8 @@ public class A{
     @Autowired
     private DataSource dataSource;
 
-    public void dosomething{
-         // a cast is needed at the point of use
+    public void dosomething() {
+        // a cast is needed at the point of use
         DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
     }
 }
@@ -23,10 +28,11 @@ DynamicDataSourceContextHolder.peek()
 ## How do I get the current thread's datasource?
 
 ```java
-public void dosomething{
+public void dosomething() {
     DynamicRoutingDataSource ds = (DynamicRoutingDataSource) dataSource;
-    DataSource datasource=ds.determineDataSource();
+    DataSource datasource = ds.determineDataSource();
 }
 ```
+
 ## Other commonly used methods of DynamicRoutingDataSource
 ![](/img/screenshot_1649815541046.png)

@@ -1,3 +1,8 @@
+---
+title: "@DS 不生效排查总表"
+description: "@DS(\"xxx\") 标注之后 SQL 仍打到默认库（primary），或日志显示「切了但连的库没变」——这是本仓库历史上单类问题最多的投诉（合计 150+ issue）。按下面的顺序逐项自查，命中率从高到低。"
+---
+
 # @DS 不生效排查总表
 
 > 关联 Issue：[#770](https://github.com/baomidou/dynamic-datasource/issues/770)、[#649](https://github.com/baomidou/dynamic-datasource/issues/649)、[#674](https://github.com/baomidou/dynamic-datasource/issues/674)、[#266](https://github.com/baomidou/dynamic-datasource/issues/266)、[#122](https://github.com/baomidou/dynamic-datasource/issues/122)、[#166](https://github.com/baomidou/dynamic-datasource/issues/166)、[#740](https://github.com/baomidou/dynamic-datasource/issues/740)、[#663](https://github.com/baomidou/dynamic-datasource/issues/663)

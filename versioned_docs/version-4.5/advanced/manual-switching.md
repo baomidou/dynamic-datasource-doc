@@ -1,3 +1,8 @@
+---
+title: "手动切换数据源"
+description: "在某些情况您可能需要手动切换数据源。"
+---
+
 # 手动切换数据源
 
 在某些情况您可能需要手动切换数据源。
@@ -18,8 +23,8 @@ public class UserServiceImpl implements UserService {
 }
 ```
 
-需要注意的是手动切换的数据源，最好自己在合适的位置 调用DynamicDataSourceContextHolder.clear()清空当前线程的数据源信息。 
-如果你不太清楚什么时候调用，那么可以参考下面写一个拦截器，注册进spring里即可。
+需要注意的是手动切换的数据源，最好自己在合适的位置 调用 DynamicDataSourceContextHolder.clear()清空当前线程的数据源信息。 
+如果你不太清楚什么时候调用，那么可以参考下面写一个拦截器，注册进 spring 里即可。
 ```java
 @Slf4j
 public class DynamicDatasourceClearInterceptor implements HandlerInterceptor {

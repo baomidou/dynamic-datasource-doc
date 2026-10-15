@@ -1,3 +1,8 @@
+---
+title: "完整配置参考"
+description: "本页列出 spring.datasource.dynamic.* 下的全部框架级配置项。连接池自身的参数（druid.* / hikari.* 等）请见连接池集成章节，那里有与原生参数名的对照。"
+---
+
 # 完整配置参考
 
 本页列出 `spring.datasource.dynamic.*` 下的**全部框架级配置项**。连接池自身的参数（`druid.*` / `hikari.*` 等）请见[连接池集成](/docs/pool/common)章节，那里有与原生参数名的对照。

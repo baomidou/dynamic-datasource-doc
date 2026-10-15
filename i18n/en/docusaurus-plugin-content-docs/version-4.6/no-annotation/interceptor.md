@@ -1,3 +1,8 @@
+---
+title: "Switching Datasource with an Interceptor"
+description: "Goal: intercept every request whose path starts with filter/**; if the following part starts with a switch to db1, if it starts with b switch to db2, otherwise use the default datasource."
+---
+
 # Switching Datasource with an Interceptor
 
 Goal: intercept every request whose path starts with `filter/**`; if the following part starts with `a` switch to `db1`, if it starts with `b` switch to `db2`, otherwise use the default datasource.
