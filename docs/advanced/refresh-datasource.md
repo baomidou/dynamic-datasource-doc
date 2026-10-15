@@ -118,7 +118,7 @@ public class DatasourceConfigListener {
 ### 刷新会不会把正在执行的请求打断？
 
 `addDataSource` / `removeDataSource` 都是 `synchronized`，但都不等待在途请求。开 `grace-destroy` 能覆盖替换旧池的场景；
-删除场景请参照[动态添加/移除数据源](/docs/advanced/add-remove-datasource#注意事项)先摘流量再移除。
+删除场景请参照[动态添加/移除数据源](/docs/advanced/add-remove-datasource)，先摘流量再移除。
 
 ## 示例项目
 
