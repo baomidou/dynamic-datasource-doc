@@ -50,3 +50,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        with:
+          # 卡在 in-progress 部署时更早失败、更早重试（默认 10 分钟）
+          timeout: '3'
