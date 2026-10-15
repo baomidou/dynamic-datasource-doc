@@ -23,6 +23,7 @@ spring:
       seata: false                 # 全局启用 Seata
       seata-mode: AT               # Seata 模式：AT | XA
       grace-destroy: false         # 优雅关闭
+      refresh-enabled: false       # 配置中心自动刷新
       public-key: <内置默认公钥>     # ENC() 解密公钥
       strategy: com.baomidou.dynamic.datasource.strategy.LoadBalanceDynamicDataSourceStrategy
       datasource: {}               # 数据源定义，见下一节
@@ -38,6 +39,7 @@ spring:
 | `seata` | `boolean` | `false` | 全局启用 Seata 代理。**开启后本地事务切面（`@DSTransactional`）会被自动禁用**，事务交由 Seata 托管。 |
 | `seata-mode` | `AT` / `XA` | `AT` | Seata 代理模式，决定包装成 `DataSourceProxy` 还是 `DataSourceProxyXA`。 |
 | `grace-destroy` | `boolean` | `false` | 优雅关闭。`true` 时容器关闭阶段会先等待活跃连接归还，最多 10 秒后再强制销毁数据源。 |
+| `refresh-enabled` | `boolean` | `false` | 配置中心自动刷新。仅在 classpath 存在 Spring Cloud 的 `RefreshEvent` 时生效，`true` 时配置变更会自动重建变化的数据源，详见[配置中心刷新数据源](/docs/advanced/refresh-datasource)。 |
 | `public-key` | `String` | 内置默认公钥 | `ENC(...)` 的解密公钥。**生产必须替换**，详见[数据库密码加密](/docs/advanced/encryption)。 |
 | `strategy` | `Class<? extends DynamicDataSourceStrategy>` | `LoadBalanceDynamicDataSourceStrategy` | 组内选库策略。内置轮询与随机两种，可自定义。 |
 | `datasource` | `Map<String, DataSourceProperty>` | `{}` | 数据源定义。 |
@@ -166,7 +168,8 @@ public DynamicDataSourcePropertiesCustomizer customizer() {
 }
 ```
 
-需要更彻底的接管（例如数据源清单来自外部配置中心）时，请实现 `DynamicDataSourceProvider`，见[自定义数据源来源](/docs/custom/datasource-provider)。
+需要更彻底的接管（例如数据源清单来自外部配置中心）时，请实现 `DynamicDataSourceProvider`，见[自定义数据源来源](/docs/custom/datasource-provider)；
+只是想让配置中心的变更在运行期生效，见[配置中心刷新数据源](/docs/advanced/refresh-datasource)。
 
 ## 相关阅读
 
@@ -174,3 +177,4 @@ public DynamicDataSourcePropertiesCustomizer customizer() {
 - [连接池必读](/docs/pool/common) —— `type` 与各连接池参数
 - [数据库密码加密](/docs/advanced/encryption) —— `public-key` 与 `ENC()`
 - [优雅关闭](/docs/advanced/graceful-shutdown) —— `grace-destroy`
+- [配置中心刷新数据源](/docs/advanced/refresh-datasource) —— `refresh-enabled`

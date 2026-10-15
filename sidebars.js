@@ -68,6 +68,7 @@ const sidebars = {
       items: [
         {type: 'doc', id: 'advanced/index', label: '进阶总览'},
         'advanced/add-remove-datasource',
+        'advanced/refresh-datasource',
         'advanced/observability',
         'advanced/graceful-shutdown',
         'advanced/dynamic-datasource-resolution',
