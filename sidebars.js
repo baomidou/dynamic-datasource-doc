@@ -115,6 +115,20 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'FAQ 速查',
+      collapsed: false,
+      items: [
+        {type: 'doc', id: 'faq/index', label: '速查总览'},
+        'faq/not-working',
+        'faq/annotation-placement',
+        'faq/threads',
+        'faq/spel',
+        'faq/tx-inside',
+        'faq/startup-errors',
+      ],
+    },
+    {
+      type: 'category',
       label: '版本与迁移',
       collapsed: false,
       items: [

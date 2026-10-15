@@ -1,5 +1,9 @@
 # 本地多数据源事务
 
+:::info[语义由契约测试锁定]
+本篇描述的传播行为、回滚规则与语义边界，由三线共享的契约测试锁定：`dynamic-datasource-test-common` 的 `AbstractPropagationContractTest`（12 个场景，Boot 2/3/4 跑同一套断言）。
+:::
+
 ## 背景
 
 多数据源事务一直是个难题，传统方案只有两条路：
@@ -75,17 +79,35 @@ public @interface DSTransactional {
 而 Spring 的 `@Transactional` 默认只回滚 `RuntimeException` 与 `Error`。从 Spring 迁过来的代码不要想当然，需要排除某些异常时请显式配置 `noRollbackFor`。
 :::
 
-`DsPropagation` 提供与 Spring 对齐的 7 种传播行为：
+补充几条细则：
 
-| 传播行为 | 含义 |
-| :--- | :--- |
-| `REQUIRED`（默认） | 有事务就加入，没有就新建 |
-| `REQUIRES_NEW` | 总是新建，若存在当前事务则挂起 |
-| `NOT_SUPPORTED` | 以非事务方式执行，若存在当前事务则挂起 |
-| `SUPPORTS` | 有事务就加入，没有就以非事务方式执行 |
-| `NEVER` | 以非事务方式执行，若存在当前事务则抛异常 |
-| `MANDATORY` | 必须已存在事务，否则抛异常 |
-| `NESTED` | 存在当前事务时在嵌套事务内执行（基于 Savepoint），否则新建 |
+- **`Error` 一律回滚**，不会被当作「非回滚异常」放行提交；
+- **`noRollbackFor` 优先级高于 `rollbackFor`**，两者冲突时以 `noRollbackFor` 为准；
+- **业务体成功但提交阶段失败**时，对外抛出 `TransactionSystemException`——「提交没成功」不会被伪装成成功，调用方不要把它当成业务成功处理。
+
+`DsPropagation` 提供与 Spring 对齐的 7 种传播行为，按「有没有外层事务」分别给出效果：
+
+| 传播行为 | 无外层事务 | 有外层事务 |
+| :--- | :--- | :--- |
+| `REQUIRED`（默认） | 新建事务 | 加入当前事务（同一 xid） |
+| `REQUIRES_NEW` | 新建事务 | **挂起外层**，独立开新事务；内层提交/回滚不影响外层 |
+| `NESTED` | 等同 `REQUIRED` | 在当前事务内创建 **savepoint**；内层回滚只回到 savepoint，外层回滚会连带内层 |
+| `NOT_SUPPORTED` | 以非事务方式执行 | **挂起外层**，以非事务方式执行（连接自动提交，立即持久） |
+| `SUPPORTS` | 以非事务方式执行 | 加入当前事务 |
+| `MANDATORY` | **抛 `TransactionException`** | 加入当前事务 |
+| `NEVER` | 以非事务方式执行 | **抛 `TransactionException`** |
+
+## 语义边界
+
+以下场景**明确不在支持范围内**，踩到时不要当成 bug 处理：
+
+1. **跨线程不传播**：事务上下文（xid）存在 ThreadLocal 里。在事务内提交线程池任务，新线程不在事务中（`@DS` 也会回落主库），见 [@DS 与线程](/docs/faq/threads)；
+2. **同类自调用不走切面**：与 Spring AOP 一致，`this.method()` 不会触发 `@DSTransactional` / `@DS`，请跨 bean 调用或自注入代理；
+3. **非 public 方法默认不生效**：`aop.allowed-public-only=true`（默认）时只有 public 方法会被拦截；
+4. **与 Spring `@Transactional` 互不感知**：`@DSTransactional` 是自研的本地多库事务，不经过 `PlatformTransactionManager`，两者不会互相「搭桥」。混用前请显式规划边界，见[事务常见问题](/docs/tx/faq)；
+5. **NESTED 需要数据库支持 savepoint**：创建 savepoint 失败（驱动/数据库不支持）会抛 `CannotCreateTransactionException`。外层尚未触碰任何连接时进入 NESTED 是安全的（没有可挂 savepoint 的连接）；
+6. **「挂起」= 连接隔离**：`REQUIRES_NEW` / `NOT_SUPPORTED` 的挂起只解绑当前线程的 xid，外层事务的**物理连接保持打开**，内层在自己的独立连接上运行；
+7. **一个事务内同一数据源复用同一物理连接**：`@DS` 切换到的新数据源会在同一个 xid 下登记一条新连接，最终一起提交/回滚——这正是「本地多库事务」的实现方式，**它不是分布式事务**。
 
 ## 事务事件监听
 
@@ -208,3 +230,4 @@ public class ProductService {
 
 - [事务选型指南](/docs/tx) —— 什么时候该用它，什么时候不该
 - [事务常见问题](/docs/tx/faq) —— 混用陷阱与不回滚的排查
+- [事务内不切换数据源](/docs/faq/tx-inside) —— 外层已有 Spring 事务（含 Spring Batch/Quartz）时怎么办

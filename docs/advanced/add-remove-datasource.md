@@ -114,6 +114,32 @@ public class DataSourceController {
 - 运行期新增的数据源**同样会被 Actuator 端点统计到**，可用它验证是否添加成功，见[运维端点与指标](/docs/advanced/observability)。
 - 数据源清单如果来自外部（配置中心、引导库），更适合实现 `DynamicDataSourceProvider`，见[自定义数据源来源](/docs/custom/datasource-provider)。
 
+## 常见问题
+
+### 集群/多实例部署，是不是每台机器都要 add？
+
+是。`addDataSource` 只作用于**当前 JVM**（[#233](https://github.com/baomidou/dynamic-datasource/issues/233)）。常见方案有三种：
+
+1. 每台实例启动时从同一个来源（引导库 / 配置中心）加载**全量清单**，运行期不再动态增删；
+2. 管理操作通过 MQ 或发布订阅**广播**到所有实例；
+3. 把数据源配置整体交给配置中心，自行接入刷新（框架本身不内置刷新能力）。
+
+### 怎么让「数据源清单」本身存库？
+
+继承 `AbstractJdbcDataSourceProvider`，从引导库查出 `Map<String, DataSourceProperty>` 返回即可（[#107](https://github.com/baomidou/dynamic-datasource/issues/107)、[#302](https://github.com/baomidou/dynamic-datasource/issues/302)）。引导库自身的连接信息仍然写在配置文件里——这也是「引导」二字的含义。更完整的扩展说明见[自定义数据源来源](/docs/custom/datasource-provider)。
+
+### 引导库里没有数据时启动会报错吗？
+
+自定义 provider 返回 `null` 或空 Map，在旧版本会直接 NPE（[#302](https://github.com/baomidou/dynamic-datasource/issues/302)）；当前版本已兼容 `null`（启动后得到空清单并打印警告日志）。自己写 provider 时仍建议对空结果做兜底。
+
+### 运行中重复 add 同名数据源会怎样？
+
+**同名会替换**：旧池被关闭，新池生效。可用于「换库不停机」的滚动切换。
+
+### add/remove 与正在执行的请求冲突怎么办？
+
+两个方法都是 `synchronized` 的，路由侧对「删除瞬间的并发读」也做了空值防护（不会把 `null` 连接交给调用方）。但业务上仍应按上面的[注意事项](#注意事项)先摘流量再移除。
+
 ## 源码分析
 
 `DataSourceCreator` 是创建器的统一抽象，`DefaultDataSourceCreator` 按注册顺序取第一个 `support()` 返回 `true` 的实现：

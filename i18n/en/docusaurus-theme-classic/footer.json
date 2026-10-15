@@ -23,9 +23,9 @@
     "message": "Troubleshooting",
     "description": "The label of footer link with label=排查「切换失败」 linking to /docs/guide/switching-failure"
   },
-  "link.item.label.FAQ 排查（Wiki）": {
-    "message": "FAQ (Wiki)",
-    "description": "The label of footer link with label=FAQ 排查（Wiki） linking to https://github.com/baomidou/dynamic-datasource/wiki"
+  "link.item.label.FAQ 速查": {
+    "message": "FAQ",
+    "description": "The label of footer link with label=FAQ 速查 linking to /docs/faq"
   },
   "link.item.label.GitHub Issues": {
     "message": "GitHub Issues",

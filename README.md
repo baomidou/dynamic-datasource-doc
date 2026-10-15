@@ -14,7 +14,8 @@ docs/                          Next（开发中），路由 /docs/next/
 ├── tx/             事务专栏（选型指南 / 概念 / 切换原理 / 常见问题 / 本地事务 / Seata）
 ├── advanced/       进阶使用（动态增删、运维端点、优雅关闭、加密、懒启动、手动注入…）
 ├── custom/         自定义（注解 / 数据源来源 / 负载均衡策略）
-└── no-annotation/  无注解方案（总览 / Filter / Interceptor / AOP / MyBatis 读写分离）
+├── no-annotation/  无注解方案（总览 / Filter / Interceptor / AOP / MyBatis 读写分离）
+└── faq/            FAQ 速查（@DS 不生效排查总表、MyBatis-Plus 调用姿势、线程、SpEL、事务内不切换、启动报错）
 
 versioned_docs/
 ├── version-4.6/    4.6.0 文档（最新稳定版，默认），路由 /docs/
@@ -167,7 +168,7 @@ push 到 `main` 后，GitHub Actions（[`.github/workflows/deploy.yml`](./.githu
 - 内容来自 docpay 中的 GitBook 风格文档，最初的 Markdown 结构化迁移（中文文件名 → 英文 slug、互链/图片改写）见 git 历史中的 `scripts/migrate.py`；
 - 适配 Docusaurus 严格 MDX（`<url>` autolink、HTML 徽章块等）的清洗脚本：[`scripts/fix-mdx.py`](./scripts/fix-mdx.py)、[`scripts/fix-badges.py`](./scripts/fix-badges.py)；
 - 链接与代码块规范化：[`scripts/fix-doc-links.py`](./scripts/fix-doc-links.py)、[`scripts/fix-code-fences.py`](./scripts/fix-code-fences.py)（均支持 `--dry-run`）；
-- 历史高频问题的排查清单另见主仓库 Wiki：<https://github.com/baomidou/dynamic-datasource/wiki>（FAQ 速查），本站与 Wiki 互为补充；
+- 历史高频问题的排查清单见 [`docs/faq/`](./docs/faq)（路由 `/docs/faq`），由主仓库的 FAQ 页迁移而来，现统一在本站维护；
 - 欢迎直接提 PR 修正文档。
 
 ## 相关链接

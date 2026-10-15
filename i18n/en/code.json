@@ -436,8 +436,8 @@
   "homepage.cta.desc": {
     "message": "The most frequently reported issues (@DS not working, startup errors, no switching inside transactions) are distilled into troubleshooting checklists."
   },
-  "homepage.cta.wiki": {
-    "message": "Wiki FAQ"
+  "homepage.cta.faq": {
+    "message": "FAQ Quick Reference"
   },
   "homepage.cta.issue": {
     "message": "Open an Issue"

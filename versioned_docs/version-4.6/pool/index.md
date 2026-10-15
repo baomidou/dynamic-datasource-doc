@@ -50,6 +50,83 @@ spring:
 
 合并由 `ConfigMergeCreator` 完成：以全局参数为基线，用单库参数逐字段覆盖。所以「全局设一次、个别库微调」是安全的，不需要每库重抄。
 
+## 常见坑
+
+### 参数到底写在哪一层？
+
+池参数有**两层**，单数据源优先：
+
+```yaml
+spring:
+  datasource:
+    dynamic:
+      druid:                # 全局默认，对所有数据源生效
+        max-wait: 3000
+      hikari:
+        maximum-pool-size: 20
+      datasource:
+        master:
+          druid:            # 单数据源覆盖全局
+            max-wait: 5000
+```
+
+- 框架**不读** `spring.datasource.druid.*`（那是 `druid-spring-boot-starter` 的配置）；
+- 框架**不读** `spring.datasource.hikari.*`（那是 Spring Boot 默认单数据源的配置）；
+- 只读 `spring.datasource.dynamic.druid.*` 与 `spring.datasource.dynamic.datasource.<name>.druid.*`。
+
+历史 issue 中大量「`max-wait` 不生效 / Hikari 参数不生效」都属于写错层级（[#189](https://github.com/baomidou/dynamic-datasource/issues/189)、[#254](https://github.com/baomidou/dynamic-datasource/issues/254)、[#447](https://github.com/baomidou/dynamic-datasource/issues/447)、[#418](https://github.com/baomidou/dynamic-datasource/issues/418)）。
+
+### druid 版本兼容窗口
+
+| dynamic-datasource | druid | 结果 |
+| :--- | :--- | :--- |
+| ≤ 3.6.1 | 1.2.17+ | 启动失败（构造方式变化），[#494](https://github.com/baomidou/dynamic-datasource/issues/494)、[#497](https://github.com/baomidou/dynamic-datasource/issues/497)、[#500](https://github.com/baomidou/dynamic-datasource/issues/500)、[#506](https://github.com/baomidou/dynamic-datasource/issues/506) |
+| 4.x | 1.2.x（较新） | 正常 |
+| 4.2.x | 1.2.22 | autoconfigure 冲突，需排除，见上 |
+
+**结论：保持 dynamic-datasource 最新 4.x + 较新 druid，并排除 druid 的自动配置。**
+
+### 高频参数陷阱
+
+**Druid**
+
+- `max-wait` 默认 **-1（无限等待）**：连接耗尽时请求会一直卡住而不是快速失败，生产建议显式设置；
+- `socket-timeout` / `connect-timeout`：druid 1.2.12+ 新增，**默认 10 秒**（[#455](https://github.com/baomidou/dynamic-datasource/issues/455)、[#461](https://github.com/baomidou/dynamic-datasource/issues/461)）——慢查询可能被 10s 掐断，排查网络超时要先看它；
+- `wall` 过滤器（SQL 防火墙）：`multi-statement-allow` 等参数要配在 **`wall` 子块**里，且 `filters` 要包含 `wall`：
+
+```yaml
+spring:
+  datasource:
+    dynamic:
+      druid:
+        filters: stat,wall
+        wall:
+          multi-statement-allow: true
+```
+
+（[#5](https://github.com/baomidou/dynamic-datasource/issues/5)、[#640](https://github.com/baomidou/dynamic-datasource/issues/640)）
+
+**Hikari**
+
+- `connection-timeout` 默认 30s，池满时抛 `Connection is not available, request timed out after 30001ms`（[#231](https://github.com/baomidou/dynamic-datasource/issues/231)）——先查连接泄漏与池上限，再调参；
+- `initialization-fail-timeout: -1`：启动时不等待建连，配合「某个库暂时连不上也不阻塞启动」使用。
+
+### 监控
+
+- **Hikari 指标**：4.x 内置 Micrometer 绑定（`spring.datasource.dynamic.hikari-metrics.enabled`，默认 `true`），会为每个数据源注册指标。历史 issue [#626](https://github.com/baomidou/dynamic-datasource/issues/626)、[#734](https://github.com/baomidou/dynamic-datasource/issues/734)（采集不到指标）在 4.x 已解决，老版本请升级；端点与指标口径见[运维端点与指标](/docs/advanced/observability)。
+- **Druid 监控页**：dynamic **不自动注册** druid 的 `StatViewServlet`，需要自行注册（或保留 druid starter 的监控配置）。历史「监控页 404 / 登录名」问题（[#34](https://github.com/baomidou/dynamic-datasource/issues/34)、[#154](https://github.com/baomidou/dynamic-datasource/issues/154)、[#184](https://github.com/baomidou/dynamic-datasource/issues/184)、[#443](https://github.com/baomidou/dynamic-datasource/issues/443)）按 [Druid 集成](/docs/pool/druid)处理：
+
+```java
+@Bean
+public ServletRegistrationBean<StatViewServlet> druidStatView() {
+    ServletRegistrationBean<StatViewServlet> bean =
+            new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
+    bean.addInitParameter("loginUsername", "admin");
+    bean.addInitParameter("loginPassword", "admin");
+    return bean;
+}
+```
+
 ## 本章内容
 
 - [连接池必读](/docs/pool/common) —— `type` 的取值与自动选择顺序

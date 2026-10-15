@@ -57,6 +57,8 @@ mp内置的ServiceImpl在新增,更改,删除等一些方法上自带事物导�
 1. 复制ServiceImpl出来为自己的MyServiceImpl，并去掉所有事务注解。
 2. 创建一个新方法，并在此方法上加DS注解. 如上面的`addUser`方法。
 
+更完整的调用姿势清单（`lambdaQuery()` 链式调用、`IService` 默认方法、`saveBatch`、ActiveRecord、`databaseId` 等）见 [@DS 注解位置与 MyBatis-Plus 调用姿势](/docs/faq/annotation-placement)。
+
 ## FAQ
 
 **为什么要单独拿出来说和mybatisPlus的集成**？

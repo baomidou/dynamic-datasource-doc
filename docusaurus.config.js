@@ -175,7 +175,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/baomidou/dynamic-datasource/wiki',
+            to: '/docs/faq',
             label: 'FAQ 排查',
             position: 'right',
           },
@@ -217,8 +217,8 @@ const config = {
             title: '社区',
             items: [
               {
-                label: 'FAQ 排查（Wiki）',
-                href: 'https://github.com/baomidou/dynamic-datasource/wiki',
+                label: 'FAQ 速查',
+                to: '/docs/faq',
               },
               {
                 label: 'GitHub Issues',

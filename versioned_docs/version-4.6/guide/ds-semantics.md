@@ -97,4 +97,4 @@ public List<Order> listOrders() { }
 - **它不跨线程传播**。`@Async`、线程池、`CompletableFuture` 中拿到的会是默认数据源，需要在子线程显式重新 `push`。
 - `push` 之后如果不在同一线程成对 `poll`，会造成 ThreadLocal 泄漏——手动切换请成对调用，或直接使用 `clear()`。
 
-相关细节见 [手动切换数据源](/docs/advanced/manual-switching) 与 [切换失败排查](/docs/guide/switching-failure)。
+相关细节见 [手动切换数据源](/docs/advanced/manual-switching) 与 [切换失败排查](/docs/guide/switching-failure)；`@DS("#...")` 解析失败的排查见 [SpEL 动态数据源名](/docs/faq/spel)。

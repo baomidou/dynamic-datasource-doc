@@ -119,6 +119,20 @@ public DataSourceInitEvent myInitEvent() {
 
 框架默认的实现是 `EncDataSourceInitEvent`，也就是 `ENC(...)` 这一套。自定义实现会**替换**默认行为，两者不要混用。
 
+## 常见报错与坑
+
+| 报错 / 问题 | 原因与解决 |
+| :--- | :--- |
+| `Data must not be longer than 53 bytes`（[#367](https://github.com/baomidou/dynamic-datasource/issues/367)） | 单段上限 53 字节，**用第三方工具加密必然踩到**。请用 `CryptoUtils.encrypt(...)`，它的分段逻辑与解密侧严格配套 |
+| `could not decrypt an ENC(...) property, check the public-key configuration`（4.6+） | fail-fast 设计：公钥配错、长度不匹配或密文被截断。4.6 之前会把密文当明文直接拿去连库，表现为莫名的 `Access denied`——老版本建议升级以拿到准确报错（[#490](https://github.com/baomidou/dynamic-datasource/issues/490)） |
+| 单库配了不同 `public-key` 却不生效（[#598](https://github.com/baomidou/dynamic-datasource/issues/598)、[#623](https://github.com/baomidou/dynamic-datasource/issues/623)） | 单数据源 `public-key` 优先于全局；确认它配在该数据源节点下，且密钥文本完整（Base64，无换行） |
+| `url: ENC(...)` 解密失败（[#720](https://github.com/baomidou/dynamic-datasource/issues/720)） | `url` 同样走解密，确认密文里没有多余空格/换行 |
+| 与 [jasypt](https://github.com/ulisesbocchio/jasypt-spring-boot) 冲突（[#168](https://github.com/baomidou/dynamic-datasource/issues/168)、[#672](https://github.com/baomidou/dynamic-datasource/issues/672)） | jasypt 默认语法**也是** `ENC(...)`，两者会互相抢着解密。改掉 jasypt 的前后缀（`jasypt.encryptor.property.prefix` / `suffix`）避免撞车，或两者只用其一 |
+
+:::warning[默认内置密钥是公开的]
+框架内置的默认密钥对写在开源代码里，**只能防肩窥/误传，不防有心人**。生产请用上面的 `genKeyPair` 生成自己的密钥对，或接 KMS；`public-key` 是「解密密钥」，本身不敏感，私钥只用于离线加密，**不要**提交进仓库。
+:::
+
 ## 为什么不是公钥加密、私钥解密？
 
 这是作者参考 Druid 的实现方式保留的设计。Druid 作者 wenshao 在 [issue #960](https://github.com/alibaba/druid/issues/960) 中解释过取舍：配置侧只需要持有公钥，私钥可以被控制在少数人手里，从而限制「谁能生成密文」。
@@ -129,3 +143,4 @@ public DataSourceInitEvent myInitEvent() {
 
 - [完整配置参考](/docs/guide/configuration) —— `public-key` 与 `lazy` 的继承规则
 - [自定义数据源来源](/docs/custom/datasource-provider) —— 把配置整体搬到外部配置中心
+- [FAQ 速查](/docs/faq) —— 其它高频问题的排查入口

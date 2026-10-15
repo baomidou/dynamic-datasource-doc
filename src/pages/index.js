@@ -225,8 +225,8 @@ function BottomCta() {
         <div className={styles.heroActions}>
           <Link
             className={styles.btnPrimary}
-            href="https://github.com/baomidou/dynamic-datasource/wiki">
-            <Translate id="homepage.cta.wiki">Wiki FAQ 排查</Translate>
+            to="/docs/faq">
+            <Translate id="homepage.cta.faq">FAQ 速查</Translate>
           </Link>
           <Link
             className={styles.btnGhost}
