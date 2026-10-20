@@ -59,6 +59,7 @@ const sidebars = {
         'tx/faq',
         'tx/local-tx',
         'tx/seata',
+        'tx/atomikos',
       ],
     },
     {

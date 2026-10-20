@@ -18,6 +18,7 @@ description: "传统多数据源接入连接池，需要手写大量重复的 Da
 | [JNDI](/docs/pool/jndi) | — | 数据源由容器（Tomcat / WebLogic 等）提供 |
 | C3P0 | `com.mchange.v2.c3p0.ComboPooledDataSource` | 有全局 `c3p0.*` 与单库覆盖 |
 | Oracle UCP | `oracle.ucp.jdbc.PoolDataSourceImpl` | Oracle 官方池 |
+| [Atomikos](/docs/next/tx/atomikos) | `com.atomikos.jdbc.AtomikosDataSourceBean` | XA 连接池，配合 JTA 事务做两阶段提交 |
 | Basic | — | 不池化，仅用驱动自带的 `DriverManager` 包装，测试用 |
 
 ## 不指定 type 时会怎样
@@ -25,10 +26,15 @@ description: "传统多数据源接入连接池，需要手写大量重复的 Da
 `type` **不是必填项**。不设置时，框架按下面的顺序取**第一个 classpath 上可用的**连接池：
 
 ```text
-Druid > HikariCP > BeeCP > DBCP2 > Basic
+Druid > HikariCP > BeeCP > DBCP2 > Atomikos > C3P0 > Oracle UCP > Basic
 ```
 
 这个顺序由各 `DataSourceCreator` 的注册顺序决定。`Basic` 是兜底实现——它不做连接池化，每次都会新建连接，**只适合测试或极低频场景**。
+
+:::note
+`JNDI` 是例外：只有配置了 `jndi-name` 的数据源才会走它，不会抢普通数据源。
+`Atomikos` 还要求 `driver-class-name` 是内置的 XA 数据源类（见[Atomikos XA 事务](/docs/next/tx/atomikos)），因此**用 Atomikos 时必须显式声明 `type`**。
+:::
 
 :::tip
 生产环境建议**显式声明 `type`**。否则一旦依赖变动（比如某个 starter 顺带引入了 Hikari），数据源类型会在你不知情的情况下被换掉，参数也随之失效。
