@@ -40,7 +40,16 @@ const ANALYTICS_SOURCES = [
 /**
  * Docusaurus 的 `scripts` 配置无法做条件判断，因此改为注入一段引导脚本：
  * 只有当前 hostname 命中白名单时，才动态插入统计脚本。
+ *
+ * 注意：Clarity 的 tag 脚本（clarity.ms/tag/<id>）执行后会立即调用
+ * window.clarity(...)，必须先按官方 snippet 定义好 queue 垫片；
+ * 缺少垫片时 tag 脚本会抛 TypeError 直接终止，主脚本永远不会加载
+ * （百度 hm.js 自包含不受影响，所以会出现"百度有数据、Clarity 零数据"）。
  */
+const clarityQueueShim = CLARITY_ID
+  ? 'window.clarity=window.clarity||function(){(window.clarity.q=window.clarity.q||[]).push(arguments)};'
+  : '';
+
 const analyticsBootstrap =
   ANALYTICS_SOURCES.length > 0
     ? {
@@ -48,7 +57,7 @@ const analyticsBootstrap =
         attributes: {},
         innerHTML: `(function(){var h=${JSON.stringify(
           ANALYTICS_HOSTS,
-        )};if(h.indexOf(location.hostname.toLowerCase())===-1){return;}[${ANALYTICS_SOURCES.map(
+        )};if(h.indexOf(location.hostname.toLowerCase())===-1){return;}${clarityQueueShim}[${ANALYTICS_SOURCES.map(
           (src) => JSON.stringify(src),
         ).join(
           ',',
