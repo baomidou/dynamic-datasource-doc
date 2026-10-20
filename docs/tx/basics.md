@@ -79,7 +79,7 @@ public void inner() {
 | :--- | :--- |
 | 单体应用、跨库 | `@DSTransactional`，见[本地多数据源事务](/docs/tx/local-tx) |
 | 微服务、跨服务 | Seata `AT` / `XA`，见[Seata 事务](/docs/tx/seata) |
-| 需要标准 JTA/XA | Atomikos（驱动直接指向 XA 数据源） |
+| 需要标准 JTA/XA | Atomikos，见[Atomikos XA 事务](/docs/next/tx/atomikos) |
 
 选型对比见[事务选型指南](/docs/tx)。
 

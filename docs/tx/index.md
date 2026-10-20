@@ -25,7 +25,7 @@ description: "用多数据源的人一定会撞上事务问题。这一章不讲
 ├─ 不会（只有单库读写）→ 用 Spring 原生 @Transactional（配合 @DS）
 │
 └─ 会
-   ├─ 同一个应用进程内 → 用 @DSTransactional
+   ├─ 同一个应用进程内 → 用 @DSTransactional（要求强一致则用 Atomikos XA）
    └─ 跨服务/跨进程    → 用 Seata（AT 或 XA）
 ```
 
@@ -37,7 +37,7 @@ description: "用多数据源的人一定会撞上事务问题。这一章不讲
 | `@DSTransactional` | 单体应用内跨多个库 | 无 | 否 | 尽力而为（见下方说明） |
 | Seata `AT` | 微服务跨服务 | Seata Server | 是 | 最终一致，自动补偿 |
 | Seata `XA` | 跨服务且要求强一致 | Seata Server | 是 | 强一致，性能较低 |
-| Atomikos XA | 单进程内需要标准 XA | Atomikos | 否 | 强一致 |
+| Atomikos XA | 单进程内需要标准 XA | Atomikos | 否 | 强一致（见[Atomikos XA 事务](/docs/next/tx/atomikos)） |
 
 :::warning[`@DSTransactional` 不是严格的 2PC]
 `@DSTransactional` 的做法是：为涉及的每个库各开一个本地事务，全部挂在同一个 XID 下，业务方法正常返回时**逐库提交**，抛异常时**逐库回滚**。
@@ -53,6 +53,7 @@ description: "用多数据源的人一定会撞上事务问题。这一章不讲
 - [事务常见问题](/docs/tx/faq) —— 混用陷阱、`@DS` 与 `@Transactional` 的共存规则
 - [本地多数据源事务](/docs/tx/local-tx) —— `@DSTransactional` 完整用法、7 种传播行为、`@DsTxEventListener`
 - [Seata 事务](/docs/tx/seata) —— 完整可运行示例
+- [Atomikos XA 事务](/docs/next/tx/atomikos) —— 单进程内的标准 XA 两阶段提交
 - [事务概念](/docs/tx/concepts) —— ACID、JDBC 事务与 Spring 事务的科普
 
 ## 相关阅读
